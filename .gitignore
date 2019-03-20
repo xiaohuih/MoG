@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 /.vagrant
+/.vscode
 .env
 .phpunit.result.cache
 npm-debug.log
