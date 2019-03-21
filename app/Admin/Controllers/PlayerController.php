@@ -83,8 +83,10 @@ class PlayerController extends Controller
             return date('Y-m-d H:i:s', $offlinetime);
         });
         $grid->online_state(trans('game.player.onlineoffline'))->display(function ($online) {
-            return $online ? trans('game.yes') : trans('game.no');
-        })->label();
+            $name = isset($online) ? trans('game.yes') : trans('game.no');
+            $style = isset($online) ? 'success' : 'default';
+            return "<span class='label label-{$style}'>$name</span>";
+        });
 
         return $grid;
     }
@@ -99,8 +101,7 @@ class PlayerController extends Controller
     {
         $show = new Show(Player::findOrFail($id));
         // 工具
-        $show->panel()
-        ->tools(function ($tools) {
+        $show->panel()->tools(function ($tools) {
             $tools->disableEdit();
             $tools->disableList();
             $tools->disableDelete();

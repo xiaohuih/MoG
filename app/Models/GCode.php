@@ -8,9 +8,21 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Pagination\Paginator;
 use GuzzleHttp\Client;
 
-class Player extends Model
+class GCode extends Model
 {
-    protected static $cmd = 10003;
+	// 增加
+	const OPT_ADD = 1;
+	// 删除
+    const OPT_REMOVE = 2; 
+	// 获取
+    const OPT_CHECK = 3;
+
+    // 无限制
+    const TYPE_NOLIMIT  = 0;
+    // 仅可领取一次
+    const TYPE_ONCE     = 1;
+    
+    protected static $cmd = 10004;
 
     /**
      * Paginate the given query.
@@ -25,18 +37,13 @@ class Player extends Model
      */
     public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
-        $page = $page ?: Paginator::resolveCurrentPage($pageName);
-        $perPage = $perPage ?: $this->getPerPage();
-
-        $offset = max(0, ($page - 1) * $perPage);
-        $count = $perPage * 3;
         $params = json_encode([
-            "funId"     => "QUERY_ROLE_INFO",
-            "role_id"   => Request::get('id') ?: '',
-            "nickname"  => Request::get('name') ?: '',
+            "funId"     => "GIFT_CODE_OPT",
+            "code_id"   => trim(Request::get('id') ?: ''),
+            "opt"       => self::OPT_CHECK
         ]);
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.account.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
@@ -45,10 +52,10 @@ class Player extends Model
         ]);
         $data = json_decode($res->getBody(), true);
 
+        $total = 0;
         $results = array();
         if (isset($data) && $data['res'] == 0) {
-            $total = 1;
-            array_push($results, $data);
+            $results = $data['codes'];
         }
         $total = count($results);
 
@@ -70,12 +77,13 @@ class Player extends Model
     protected function findOrFail($id, $columns = ['*'])
     {
         $params = json_encode([
-            "funId"     => "QUERY_ROLE_INFO",
-            "role_id"   => $id
+            "funId"     => "GIFT_CODE_OPT",
+            "code_id"   => $id,
+            "opt"       => self::OPT_CHECK
         ]);
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
-            'connect_timeout' => 10,
+        $res = $client->request('GET', config('game.account.url'), [
+            'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
                 'params' => $params
@@ -83,7 +91,7 @@ class Player extends Model
         ]);
         $data = json_decode($res->getBody(), true);
         
-        return static::newFromBuilder($data);
+        return static::newFromBuilder($data['codes'][0]);
     }
 
     /**
