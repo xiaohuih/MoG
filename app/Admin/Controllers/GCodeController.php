@@ -9,6 +9,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Encore\Admin\Form\Builder;
 
 class GCodeController extends Controller
 {
@@ -88,7 +89,7 @@ class GCodeController extends Controller
         });
         // 行操作
         $grid->actions(function ($actions) {
-            $changable = $actions->row->is_config;
+            $changable = !$actions->row->is_config;
             if (!$changable) {
                 $actions->disableEdit();
                 $actions->disableDelete();
@@ -161,23 +162,78 @@ class GCodeController extends Controller
     protected function form()
     {
         $form = new Form(new GCode);
+        //$form->action(admin_base_path('auth/menu'));
         $form->select('type', trans('game.gcode.type'))->options([
             GCode::TYPE_NOLIMIT => trans('game.gcode.type_nolimit'), 
             GCode::TYPE_ONCE => trans('game.gcode.type_once')
         ]);
         $form->text('name', trans('game.gcode.name'));
-        $form->text('platform', trans('game.gcode.platform'))->rules('required|regex:/^\d+$/', [
-            'regex' => '请输入数字'
-        ]);
+        $form->text('platform', trans('game.gcode.platform'));
         $form->text('group', trans('game.gcode.group'));
         $form->text('key', trans('game.gcode.key'));
         $form->datetime('begintime', trans('game.gcode.begintime'));
         $form->datetime('endtime', trans('game.gcode.endtime'));
 
-        $form->text('title', trans('game.gcode.mail.title'))->rules('required|min:10');
+        $form->text('title', trans('game.gcode.mail.title'));
         $form->textarea('content', trans('game.gcode.mail.content'))->rows(3);
         $form->textarea('items', trans('game.gcode.mail.attachments'))->rows(3);
 
         return $form;
+    }
+
+    public function eform($id)
+    {
+        $form = $this->form();
+        
+        $form->builder()->setMode(Builder::MODE_EDIT);
+        $form->builder()->setResourceId($id);
+
+        $form->setFieldValue($id);
+        
+        $builder = $form->model();
+
+        $form->model = GCode::findOrFail($id);
+
+//        static::doNotSnakeAttributes($this->model);
+
+        $data = $form->model()->toArray();
+
+        $form->builder->fields()->each(function (Field $field) use ($data) {
+            if (!in_array($field->column(), $form->ignored)) {
+                $field->fill($data);
+            }
+        });
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        return $this->form()->update($id);
+    }
+
+    /**
+     * Destroy data entity and remove files.
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        collect(explode(',', $id))->filter()->each(function ($id) {
+            $model = GCode::findOrFail($id);
+            $model->delete();
+        });
+
+        return response()->json([
+            'status'  => true,
+            'message' => trans('admin.delete_succeeded'),
+        ]);
     }
 }

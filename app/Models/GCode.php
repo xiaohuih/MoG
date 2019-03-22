@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Pagination\Paginator;
@@ -13,7 +14,7 @@ class GCode extends Model
 	// 增加
 	const OPT_ADD = 1;
 	// 删除
-    const OPT_REMOVE = 2; 
+    const OPT_DELETE = 2; 
 	// 获取
     const OPT_CHECK = 3;
 
@@ -111,5 +112,62 @@ class GCode extends Model
     public static function with($relations)
     {
         return new static;
+    }
+    
+    /**
+     * Insert the given attributes and set the ID on the model.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  array  $attributes
+     * @return void
+     */
+    protected function insertAndSetId(Builder $query, $attributes)
+    {
+        $params = [
+            "funId"     => "GIFT_CODE_OPT",
+            "opt"       => self::OPT_ADD
+        ];
+        $params = array_merge($params, $attributes);
+        $params['mail'] = 0;
+        $params['begintime'] = isset($params['begintime']) ? strtotime($params['begintime']) : 0;
+        $params['endtime'] = isset($params['endtime']) ? strtotime($params['endtime']) : 0;
+        unset($params['created_at'], $params['updated_at']);
+        $params = json_encode($params);
+        
+        $client = new Client();
+        $res = $client->request('GET', config('game.account.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd,
+                'params' => $params
+            ]
+        ]);
+        $data = json_decode($res->getBody(), true);
+        $id = $data['id'];
+        $this->setAttribute($this->getKeyName(), $id);
+    }
+
+    /**
+     * Perform the actual delete query on this model instance.
+     *
+     * @return void
+     */
+    protected function performDeleteOnModel()
+    {
+        $params = json_encode([
+            "funId"     => "GIFT_CODE_OPT",
+            "code_id"   => $this->getKeyForSaveQuery(),
+            "opt"       => self::OPT_DELETE
+        ]);
+        $client = new Client();
+        $res = $client->request('GET', config('game.account.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd,
+                'params' => $params
+            ]
+        ]);
+
+        $this->exists = false;
     }
 }
