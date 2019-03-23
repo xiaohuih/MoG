@@ -3,9 +3,9 @@
 namespace App\Admin\Controllers;
 
 use App\Models\GCode;
+use App\Widgets\Form;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
-use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
@@ -162,7 +162,6 @@ class GCodeController extends Controller
     protected function form()
     {
         $form = new Form(new GCode);
-        //$form->action(admin_base_path('auth/menu'));
         $form->select('type', trans('game.gcode.type'))->options([
             GCode::TYPE_NOLIMIT => trans('game.gcode.type_nolimit'), 
             GCode::TYPE_ONCE => trans('game.gcode.type_once')
@@ -171,69 +170,17 @@ class GCodeController extends Controller
         $form->text('platform', trans('game.gcode.platform'));
         $form->text('group', trans('game.gcode.group'));
         $form->text('key', trans('game.gcode.key'));
-        $form->datetime('begintime', trans('game.gcode.begintime'));
-        $form->datetime('endtime', trans('game.gcode.endtime'));
+        $form->datetime('begintime', trans('game.gcode.begintime'))->customFormat(function ($begintime) {
+            return empty($begintime) ? null : date('Y-m-d H:i:s', $begintime);
+        });
+        $form->datetime('endtime', trans('game.gcode.endtime'))->customFormat(function ($begintime) {
+            return empty($begintime) ? null : date('Y-m-d H:i:s', $begintime);
+        });
 
         $form->text('title', trans('game.gcode.mail.title'));
         $form->textarea('content', trans('game.gcode.mail.content'))->rows(3);
         $form->textarea('items', trans('game.gcode.mail.attachments'))->rows(3);
 
         return $form;
-    }
-
-    public function eform($id)
-    {
-        $form = $this->form();
-        
-        $form->builder()->setMode(Builder::MODE_EDIT);
-        $form->builder()->setResourceId($id);
-
-        $form->setFieldValue($id);
-        
-        $builder = $form->model();
-
-        $form->model = GCode::findOrFail($id);
-
-//        static::doNotSnakeAttributes($this->model);
-
-        $data = $form->model()->toArray();
-
-        $form->builder->fields()->each(function (Field $field) use ($data) {
-            if (!in_array($field->column(), $form->ignored)) {
-                $field->fill($data);
-            }
-        });
-    }
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update($id)
-    {
-        return $this->form()->update($id);
-    }
-
-    /**
-     * Destroy data entity and remove files.
-     *
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function destroy($id)
-    {
-        collect(explode(',', $id))->filter()->each(function ($id) {
-            $model = GCode::findOrFail($id);
-            $model->delete();
-        });
-
-        return response()->json([
-            'status'  => true,
-            'message' => trans('admin.delete_succeeded'),
-        ]);
     }
 }

@@ -143,8 +143,12 @@ class GCode extends Model
             ]
         ]);
         $data = json_decode($res->getBody(), true);
-        $id = $data['id'];
-        $this->setAttribute($this->getKeyName(), $id);
+        if ($data['res'] != 0) {
+            admin_toastr($data['reason'], 'error');
+        } else {
+            $id = $data['id'];
+            $this->setAttribute($this->getKeyName(), $id);
+        }
     }
 
     /**
