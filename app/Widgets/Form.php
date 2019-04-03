@@ -36,6 +36,45 @@ class Form extends FormBase
     }
     
     /**
+     * Store a new record.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\Http\JsonResponse
+     */
+    public function store()
+    {
+        $data = Input::all();
+
+        // Handle validation errors.
+        if ($validationMessages = $this->validationMessages($data)) {
+            return back()->withInput()->withErrors($validationMessages);
+        }
+
+        if (($response = $this->prepare($data)) instanceof Response) {
+            return $response;
+        }
+        
+        $inserts = $this->prepareInsert($this->updates);
+
+        foreach ($inserts as $column => $value) {
+            $this->model->setAttribute($column, $value);
+        }
+
+        if (($response = $this->model->save()) instanceof Response) {
+            return $response;
+        }
+
+        if (($response = $this->callSaved()) instanceof Response) {
+            return $response;
+        }
+
+        if ($response = $this->ajaxResponse(trans('admin.save_succeeded'))) {
+            return $response;
+        }
+
+        return $this->redirectAfterStore();
+    }
+
+    /**
      * Handle update.
      *
      * @param int $id
@@ -138,5 +177,4 @@ class Form extends FormBase
             }
         });
     }
-
 }

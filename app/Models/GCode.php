@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Request;
@@ -144,11 +143,12 @@ class GCode extends Model
         ]);
         $data = json_decode($res->getBody(), true);
         if ($data['res'] != 0) {
-            admin_toastr($data['reason'], 'error');
-        } else {
-            $id = $data['id'];
-            $this->setAttribute($this->getKeyName(), $id);
+            return response([
+                'status'  => false,
+                'message' => $data['reason'],
+            ]);
         }
+        $this->setAttribute($this->getKeyName(), $data['id']);
     }
 
     /**

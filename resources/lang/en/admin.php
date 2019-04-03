@@ -25,6 +25,7 @@ return [
     'browse'                => 'Browse',
     'reset'                 => 'Reset',
     'export'                => 'Export',
+    'import'                => 'Import',
     'batch_delete'          => 'Batch delete',
     'save'                  => 'Save',
     'refresh'               => 'Refresh',
