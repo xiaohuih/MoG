@@ -4,8 +4,8 @@ namespace App\Admin\Extensions;
 
 use Closure;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 use Encore\Admin\Form\Field;
 use Encore\Admin\Form;
 use Maatwebsite\Excel\Facades\Excel;
@@ -32,6 +32,16 @@ class ImportForm extends Form
         parent::__construct($model, $callback);
 
         $this->toModelClass = $toModelClass;
+    }
+
+    /**
+     * Default storage for file to upload.
+     *
+     * @return mixed
+     */
+    public function defaultStorage()
+    {
+        return config('admin.upload.disk');
     }
 
     /**
@@ -75,16 +85,10 @@ class ImportForm extends Form
     protected function import($columns)
     {
         foreach ($columns as $column => $value) {
-            if (is_null($field = $this->getFieldByColumn($column))) {
+            if (!$value instanceof UploadedFile) {
                 continue;
             }
-            if (!$field instanceof Field\File) {
-                continue;
-            }
-            $filePath = $field->prepare($value);
-            
-            Excel::import(new $this->toModelClass, $filePath, config('admin.upload.disk'));
-            Storage::disk(config('admin.upload.disk'))->delete($filePath);
+            Excel::import(new $this->toModelClass, $value);
         }
     }
 }

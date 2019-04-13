@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Admin\Extensions;
+namespace App\Admin\Extensions\Excel;
 
 use Encore\Admin\Grid\Exporters\AbstractExporter;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ExcelExpoter extends AbstractExporter
+class ExcelExporter extends AbstractExporter
 {
     /**
      * {@inheritdoc}

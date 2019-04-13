@@ -5,8 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\Schedule;
 use App\Exports\SchedulesExport;
 use App\Imports\SchedulesImport;
-use App\Admin\Extensions\ImportForm;
-use App\Admin\Extensions\ExcelExpoter;
+use App\Admin\Extensions\Excel\ExcelExporter;
 use App\Admin\Extensions\Grid\CreateButton;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -81,47 +80,6 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Import interface.
-     *
-     * @return Content
-     */
-    public function importget(Content $content)
-    {
-        return $content
-            ->header(trans('game.schedules'))
-            ->description(trans('admin.import'))
-            ->body($this->form_import());
-    }
-
-    /**
-     * Import interface.
-     *
-     * @return Content
-     */
-    public function importpost()
-    {
-        return $this->form_import()->store();
-    }
-
-    /**
-     * Get current resource route url.
-     *
-     * @param int $slice
-     *
-     * @return string
-     */
-    public function resource($slice = -2)
-    {
-        $segments = explode('/', trim(app('request')->getUri(), '/'));
-
-        if ($slice != 0) {
-            $segments = array_slice($segments, 0, $slice);
-        }
-
-        return implode('/', $segments);
-    }
-
-    /**
      * Make a grid builder.
      *
      * @return Grid
@@ -144,7 +102,7 @@ class ScheduleController extends Controller
         $grid->duration();
         $grid->interval();
         $grid->wdays();
-        $grid->exporter(new ExcelExpoter());
+        $grid->exporter(new ExcelExporter());
         
         $grid->disableCreation();
         $grid->tools(function ($tools) {
@@ -208,25 +166,6 @@ class ScheduleController extends Controller
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
-
-        return $form;
-    }
-
-    /**
-     * Make a import form builder.
-     *
-     * @return Form
-     */
-    protected function form_import() 
-    {
-        $form = new ImportForm(new Schedule);
-        $form->disableViewCheck();
-        $form->disableEditingCheck();
-        $form->disableCreatingCheck();
-
-        $form->setAction($form->resource(0));
-        $form->setTitle(trans('admin.import'));
-        $form->file('importfile')->uniqueName()->rules('required|mimes:csv,xlsx');
 
         return $form;
     }
