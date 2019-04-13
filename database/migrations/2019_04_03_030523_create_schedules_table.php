@@ -16,13 +16,13 @@ class CreateSchedulesTable extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('begin_relativetime');
-            $table->string('end_relativetime');
+            $table->string('begin_relativetime')->nullable();
+            $table->string('end_relativetime')->nullable();
             $table->date('begin_date')->nullable();
             $table->date('end_date')->nullable();
             $table->time('begin_time')->nullable();
-            $table->string('duration');
-            $table->string('interval');
+            $table->string('duration')->nullable();
+            $table->string('interval')->nullable();
             $table->string('wdays')->nullable();
             $table->timestamps();
         });

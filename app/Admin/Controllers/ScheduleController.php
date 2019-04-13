@@ -5,14 +5,18 @@ namespace App\Admin\Controllers;
 use App\Models\Schedule;
 use App\Exports\SchedulesExport;
 use App\Imports\SchedulesImport;
+use App\Admin\Extensions\ImportForm;
+use App\Admin\Extensions\ExcelExpoter;
 use App\Admin\Extensions\Grid\CreateButton;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
+use Encore\Admin\Form\Builder;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Grid\Exporters\CsvExporter;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Encore\Admin\Facades\Admin;
 
 class ScheduleController extends Controller
 {
@@ -57,8 +61,8 @@ class ScheduleController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('Edit')
-            ->description('description')
+            ->header(trans('game.schedules'))
+            ->description(trans('admin.edit'))
             ->body($this->form()->edit($id));
     }
 
@@ -71,27 +75,50 @@ class ScheduleController extends Controller
     public function create(Content $content)
     {
         return $content
-            ->header('Create')
-            ->description('description')
+            ->header(trans('game.schedules'))
+            ->description(trans('admin.create'))
             ->body($this->form());
     }
 
     /**
-     * Export interface.
+     * Import interface.
+     *
+     * @return Content
      */
-    public function export() 
+    public function importget(Content $content)
     {
-        return Excel::download(new SchedulesExport, 'schedules.xlsx');
+        return $content
+            ->header(trans('game.schedules'))
+            ->description(trans('admin.import'))
+            ->body($this->form_import());
     }
 
     /**
      * Import interface.
+     *
+     * @return Content
      */
-    public function import() 
+    public function importpost()
     {
-        Excel::import(new SchedulesImport, request()->file('schedules.xlsx'));
-        
-        return redirect('/')->with('success', 'All good!');
+        return $this->form_import()->store();
+    }
+
+    /**
+     * Get current resource route url.
+     *
+     * @param int $slice
+     *
+     * @return string
+     */
+    public function resource($slice = -2)
+    {
+        $segments = explode('/', trim(app('request')->getUri(), '/'));
+
+        if ($slice != 0) {
+            $segments = array_slice($segments, 0, $slice);
+        }
+
+        return implode('/', $segments);
     }
 
     /**
@@ -117,7 +144,7 @@ class ScheduleController extends Controller
         $grid->duration();
         $grid->interval();
         $grid->wdays();
-        //$grid->exporter(new SchedulesExport());
+        $grid->exporter(new ExcelExpoter());
         
         $grid->disableCreation();
         $grid->tools(function ($tools) {
@@ -181,6 +208,25 @@ class ScheduleController extends Controller
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
+
+        return $form;
+    }
+
+    /**
+     * Make a import form builder.
+     *
+     * @return Form
+     */
+    protected function form_import() 
+    {
+        $form = new ImportForm(new Schedule);
+        $form->disableViewCheck();
+        $form->disableEditingCheck();
+        $form->disableCreatingCheck();
+
+        $form->setAction($form->resource(0));
+        $form->setTitle(trans('admin.import'));
+        $form->file('importfile')->uniqueName()->rules('required|mimes:csv,xlsx');
 
         return $form;
     }

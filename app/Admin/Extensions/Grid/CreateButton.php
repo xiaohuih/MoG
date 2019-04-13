@@ -29,7 +29,7 @@ class CreateButton extends AbstractTool
     </button>
     <ul class="dropdown-menu" role="menu">
         <li><a href="{$this->grid->getCreateUrl()}">{$create}</a></li>
-        <li><a href="{$this->getImportUrl('')}">{$import}</a></li>
+        <li><a href="{$this->getImportUrl()}">{$import}</a></li>
     </ul>
 </div>
 EOT;
@@ -42,11 +42,7 @@ EOT;
      */
     public function getImportUrl()
     {
-        $queryString = '';
-
-        return sprintf('%s/import%s',
-            $this->grid->resource(),
-            $queryString ? ('?'.$queryString) : ''
-        );
+        $url = sprintf('%s/import', $this->grid->resource());
+        return $url;
     }
 }
