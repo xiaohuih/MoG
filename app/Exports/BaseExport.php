@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Admin\Extensions;
+namespace App\Exports;
 
-use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Collection;
 
-class FromCollectionExport implements FromCollection, WithHeadings
+class BaseExport implements FromCollection, WithHeadings
 {
     protected $collection;
-
+    
     /**
      * Create a new instance.
      *
@@ -25,20 +25,7 @@ class FromCollectionExport implements FromCollection, WithHeadings
      */
     public function headings(): array
     {
-        return [
-            'id',
-            'name',
-            'begin_relativetime',
-            'end_relativetime',
-            'begin_date',
-            'end_date',
-            'begin_time',
-            'duration',
-            'interval',
-            'wdays',
-            'created_at',
-            'updated_at',
-        ];
+        return [];
     }
 
     /**

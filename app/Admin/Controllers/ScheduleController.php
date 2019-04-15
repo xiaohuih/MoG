@@ -4,7 +4,6 @@ namespace App\Admin\Controllers;
 
 use App\Models\Schedule;
 use App\Exports\SchedulesExport;
-use App\Imports\SchedulesImport;
 use App\Admin\Extensions\Excel\ExcelExporter;
 use App\Admin\Extensions\Grid\CreateButton;
 use App\Http\Controllers\Controller;
@@ -12,7 +11,6 @@ use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form\Builder;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Grid\Exporters\CsvExporter;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Encore\Admin\Facades\Admin;
@@ -102,7 +100,7 @@ class ScheduleController extends Controller
         $grid->duration();
         $grid->interval();
         $grid->wdays();
-        $grid->exporter(new ExcelExporter());
+        $grid->exporter(new ExcelExporter(SchedulesExport::class));
         
         $grid->disableCreation();
         $grid->tools(function ($tools) {

@@ -4,44 +4,31 @@ namespace App\Admin\Extensions;
 
 use Closure;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
-use Encore\Admin\Form\Field;
 use Encore\Admin\Form;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\SchedulesImport;
 
 class ImportForm extends Form
 {
     /**
-     * To trans Eloquent model.
+     * Import driver.
      *
-     * @var ToModel
+     * @var string
      */
-    protected $toModelClass;
+    protected $importer;
 
     /**
-     * Create a new form instance.
+     * Set importer driver to export.
      *
-     * @param $toModelClass
-     * @param $model
-     * @param \Closure $callback
-     */
-    public function __construct($toModelClass, $model, Closure $callback = null)
-    {
-        parent::__construct($model, $callback);
-
-        $this->toModelClass = $toModelClass;
-    }
-
-    /**
-     * Default storage for file to upload.
+     * @param $importer
      *
-     * @return mixed
+     * @return $this
      */
-    public function defaultStorage()
+    public function importer($importer)
     {
-        return config('admin.upload.disk');
+        $this->importer = $importer;
+
+        return $this;
     }
 
     /**
@@ -62,7 +49,12 @@ class ImportForm extends Form
             return $response;
         }
 
-        $this->import($this->updates);
+        foreach ($this->updates as $field => $file) {
+            if (!$file instanceof UploadedFile) {
+                continue;
+            }
+            $this->importer->import($file);
+        }
 
         if (($response = $this->callSaved()) instanceof Response) {
             return $response;
@@ -73,22 +65,5 @@ class ImportForm extends Form
         }
 
         return $this->redirectAfterStore();
-    }
-
-    /**
-     * Import files.
-     *
-     * @param array $columns
-     * 
-     * @return mixed
-     */
-    protected function import($columns)
-    {
-        foreach ($columns as $column => $value) {
-            if (!$value instanceof UploadedFile) {
-                continue;
-            }
-            Excel::import(new $this->toModelClass, $value);
-        }
     }
 }

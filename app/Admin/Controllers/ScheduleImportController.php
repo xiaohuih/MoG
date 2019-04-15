@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Schedule;
 use App\Admin\Extensions\ImportForm;
+use App\Admin\Extensions\Excel\ExcelImporter;
 use App\Imports\SchedulesImport;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Layout\Content;
@@ -41,14 +42,16 @@ class ScheduleImportController extends Controller
      */
     protected function form()
     {
-        $form = new ImportForm(SchedulesImport::class, new Schedule);
+        $form = new ImportForm(new Schedule);
         $form->disableViewCheck();
         $form->disableEditingCheck();
         $form->disableCreatingCheck();
         $form->setAction($form->resource(0));
         $form->setTitle(trans('admin.import'));
 
-        $form->file('imfile')->uniqueName();;
+        $form->file('imfile')->uniqueName();
+
+        $form->importer(new ExcelImporter(SchedulesImport::class));
 
         return $form;
     }
