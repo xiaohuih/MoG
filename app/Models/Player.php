@@ -25,34 +25,33 @@ class Player extends Model
      */
     public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
-        $page = $page ?: Paginator::resolveCurrentPage($pageName);
+        $currentPage = $page ?: Paginator::resolveCurrentPage($pageName);
         $perPage = $perPage ?: $this->getPerPage();
 
-        $offset = max(0, ($page - 1) * $perPage);
-        $count = $perPage * 3;
-        $params = json_encode([
-            "funId"     => "QUERY_ROLE_INFO",
-            "role_id"   => Request::get('id') ?: '',
-            "nickname"  => Request::get('name') ?: '',
-        ]);
+        $params = [
+            'funId' => 'GET_PLAYERS',
+            'perPage' => $perPage,
+            'currentPage' => $currentPage
+        ];
+        if (Request::get('id')) {
+            $params['id'] = Request::get('id');
+        }
+        if (Request::get('name')) {
+            $params['name'] = Request::get('name');
+        }
         $client = new Client();
         $res = $client->request('GET', config('game.gm.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
-                'params' => $params
+                'params' => json_encode($params)
             ]
         ]);
         $data = json_decode($res->getBody(), true);
 
-        $results = array();
-        if (isset($data) && $data['res'] == 0) {
-            $total = 1;
-            array_push($results, $data);
-        }
-        $total = count($results);
-
-        return new LengthAwarePaginator(static::hydrate($results), $total, $perPage, $page,[
+        $items = static::hydrate($data['list']);
+        $pagination = $data['pagination'];
+        return new LengthAwarePaginator($items,$pagination['total'], $pagination['perPage'], $pagination['currentPage'],[
             'path' => Paginator::resolveCurrentPath(),
             'pageName' => $pageName
         ]);
@@ -69,16 +68,16 @@ class Player extends Model
      */
     protected function findOrFail($id, $columns = ['*'])
     {
-        $params = json_encode([
-            "funId"     => "QUERY_ROLE_INFO",
-            "role_id"   => $id
-        ]);
+        $params = [
+            'funId' => 'GET_PLAYER_DETAIL',
+            'id' => $id
+        ];
         $client = new Client();
         $res = $client->request('GET', config('game.gm.url'), [
             'connect_timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
-                'params' => $params
+                'params' => json_encode($params)
             ]
         ]);
         $data = json_decode($res->getBody(), true);

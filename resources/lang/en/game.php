@@ -18,7 +18,10 @@ return [
         'paperlevel'    => 'paper',
         'createtime'    => 'created at',
         'offlinetime'   => 'offlined at',
-        'onlineoffline' => 'online?',
+        'status'        => 'status',
+        'online'        => 'online',
+        'offline'       => 'offline',
+        'forbid'        => 'forbid',
     ],
     'gcodes'                => 'gcodes',
     'gcode'                 => [
