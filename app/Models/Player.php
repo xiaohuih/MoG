@@ -99,8 +99,27 @@ class Player extends Model
         return $this;
     }
 
-    public static function with($relations)
+    /**
+     * 执行操作
+     *
+     * @param mixed $id
+     * @param int $action
+     */
+    public static function perform($id, $action)
     {
-        return new static;
+        $params = [
+            'funId' => 'CTRL_PLAYER',
+            'id' => $id,
+            'action' => $action,
+        ];
+        $client = new Client();
+        $res = $client->request('GET', config('game.gm.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd,
+                'params' => json_encode($params)
+            ]
+        ]);
+        $data = json_decode($res->getBody(), true);
     }
 }

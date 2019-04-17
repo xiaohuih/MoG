@@ -19,133 +19,276 @@ class AdminTablesSeeder extends Seeder
                     "id" => 1,
                     "parent_id" => 0,
                     "order" => 1,
-                    "title" => "Dashbord",
+                    "title" => "控制台",
                     "icon" => "fa-dashboard",
                     "uri" => "/",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-03-13 07:13:56"
+                    "updated_at" => "2019-04-17 07:15:38"
                 ],
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 7,
-                    "title" => "Admin",
+                    "order" => 20,
+                    "title" => "管理员",
                     "icon" => "fa-tasks",
-                    "uri" => "",
+                    "uri" => NULL,
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 8,
-                    "title" => "Users",
+                    "order" => 21,
+                    "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 9,
-                    "title" => "Roles",
+                    "order" => 22,
+                    "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 10,
-                    "title" => "Permission",
+                    "order" => 23,
+                    "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 11,
-                    "title" => "Menu",
+                    "order" => 24,
+                    "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 12,
-                    "title" => "Operation log",
+                    "order" => 25,
+                    "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 8,
                     "parent_id" => 0,
-                    "order" => 2,
+                    "order" => 19,
                     "title" => "Player",
                     "icon" => "fa-user-md",
                     "uri" => "/player",
                     "permission" => "*",
                     "created_at" => "2019-03-13 07:15:21",
-                    "updated_at" => "2019-03-13 07:15:40"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 9,
                     "parent_id" => 0,
-                    "order" => 3,
-                    "title" => "Activity",
+                    "order" => 11,
+                    "title" => "活动",
                     "icon" => "fa-adjust",
                     "uri" => "/activity",
                     "permission" => NULL,
                     "created_at" => "2019-04-03 02:23:26",
-                    "updated_at" => "2019-04-03 02:24:22"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 10,
                     "parent_id" => 0,
-                    "order" => 6,
+                    "order" => 18,
                     "title" => "Schedule",
                     "icon" => "fa-calendar",
                     "uri" => "/schedule",
                     "permission" => NULL,
                     "created_at" => "2019-04-03 03:03:51",
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 11,
                     "parent_id" => 9,
-                    "order" => 5,
+                    "order" => 13,
                     "title" => "Templates",
                     "icon" => "fa-product-hunt",
                     "uri" => "/schedule/templates",
                     "permission" => NULL,
                     "created_at" => "2019-04-03 06:25:11",
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
                     "id" => 12,
                     "parent_id" => 9,
-                    "order" => 4,
+                    "order" => 12,
                     "title" => "Activities",
                     "icon" => "fa-fire",
                     "uri" => "/activity/activities",
                     "permission" => NULL,
                     "created_at" => "2019-04-03 06:28:46",
-                    "updated_at" => "2019-04-03 06:30:57"
+                    "updated_at" => "2019-04-17 07:24:57"
+                ],
+                [
+                    "id" => 13,
+                    "parent_id" => 0,
+                    "order" => 2,
+                    "title" => "玩家",
+                    "icon" => "fa-user-md",
+                    "uri" => "admin/player",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:40:44",
+                    "updated_at" => "2019-04-17 06:43:53"
+                ],
+                [
+                    "id" => 14,
+                    "parent_id" => 13,
+                    "order" => 3,
+                    "title" => "查询",
+                    "icon" => "fa-search",
+                    "uri" => "player/info",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:41:54",
+                    "updated_at" => "2019-04-17 07:29:01"
+                ],
+                [
+                    "id" => 15,
+                    "parent_id" => 13,
+                    "order" => 4,
+                    "title" => "排行榜",
+                    "icon" => "fa-list-ol",
+                    "uri" => "player/ranks",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:42:50",
+                    "updated_at" => "2019-04-17 06:50:44"
+                ],
+                [
+                    "id" => 16,
+                    "parent_id" => 0,
+                    "order" => 5,
+                    "title" => "公会",
+                    "icon" => "fa-bank",
+                    "uri" => "admin/guild",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:47:21",
+                    "updated_at" => "2019-04-17 06:49:08"
+                ],
+                [
+                    "id" => 17,
+                    "parent_id" => 16,
+                    "order" => 6,
+                    "title" => "查询",
+                    "icon" => "fa-search",
+                    "uri" => "guild/info",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:48:13",
+                    "updated_at" => "2019-04-17 07:29:13"
+                ],
+                [
+                    "id" => 18,
+                    "parent_id" => 16,
+                    "order" => 7,
+                    "title" => "排行榜",
+                    "icon" => "fa-list-ol",
+                    "uri" => "guild/ranks",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:48:53",
+                    "updated_at" => "2019-04-17 07:23:24"
+                ],
+                [
+                    "id" => 19,
+                    "parent_id" => 0,
+                    "order" => 8,
+                    "title" => "邮件",
+                    "icon" => "fa-envelope",
+                    "uri" => "email",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:52:41",
+                    "updated_at" => "2019-04-17 07:23:34"
+                ],
+                [
+                    "id" => 20,
+                    "parent_id" => 0,
+                    "order" => 9,
+                    "title" => "公告",
+                    "icon" => "fa-bullhorn",
+                    "uri" => "notice",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:54:36",
+                    "updated_at" => "2019-04-17 07:23:42"
+                ],
+                [
+                    "id" => 21,
+                    "parent_id" => 0,
+                    "order" => 10,
+                    "title" => "礼包",
+                    "icon" => "fa-briefcase",
+                    "uri" => "gcode",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 06:58:37",
+                    "updated_at" => "2019-04-17 07:23:53"
+                ],
+                [
+                    "id" => 22,
+                    "parent_id" => 0,
+                    "order" => 14,
+                    "title" => "配置",
+                    "icon" => "fa-asterisk",
+                    "uri" => "admin/config",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 07:17:46",
+                    "updated_at" => "2019-04-17 07:24:57"
+                ],
+                [
+                    "id" => 23,
+                    "parent_id" => 22,
+                    "order" => 17,
+                    "title" => "计划",
+                    "icon" => "fa-calendar",
+                    "uri" => "config/schedules",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 07:18:25",
+                    "updated_at" => "2019-04-17 07:24:57"
+                ],
+                [
+                    "id" => 24,
+                    "parent_id" => 22,
+                    "order" => 15,
+                    "title" => "宠物",
+                    "icon" => "fa-bars",
+                    "uri" => "config/pets",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 07:19:21",
+                    "updated_at" => "2019-04-17 07:24:57"
+                ],
+                [
+                    "id" => 25,
+                    "parent_id" => 22,
+                    "order" => 16,
+                    "title" => "道具",
+                    "icon" => "fa-info",
+                    "uri" => "config/items",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-17 07:21:01",
+                    "updated_at" => "2019-04-17 07:24:57"
                 ]
             ]
         );
