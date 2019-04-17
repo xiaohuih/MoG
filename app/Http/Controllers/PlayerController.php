@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Http\Controllers;
 
 use App\Models\Player;
 use Encore\Admin\Controllers\HasResourceActions;

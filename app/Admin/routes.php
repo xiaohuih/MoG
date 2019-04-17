@@ -16,6 +16,6 @@ Route::group([
     $router->post('schedule/import', 'ScheduleImportController@store');
     $router->resource('schedule', ScheduleController::class);
     $router->resource('gcode', GCodeController::class);
-    $router->resource('maintenance/notice', Maintenance\NoticeController::class);
-    $router->resource('maintenance/servers', Maintenance\ServersController::class);
+
+    $router->resource('player/search', Player\SearchController::class);
 });

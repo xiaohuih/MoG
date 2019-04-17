@@ -164,10 +164,10 @@ class AdminTablesSeeder extends Seeder
                     "order" => 3,
                     "title" => "查询",
                     "icon" => "fa-search",
-                    "uri" => "player/info",
+                    "uri" => "player/search",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 06:41:54",
-                    "updated_at" => "2019-04-17 07:29:01"
+                    "updated_at" => "2019-04-17 07:48:49"
                 ],
                 [
                     "id" => 15,
@@ -197,10 +197,10 @@ class AdminTablesSeeder extends Seeder
                     "order" => 6,
                     "title" => "查询",
                     "icon" => "fa-search",
-                    "uri" => "guild/info",
+                    "uri" => "guild/search",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 06:48:13",
-                    "updated_at" => "2019-04-17 07:29:13"
+                    "updated_at" => "2019-04-17 07:49:00"
                 ],
                 [
                     "id" => 18,
@@ -262,22 +262,22 @@ class AdminTablesSeeder extends Seeder
                     "parent_id" => 22,
                     "order" => 17,
                     "title" => "计划",
-                    "icon" => "fa-calendar",
+                    "icon" => "fa-clock-o",
                     "uri" => "config/schedules",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 07:18:25",
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-17 07:44:39"
                 ],
                 [
                     "id" => 24,
                     "parent_id" => 22,
                     "order" => 15,
                     "title" => "宠物",
-                    "icon" => "fa-bars",
+                    "icon" => "fa-qq",
                     "uri" => "config/pets",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 07:19:21",
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-17 07:46:55"
                 ],
                 [
                     "id" => 25,
