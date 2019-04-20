@@ -1,12 +1,14 @@
 <?php
 
 return [
+    'name'                  => '精灵',
+    'zone'                  => '区',
     'notice'                => '公告',
-    'zone'                  => '区服',
     'players'               => '玩家',
     'yes'                   => '是',
     'no'                    => '否',
     'player'                => [
+        'id'            => 'ID',
         'name'          => '昵称',
         'account'       => '账号',
         'level'         => '等级',
@@ -39,4 +41,5 @@ return [
             'attachments' => '附件'
         ],
     ],
+    'select_zone'       => '请选择区服',
 ];

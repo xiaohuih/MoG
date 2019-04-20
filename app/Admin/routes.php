@@ -10,7 +10,7 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
     $router->get('/', 'HomeController@index');
-    $router->resource('player', PlayerController::class);
+    //$router->resource('player', PlayerController::class);
     $router->resource('activity', ActivityController::class);
     $router->get('schedule/import', 'ScheduleImportController@index');
     $router->post('schedule/import', 'ScheduleImportController@store');

@@ -1,12 +1,14 @@
 <?php
 
 return [
+    'name'                  => 'digimon',
     'notice'                => 'notice',
     'zone'                  => 'zone',
     'players'               => 'players',
     'yes'                   => 'yes',
     'no'                    => 'no',
     'player'                => [
+        'id'            => 'ID',
         'name'          => 'name',
         'account'       => 'account',
         'level'         => 'level',
@@ -54,4 +56,5 @@ return [
         'interval' => 'interval',
         'wdays' => 'wdays',
     ],
+    'select_zone'       => 'Player select zone',
 ];

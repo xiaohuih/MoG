@@ -24,13 +24,10 @@
                 </span>
             </div>
         </form> -->
-        <div class="sidebar-form">
-            <select class="form-control">
-                <option value="1">精灵一区</option>
-                <option value="2">精灵二区</option>
-            </select>
-        </div>
         <!-- /.search form -->
+        <!-- zones form (Optional) -->
+        {!!  Game::zoneSelect()->render() !!}
+        <!-- /.zones form -->
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
