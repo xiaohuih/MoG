@@ -11,7 +11,7 @@ return [
         | your game server so that it is used when control game command.
         |
         */
-        'url' => env('GM_URL', 'http://127.0.0.1:8020/web')
+        'url' => env('GM_URL', 'http://127.0.0.1:8020/gm')
     ],
     'account' => [
         /*

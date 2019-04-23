@@ -7,11 +7,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Pagination\Paginator;
 use GuzzleHttp\Client;
+use App\Facades\Game;
 
 class Player extends Model
 {
-    protected static $cmd = 10003;
-
     /**
      * Paginate the given query.
      *
@@ -43,7 +42,7 @@ class Player extends Model
         $res = $client->request('GET', config('game.gm.url'), [
             'timeout' => 10,
             'query' => [
-                'CmdId' => static::$cmd,
+                'ZoneId' => Game::zone(),
                 'params' => json_encode($params)
             ]
         ]);
@@ -51,7 +50,7 @@ class Player extends Model
 
         $items = static::hydrate($data['list']);
         $pagination = $data['pagination'];
-        return new LengthAwarePaginator($items,$pagination['total'], $pagination['perPage'], $pagination['currentPage'],[
+        return new LengthAwarePaginator($items, $pagination['total'], $pagination['perPage'], $pagination['currentPage'],[
             'path' => Paginator::resolveCurrentPath(),
             'pageName' => $pageName
         ]);
@@ -76,7 +75,7 @@ class Player extends Model
         $res = $client->request('GET', config('game.gm.url'), [
             'connect_timeout' => 10,
             'query' => [
-                'CmdId' => static::$cmd,
+                'ZoneId' => Game::zone(),
                 'params' => json_encode($params)
             ]
         ]);

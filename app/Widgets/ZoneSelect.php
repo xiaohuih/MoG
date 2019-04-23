@@ -2,6 +2,7 @@
 
 namespace App\Widgets;
 
+use App\Facades\Game;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Widgets\Widget;
 use Illuminate\Contracts\Support\Renderable;
@@ -48,59 +49,57 @@ class ZoneSelect extends Widget implements Renderable
      */
     protected function setUpScripts()
     {
-        $url_zones = static::URL_ZONES;
-        $url_selectzone = static::URL_SELECTZONE;
+        $urlZones = static::URL_ZONES;
+        $urlSelectZone = static::URL_SELECTZONE;
         $language = config('app.locale');
         $placeholder = trans('game.select_zone');
         $zonePrefix = trans('game.name');
         $zonePost = trans('game.zone');
+        $zoneLastSelected = Game::zone();
 
         $script = <<<SCRIPT
-$('.{$this->getElementClassName()}').select2({
-    ajax: {
-        url: '{$url_zones}',
-        dataType: 'json',
-        data: function (params) {
-          return {
-            q: params.term, // search term
-            page: params.page
-          };
-        },
-        processResults: function (data, params) {
-          // parse the results into the format expected by Select2
-          // since we are using custom formatting functions we do not need to
-          // alter the remote JSON data, except to indicate that infinite
-          // scrolling can be used
-          params.page = params.page || 1;
-    
-          return {
-            results: $.map(data.results, function(item) {
-                return {id: item, text: '$zonePrefix' + item + '$zonePost'};
+function initSelector() {  
+    $.ajax({
+        dataType: 'json', 
+        method: 'GET', 
+        url: '$urlZones',
+    }).done( function(data) {    
+        $(".{$this->getElementClassName()}").select2({
+            data: $.map(data.results, function(id) {
+                return {id: id, text: '$zonePrefix' + id + '$zonePost'};
             }),
-            pagination: {
-              more: (params.page * 30) < data.total_count
-            }
-          };
-        },
-        cache: true
-    },
-    allowClear: true,
-    placeholder: '{$placeholder}',
-    language: '{$language}',
-    minimumResultsForSearch: Infinity,
-});
-$('.{$this->getElementClassName()}').on('select2:select', function (e) {
-    var data = e.params.data;
+            allowClear: true,
+            placeholder: '{$placeholder}',
+            language: '{$language}',
+            minimumResultsForSearch: Infinity,
+        });
+        if ($zoneLastSelected && $zoneLastSelected != '0') {
+            $('.{$this->getElementClassName()}').val($zoneLastSelected).trigger('change');
+        } else {
+            $('.{$this->getElementClassName()}').val(null).trigger('change');
+        }
+    });
+}
 
-    $.post('{$url_selectzone}', {
+function selectZone(zone) {
+    $.post('{$urlSelectZone}', {
         _token: LA.token,
-        _curr_zone: data.id
+        _zone: zone
     },
     function(){
-        toastr.success('$zonePrefix' + data.id + '$zonePost');
+        $.pjax.reload('#pjax-container');
+        toastr.success('$zonePrefix' + zone + '$zonePost');
     });
+}
+
+$('.{$this->getElementClassName()}').on('select2:select', function (e) {
+    selectZone(e.params.data.id);
 });
-$('.{$this->getElementClassName()}').trigger('change');
+$('.{$this->getElementClassName()}').on('select2:unselect', function (e) {
+    selectZone(0);
+});
+
+initSelector();
 
 SCRIPT;
 
