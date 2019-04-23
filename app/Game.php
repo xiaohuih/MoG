@@ -32,7 +32,7 @@ class Game
      *
      * @return number
      */
-    public function zone()
+    public function getZone()
     {
         return session('__CURRENT_ZONE__');
     }

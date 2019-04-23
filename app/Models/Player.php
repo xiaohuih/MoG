@@ -11,6 +11,8 @@ use App\Facades\Game;
 
 class Player extends Model
 {
+    protected static $cmd = 10003;
+
     /**
      * Paginate the given query.
      *
@@ -42,7 +44,8 @@ class Player extends Model
         $res = $client->request('GET', config('game.gm.url'), [
             'timeout' => 10,
             'query' => [
-                'ZoneId' => Game::zone(),
+                'CmdId' => static::$cmd,
+                'ZoneId' => Game::getZone(),
                 'params' => json_encode($params)
             ]
         ]);
@@ -75,7 +78,8 @@ class Player extends Model
         $res = $client->request('GET', config('game.gm.url'), [
             'connect_timeout' => 10,
             'query' => [
-                'ZoneId' => Game::zone(),
+                'CmdId' => static::$cmd,
+                'ZoneId' => Game::getZone(),
                 'params' => json_encode($params)
             ]
         ]);

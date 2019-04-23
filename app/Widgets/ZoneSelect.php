@@ -55,7 +55,6 @@ class ZoneSelect extends Widget implements Renderable
         $placeholder = trans('game.select_zone');
         $zonePrefix = trans('game.name');
         $zonePost = trans('game.zone');
-        $zoneLastSelected = Game::zone();
 
         $script = <<<SCRIPT
 function initSelector() {  
@@ -65,7 +64,7 @@ function initSelector() {
         url: '$urlZones',
     }).done( function(data) {    
         $(".{$this->getElementClassName()}").select2({
-            data: $.map(data.results, function(id) {
+            data: $.map(data.items, function(id) {
                 return {id: id, text: '$zonePrefix' + id + '$zonePost'};
             }),
             allowClear: true,
@@ -73,8 +72,8 @@ function initSelector() {
             language: '{$language}',
             minimumResultsForSearch: Infinity,
         });
-        if ($zoneLastSelected && $zoneLastSelected != '0') {
-            $('.{$this->getElementClassName()}').val($zoneLastSelected).trigger('change');
+        if (data.selected != 0) {
+            $('.{$this->getElementClassName()}').val(data.selected).trigger('change');
         } else {
             $('.{$this->getElementClassName()}').val(null).trigger('change');
         }
