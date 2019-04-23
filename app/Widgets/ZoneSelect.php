@@ -12,11 +12,11 @@ class ZoneSelect extends Widget implements Renderable
     /**
      * The url to get zones.
      */
-    const URL_ZONES = '/api/user';
+    const URL_ZONES = '/admin/zone';
     /**
      * The url to change current one.
      */
-    const URL_SELECTZONE = '/admin/selectzone';
+    const URL_SELECTZONE = '/admin/zone/select';
     /**
      * @var string
      */

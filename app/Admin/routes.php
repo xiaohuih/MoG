@@ -1,8 +1,6 @@
 <?php
 
-use App\Facades\Game;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Input;
 
 Admin::registerAuthRoutes();
 
@@ -11,9 +9,9 @@ Route::group([
     'namespace'     => config('admin.route.namespace'),
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
-    $router->post('selectzone', function () {
-        Game::setZone(Input::get('_zone', '0'));
-    });
+    $router->get('zone', 'ZoneController@index');
+    $router->post('zone/select', 'ZoneController@select');
+
     $router->get('/', 'HomeController@index');
     $router->resource('activity', ActivityController::class);
     $router->get('schedule/import', 'ScheduleImportController@index');
