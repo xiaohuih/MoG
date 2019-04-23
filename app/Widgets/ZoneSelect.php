@@ -9,6 +9,14 @@ use Illuminate\Contracts\Support\Renderable;
 class ZoneSelect extends Widget implements Renderable
 {
     /**
+     * The url to get zones.
+     */
+    const URL_ZONES = '/api/user';
+    /**
+     * The url to change current one.
+     */
+    const URL_SELECTZONE = '/admin/selectzone';
+    /**
      * @var string
      */
     protected $className;
@@ -40,7 +48,8 @@ class ZoneSelect extends Widget implements Renderable
      */
     protected function setUpScripts()
     {
-        $url = '/api/user';
+        $url_zones = static::URL_ZONES;
+        $url_selectzone = static::URL_SELECTZONE;
         $language = config('app.locale');
         $placeholder = trans('game.select_zone');
         $zonePrefix = trans('game.name');
@@ -49,7 +58,7 @@ class ZoneSelect extends Widget implements Renderable
         $script = <<<SCRIPT
 $('.{$this->getElementClassName()}').select2({
     ajax: {
-        url: '$url',
+        url: '{$url_zones}',
         dataType: 'json',
         data: function (params) {
           return {
@@ -82,8 +91,17 @@ $('.{$this->getElementClassName()}').select2({
 });
 $('.{$this->getElementClassName()}').on('select2:select', function (e) {
     var data = e.params.data;
-    console.log(data);
+
+    $.post('{$url_selectzone}', {
+        _token: LA.token,
+        _curr_zone: data.id
+    },
+    function(){
+        toastr.success('$zonePrefix' + data.id + '$zonePost');
+    });
 });
+$('.{$this->getElementClassName()}').trigger('change');
+
 SCRIPT;
 
         Admin::script($script);
