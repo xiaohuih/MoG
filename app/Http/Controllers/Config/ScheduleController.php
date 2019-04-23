@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Config;
 
 use App\Models\Schedule;
 use App\Exports\SchedulesExport;

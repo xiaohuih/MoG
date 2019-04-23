@@ -29,79 +29,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 20,
+                    "order" => 18,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-23 09:06:20"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 21,
+                    "order" => 19,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-23 09:06:20"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 22,
+                    "order" => 20,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-23 09:06:20"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 23,
+                    "order" => 21,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-23 09:06:20"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 24,
+                    "order" => 22,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-23 09:06:20"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 25,
+                    "order" => 23,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-17 07:24:57"
-                ],
-                [
-                    "id" => 8,
-                    "parent_id" => 0,
-                    "order" => 19,
-                    "title" => "Player",
-                    "icon" => "fa-user-md",
-                    "uri" => "/player",
-                    "permission" => "*",
-                    "created_at" => "2019-03-13 07:15:21",
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-23 09:06:20"
                 ],
                 [
                     "id" => 9,
@@ -112,17 +101,6 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "/activity",
                     "permission" => NULL,
                     "created_at" => "2019-04-03 02:23:26",
-                    "updated_at" => "2019-04-17 07:24:57"
-                ],
-                [
-                    "id" => 10,
-                    "parent_id" => 0,
-                    "order" => 18,
-                    "title" => "Schedule",
-                    "icon" => "fa-calendar",
-                    "uri" => "/schedule",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-03 03:03:51",
                     "updated_at" => "2019-04-17 07:24:57"
                 ],
                 [
@@ -251,11 +229,11 @@ class AdminTablesSeeder extends Seeder
                     "parent_id" => 0,
                     "order" => 14,
                     "title" => "配置",
-                    "icon" => "fa-asterisk",
+                    "icon" => "fa-gears",
                     "uri" => "admin/config",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 07:17:46",
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-17 11:02:09"
                 ],
                 [
                     "id" => 23,

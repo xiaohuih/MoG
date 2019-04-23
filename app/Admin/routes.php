@@ -14,9 +14,9 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('activity', ActivityController::class);
-    $router->get('schedule/import', 'ScheduleImportController@index');
-    $router->post('schedule/import', 'ScheduleImportController@store');
-    $router->resource('schedule', ScheduleController::class);
+    $router->get('config/schedules/import', 'Config\ScheduleImportController@index');
+    $router->post('config/schedules/import', 'Config\ScheduleImportController@store');
+    $router->resource('config/schedules', Config\ScheduleController::class);
     $router->resource('gcode', GCodeController::class);
 
     $router->resource('player/search', Player\SearchController::class);
