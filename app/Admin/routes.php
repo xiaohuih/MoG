@@ -17,6 +17,7 @@ Route::group([
     $router->get('config/schedules/import', 'Config\ScheduleImportController@index');
     $router->post('config/schedules/import', 'Config\ScheduleImportController@store');
     $router->resource('config/schedules', Config\ScheduleController::class);
+    $router->resource('config/roles', Config\GameRoleController::class);
     $router->resource('gcode', GCodeController::class);
 
     $router->resource('player/search', Player\SearchController::class);
