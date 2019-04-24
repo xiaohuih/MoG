@@ -20,6 +20,6 @@ Route::group([
     $router->resource('config/roles', Config\GameRoleController::class);
     $router->resource('gcode', GCodeController::class);
 
-    $router->resource('player/search', Player\SearchController::class);
-    $router->resource('player', PlayerController::class);
+    $router->resource('player/search', Player\SearchController::class)->middleware('zone');;
+    $router->resource('player', PlayerController::class)->middleware('zone');;
 });
