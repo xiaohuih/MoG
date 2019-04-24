@@ -22,6 +22,7 @@ class CheckForZoneMode
         if (!empty(Game::getZone())) {
             return $next($request);
         }
-        throw new InvalidZoneException;
+        return response()->view('invalidzone');
+        //throw new InvalidZoneException;
     }
 }
