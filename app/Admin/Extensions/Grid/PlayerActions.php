@@ -2,6 +2,7 @@
 
 namespace App\Admin\Extensions\Grid;
 
+use Encore\Admin\Grid\Displayers\AbstractDisplayer;
 use Encore\Admin\Admin;
 
 class PlayerActions extends AbstractDisplayer
@@ -21,7 +22,7 @@ class PlayerActions extends AbstractDisplayer
      *
      * @var array
      */
-    protected $actions = ['view', 'edit', 'delete'];
+    protected $actions = ['view', 'forbidlogin', 'forbidchat'];
 
     /**
      * @var string
@@ -64,54 +65,6 @@ class PlayerActions extends AbstractDisplayer
     public function getRouteKey()
     {
         return $this->row->{$this->row->getRouteKeyName()};
-    }
-
-    /**
-     * Disable view action.
-     *
-     * @return $this
-     */
-    public function disableView(bool $disable = true)
-    {
-        if ($disable) {
-            array_delete($this->actions, 'view');
-        } elseif (!in_array('view', $this->actions)) {
-            array_push($this->actions, 'view');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Disable delete.
-     *
-     * @return $this.
-     */
-    public function disableDelete(bool $disable = true)
-    {
-        if ($disable) {
-            array_delete($this->actions, 'delete');
-        } elseif (!in_array('delete', $this->actions)) {
-            array_push($this->actions, 'delete');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Disable edit.
-     *
-     * @return $this.
-     */
-    public function disableEdit(bool $disable = true)
-    {
-        if ($disable) {
-            array_delete($this->actions, 'edit');
-        } elseif (!in_array('edit', $this->actions)) {
-            array_push($this->actions, 'edit');
-        }
-
-        return $this;
     }
 
     /**
@@ -167,18 +120,18 @@ class PlayerActions extends AbstractDisplayer
     protected function renderView()
     {
         return <<<EOT
-<a href="{$this->getResource()}/{$this->getRouteKey()}">
+<a href="{$this->getResource()}/{$this->getRouteKey()}" data-toggle="tooltip" data-original-title="Tooltip on top">
     <i class="fa fa-eye"></i>
 </a>
 EOT;
     }
 
     /**
-     * Render edit action.
+     * Render forbidlogin action.
      *
      * @return string
      */
-    protected function renderEdit()
+    protected function renderForbidlogin()
     {
         return <<<EOT
 <a href="{$this->getResource()}/{$this->getRouteKey()}/edit">
@@ -188,11 +141,11 @@ EOT;
     }
 
     /**
-     * Render delete action.
+     * Render forbidchat action.
      *
      * @return string
      */
-    protected function renderDelete()
+    protected function renderForbidchat()
     {
         $this->setupDeleteScript();
 

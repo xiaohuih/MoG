@@ -11,9 +11,21 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class SearchController extends Controller
+class RankController extends Controller
 {
     use HasResourceActions;
+
+    /**
+     * Player ranks
+     */
+    protected $ranks = [
+        1 => 'game.rank.level',      // 等级排行榜  
+        3 => 'game.rank.power',      // 战力排行榜
+        5 => 'game.rank.arena',      // 竞技场排行榜
+        7 => 'game.rank.parkour',    // 跑酷排行榜
+        10 => 'game.rank.recharge',  // 充值排行榜
+        11 => 'game.rank.consume',   // 消费排行榜
+    ];
 
     /**
      * Player status
@@ -33,7 +45,7 @@ class SearchController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header(trans('game.players'))
+            ->header(trans('game.ranks'))
             ->description(trans('admin.search'))
             ->body($this->grid());
     }
@@ -60,7 +72,7 @@ class SearchController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Player);
+        $grid = new Grid(new Player\Rank);
         // 新增按钮
         $grid->disableCreateButton();
         // 导出按钮
@@ -74,7 +86,10 @@ class SearchController extends Controller
         // 筛选
         $grid->filter(function($filter){
             $filter->expand();
-            $filter->like('name', 'name');
+            $filter->disableIdFilter();
+            $filter->equal('type', trans('game.ranks'))->select(collect($this->ranks)->map(function ($item) {
+                return trans($item);
+            }));
         });
         // 行操作
         $grid->actions(function ($actions) {
@@ -82,10 +97,11 @@ class SearchController extends Controller
             $actions->disableDelete();
         });
         // 列
+        $grid->rank(trans('game.player.rank'));
         $grid->id('ID');
         $grid->name(trans('game.player.name'));
-        $grid->level(trans('game.player.level'));
-        $grid->power(trans('game.player.power'));
+        $grid->value(trans('game.player.value'));
+        $grid->role(trans('game.player.role'));
         $grid->vip(trans('game.player.vip'));
         $grid->guild(trans('game.player.guild'));
         $statusInfo = $this->statusInfo;

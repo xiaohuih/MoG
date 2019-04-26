@@ -23,6 +23,5 @@ class CheckForZoneMode
             return $next($request);
         }
         return response()->view('invalidzone');
-        //throw new InvalidZoneException;
     }
 }
