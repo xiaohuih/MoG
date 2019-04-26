@@ -64,7 +64,7 @@ class SearchController extends Controller
         // 筛选
         $grid->filter(function($filter){
             $filter->expand();
-            $filter->like('name', 'name');
+            $filter->like('name', trans('game.info.name'));
         });
         // 行操作
         $grid->actions(function ($actions) {
