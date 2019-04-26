@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Guild;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -9,7 +9,7 @@ use Illuminate\Pagination\Paginator;
 use GuzzleHttp\Client;
 use App\Facades\Game;
 
-class Player extends Model
+class Rank extends Model
 {
     protected static $cmd = 10003;
 
@@ -30,16 +30,10 @@ class Player extends Model
         $perPage = $perPage ?: $this->getPerPage();
 
         $params = [
-            'funId' => 'GET_PLAYERS',
+            'funId' => 'GET_GUILD_RANK',
             'perPage' => $perPage,
             'currentPage' => $currentPage
         ];
-        if (Request::get('id')) {
-            $params['id'] = Request::get('id');
-        }
-        if (Request::get('name')) {
-            $params['name'] = Request::get('name');
-        }
         $client = new Client();
         $res = $client->request('GET', config('game.gm.url'), [
             'timeout' => 10,
@@ -50,7 +44,7 @@ class Player extends Model
             ]
         ]);
         $data = json_decode($res->getBody(), true);
-
+    
         $items = static::hydrate($data['list']);
         $pagination = $data['pagination'];
         return new LengthAwarePaginator($items, $pagination['total'], $pagination['perPage'], $pagination['currentPage'],[
@@ -71,7 +65,7 @@ class Player extends Model
     protected function findOrFail($id, $columns = ['*'])
     {
         $params = [
-            'funId' => 'GET_PLAYER_DETAIL',
+            'funId' => 'GET_GUILD_DETAIL',
             'id' => $id
         ];
         $client = new Client();
@@ -111,7 +105,7 @@ class Player extends Model
     public static function perform($id, $action)
     {
         $params = [
-            'funId' => 'CTRL_PLAYER',
+            'funId' => 'CTRL_GUILD',
             'id' => $id,
             'action' => $action,
         ];

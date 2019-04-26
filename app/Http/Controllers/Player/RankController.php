@@ -19,12 +19,12 @@ class RankController extends Controller
      * Player ranks
      */
     protected $ranks = [
-        1 => 'game.rank.level',      // 等级排行榜  
-        3 => 'game.rank.power',      // 战力排行榜
-        5 => 'game.rank.arena',      // 竞技场排行榜
-        7 => 'game.rank.parkour',    // 跑酷排行榜
-        10 => 'game.rank.recharge',  // 充值排行榜
-        11 => 'game.rank.consume',   // 消费排行榜
+        1 => 'game.ranks.level',      // 等级排行榜  
+        3 => 'game.ranks.power',      // 战力排行榜
+        10 => 'game.ranks.recharge',  // 充值排行榜
+        11 => 'game.ranks.consume',   // 消费排行榜
+        7 => 'game.ranks.parkour',    // 跑酷排行榜
+        5 => 'game.ranks.arena',      // 竞技场排行榜
     ];
 
     /**
@@ -45,8 +45,8 @@ class RankController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header(trans('game.ranks'))
-            ->description(trans('admin.search'))
+            ->header(trans('game.player'))
+            ->description(trans('game.rank'))
             ->body($this->grid());
     }
 
@@ -60,7 +60,7 @@ class RankController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header(trans('game.players'))
+            ->header(trans('game.player'))
             ->description(trans('admin.detail'))
             ->body($this->detail($id));
     }
@@ -87,7 +87,7 @@ class RankController extends Controller
         $grid->filter(function($filter){
             $filter->expand();
             $filter->disableIdFilter();
-            $filter->equal('type', trans('game.ranks'))->select(collect($this->ranks)->map(function ($item) {
+            $filter->equal('type', trans('game.rank'))->select(collect($this->ranks)->map(function ($item) {
                 return trans($item);
             }));
         });
@@ -97,18 +97,18 @@ class RankController extends Controller
             $actions->disableDelete();
         });
         // 列
-        $grid->rank(trans('game.player.rank'));
+        $grid->rank(trans('game.info.rank'));
         $grid->id('ID');
-        $grid->name(trans('game.player.name'));
-        $grid->value(trans('game.player.value'));
-        $grid->role(trans('game.player.role'));
-        $grid->vip(trans('game.player.vip'));
-        $grid->guild(trans('game.player.guild'));
+        $grid->name(trans('game.info.name'));
+        $grid->value(trans('game.info.value'));
+        $grid->role(trans('game.info.role'));
+        $grid->vip(trans('game.info.vip'));
+        $grid->guild(trans('game.info.guild'));
         $statusInfo = $this->statusInfo;
-        $grid->status(trans('game.player.status'))->display(function ($status) use ($statusInfo) {
+        $grid->status(trans('game.info.status'))->display(function ($status) use ($statusInfo) {
             $status = $statusInfo[$status];
 
-            $name = trans('game.player.'.$status['name']);
+            $name = trans('game.info.'.$status['name']);
             $style = $status['style'];
             return "<span class='label label-{$style}'>$name</span>";
         });
@@ -134,29 +134,29 @@ class RankController extends Controller
             $tools->disableDelete();
         });
         $show->id('ID');
-        $show->name(trans('game.player.name'));
-        $show->accname(trans('game.player.account'));
-        $show->guild(trans('game.player.guild'));
-        $show->level(trans('game.player.level'));
-        $show->power(trans('game.player.power'));
-        $show->vip(trans('game.player.vip'));
-        $show->paper_level(trans('game.player.paperlevel'));
-        $show->diamond(trans('game.player.diamond'));
-        $show->gold(trans('game.player.gold'));
-        $show->diamond(trans('game.player.diamond'));
-        $show->exp(trans('game.player.exp'));
+        $show->name(trans('game.info.name'));
+        $show->accname(trans('game.info.account'));
+        $show->guild(trans('game.info.guild'));
+        $show->level(trans('game.info.level'));
+        $show->power(trans('game.info.power'));
+        $show->vip(trans('game.info.vip'));
+        $show->paper_level(trans('game.info.paperlevel'));
+        $show->diamond(trans('game.info.diamond'));
+        $show->gold(trans('game.info.gold'));
+        $show->diamond(trans('game.info.diamond'));
+        $show->exp(trans('game.info.exp'));
         $statusInfo = $this->statusInfo;
-        $show->status(trans('game.player.status'))->unescape()->as(function ($status) use ($statusInfo) {
+        $show->status(trans('game.info.status'))->unescape()->as(function ($status) use ($statusInfo) {
             $status = $statusInfo[$status];
 
-            $name = trans('game.player.'.$status['name']);
+            $name = trans('game.info.'.$status['name']);
             $style = $status['style'];
             return "<span class='label label-{$style}'>$name</span>";
         });
-        $show->createtime(trans('game.player.createtime'))->as(function ($createtime) {
+        $show->createtime(trans('game.info.createtime'))->as(function ($createtime) {
             return date('Y-m-d H:i:s', $createtime);
         });
-        $show->offlinetime(trans('game.player.offlinetime'))->as(function ($offlinetime) {
+        $show->offlinetime(trans('game.info.offlinetime'))->as(function ($offlinetime) {
             return date('Y-m-d H:i:s', $offlinetime);
         });
 

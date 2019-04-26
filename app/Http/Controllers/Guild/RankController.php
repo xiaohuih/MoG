@@ -1,28 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Player;
+namespace App\Http\Controllers\Guild;
 
-use App\Admin\Extensions\Grid\PlayerActions;
 use App\Http\Controllers\Controller;
-use App\Models\Player;
+use App\Models\Guild;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class SearchController extends Controller
+class RankController extends Controller
 {
     use HasResourceActions;
-
-    /**
-     * Player status
-     */
-    protected $statusInfo = [
-        0 => ['name' => 'offline', 'style' => 'default'],    // 离线
-        1 => ['name' => 'online', 'style' => 'success'],     // 在线
-        2 => ['name' => 'forbid', 'style' => 'danger']       // 封禁
-    ];
 
     /**
      * Index interface.
@@ -33,8 +23,8 @@ class SearchController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header(trans('game.player'))
-            ->description(trans('admin.search'))
+            ->header(trans('game.guild'))
+            ->description(trans('game.rank'))
             ->body($this->grid());
     }
 
@@ -48,7 +38,7 @@ class SearchController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header(trans('game.player'))
+            ->header(trans('game.guild'))
             ->description(trans('admin.detail'))
             ->body($this->detail($id));
     }
@@ -60,7 +50,7 @@ class SearchController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Player\Search);
+        $grid = new Grid(new Guild\Rank);
         // 新增按钮
         $grid->disableCreateButton();
         // 导出按钮
@@ -72,32 +62,19 @@ class SearchController extends Controller
             });
         });
         // 筛选
-        $grid->filter(function($filter){
-            $filter->expand();
-            $filter->like('name', 'name');
-        });
+        $grid->disableFilter();
         // 行操作
         $grid->actions(function ($actions) {
             $actions->disableEdit();
-            $actions->disableDelete();
         });
         // 列
+        $grid->rank(trans('game.info.rank'));
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
         $grid->level(trans('game.info.level'));
-        $grid->power(trans('game.info.power'));
-        $grid->vip(trans('game.info.vip'));
-        $grid->guild(trans('game.info.guild'));
-        $statusInfo = $this->statusInfo;
-        $grid->status(trans('game.info.status'))->display(function ($status) use ($statusInfo) {
-            $status = $statusInfo[$status];
-
-            $name = trans('game.info.'.$status['name']);
-            $style = $status['style'];
-            return "<span class='label label-{$style}'>$name</span>";
-        });
-        $grid->forbidlogin('封禁')->switch();
-        //$grid->column('control')->displayUsing(PlayerActions::class);
+        $grid->flag(trans('game.info.flag'));
+        $grid->membercount(trans('game.info.membercount'));
+        $grid->leader(trans('game.info.leader'));
 
         return $grid;
     }
@@ -110,7 +87,7 @@ class SearchController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Player::findOrFail($id));
+        $show = new Show(Guild::findOrFail($id));
         // 工具
         $show->panel()->tools(function ($tools) {
             $tools->disableEdit();

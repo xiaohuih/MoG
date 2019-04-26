@@ -21,8 +21,11 @@ Route::group([
     $router->resource('gcode', GCodeController::class);
 
     $router->group(['middleware' => 'zone'], function (Router $router) {
+        // 玩家
         $router->resource('player/search', Player\SearchController::class);
         $router->resource('player/ranks', Player\RankController::class);
-        $router->resource('player', PlayerController::class);
+        // 公会
+        $router->resource('guild/search', Guild\SearchController::class);
+        $router->resource('guild/ranks', Guild\RankController::class);
     });
 });
