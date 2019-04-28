@@ -18,8 +18,9 @@ Route::group([
     $router->post('config/schedules/import', 'Config\ScheduleImportController@store');
     $router->resource('config/schedules', Config\ScheduleController::class);
     $router->resource('config/roles', Config\GameRoleController::class);
-    $router->resource('gcode', GCodeController::class);
     $router->resource('mail', MailController::class);
+    $router->resource('notice', NoticeController::class);
+    $router->resource('gcode', GCodeController::class);
 
     $router->group(['middleware' => 'zone'], function (Router $router) {
         // 玩家

@@ -45,9 +45,12 @@ return [
         'content'       => '内容',
         'attachments'   => '附件',
         'receivers'     => '收件人',
-        'sendtime'      => '发件时间',
+        'sendtime'      => '发送时间',
         'globalmail'    => '全局邮件',
         'normalmail'    => '普通邮件',
+        'starttime'     => '开始时间',
+        'endtime'       => '结束时间',
+        'interval'      => '间隔',
     ],
     'ranks'                  => [
         'level'         => '等级',

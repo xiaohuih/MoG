@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mail;
+use App\Models\Notice;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Grid;
@@ -11,7 +11,7 @@ use Encore\Admin\Show;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
 
-class MailController extends Controller
+class NoticeController extends Controller
 {
     use HasResourceActions;
 
@@ -24,7 +24,7 @@ class MailController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header(trans('game.mail'))
+            ->header(trans('game.notice'))
             ->description(trans('admin.list'))
             ->body($this->grid());
     }
@@ -39,7 +39,7 @@ class MailController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header(trans('game.mail'))
+            ->header(trans('game.notice'))
             ->description(trans('admin.detail'))
             ->body($this->detail($id));
     }
@@ -54,7 +54,7 @@ class MailController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header(trans('game.mail'))
+            ->header(trans('game.notice'))
             ->description(trans('admin.edit'))
             ->body($this->form()->edit($id));
     }
@@ -68,7 +68,7 @@ class MailController extends Controller
     public function create(Content $content)
     {
         return $content
-            ->header(trans('game.mail'))
+            ->header(trans('game.notice'))
             ->description(trans('admin.create'))
             ->body($this->form());
     }
@@ -80,29 +80,20 @@ class MailController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Mail);
+        $grid = new Grid(new Notice);
         // 筛选
         $grid->filter(function($filter){
-            $filter->like('title', trans('game.info.title'));
-            $filter->between('sendtime', trans('game.info.sendtime'))->datetime();
+            $filter->like('content', trans('game.info.content'));
             $filter->between('created_at', trans('admin.created_at'))->datetime();
         });
         // 列
         $grid->id('ID');
-        $grid->title(trans('game.info.title'));
         $grid->content(trans('game.info.content'));
-        $grid->attachments(trans('game.info.attachments'));
-        $grid->type(trans('game.info.type'))->display(function ($type) {
-            if ($type == Mail::TYPE_GLBOAL) {
-                return rans('game.info.globalmail');
-            } else if ($type == Mail::TYPE_NORMAL) {
-                return trans('game.info.normalmail');
-            }
-            return 'unknown';
-        });
-        $grid->receivers(trans('game.info.receivers'));
+        $grid->starttime(trans('game.info.starttime'))->sortable();
+        $grid->endtime(trans('game.info.endtime'))->sortable();
+        $grid->interval(trans('game.info.interval'));
         $grid->zones(trans('game.info.zone'));
-        $grid->sendtime(trans('game.info.sendtime'))->sortable();
+        $grid->status(trans('game.info.status'))->switch();
         $grid->created_at(trans('admin.created_at'))->sortable();
 
         return $grid;
@@ -116,15 +107,14 @@ class MailController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Mail::findOrFail($id));
+        $show = new Show(Notice::findOrFail($id));
         $show->id('ID');
-        $show->title(trans('game.info.title'));
-        $show->content(trans('game.info.content'));
-        $show->attachments(trans('game.info.attachments'));
-        $show->type(trans('game.info.type'));
-        $show->receivers(trans('game.info.receivers'));
-        $show->zones(trans('game.info.zone'));
-        $show->sendtime(trans('game.info.sendtime'));
+        $grid->content(trans('game.info.content'));
+        $grid->starttime(trans('game.info.starttime'));
+        $grid->endtime(trans('game.info.endtime'));
+        $grid->interval(trans('game.info.interval'));
+        $grid->zones(trans('game.info.zone'));
+        $grid->status(trans('game.info.status'));
         $show->created_at(trans('admin.created_at'));
         $show->updated_at(trans('admin.updated_at'));
 
@@ -138,18 +128,15 @@ class MailController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Mail);
+        $form = new Form(new Notice);
         $form->display('id');
-        $form->select('type', trans('game.info.type'))->options([
-            Mail::TYPE_GLBOAL => trans('game.info.globalmail'), 
-            Mail::TYPE_NORMAL => trans('game.info.normalmail')
-        ])->rules('required');
-        $form->text('receivers', trans('game.info.receivers'));
-        $form->text('title', trans('game.info.title'))->rules('required|max:30');
-        $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
-        $form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('required|max:255');
+
+        $form->text('content', trans('game.info.content'))->rules('required|max:255');
+        $form->datetime('starttime', trans('game.info.starttime'));
+        $form->datetime('endtime', trans('game.info.endtime'));
+        $form->text('interval', trans('game.info.interval'));
         $form->text('zones', trans('game.info.zone'));
-        $form->datetime('sendtime', trans('game.info.sendtime'));
+
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
 
