@@ -81,21 +81,6 @@ class GCodeController extends Controller
     protected function grid()
     {
         $grid = new Grid(new GCode);
-        // 批量操作
-        $grid->tools(function ($tools) {
-            $tools->batch(function ($batch) {
-                $batch->disableDelete();
-            });
-        });
-        // 行操作
-        $grid->actions(function ($actions) {
-            $changable = !$actions->row->is_config;
-            if (!$changable) {
-                $actions->disableEdit();
-                $actions->disableDelete();
-            }
-        });
-
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
@@ -115,6 +100,7 @@ class GCodeController extends Controller
         $grid->column('endtime', trans('game.info.endtime'))->display(function ($endtime) {
             return empty($endtime) ? '--' : date('Y-m-d H:i:s', $endtime);
         });
+        $grid->created_at(trans('admin.created_at'))->sortable();
 
         return $grid;
     }
@@ -147,6 +133,8 @@ class GCodeController extends Controller
         $show->endtime(trans('game.info.endtime'))->as(function ($endtime) {
             return empty($endtime) ? '--' : date('Y-m-d H:i:s', $endtime);
         });
+        $show->created_at(trans('admin.created_at'));
+        $show->updated_at(trans('admin.updated_at'));
 
         return $show;
     }
@@ -173,6 +161,8 @@ class GCodeController extends Controller
         $form->datetime('endtime', trans('game.info.endtime'))->customFormat(function ($begintime) {
             return empty($begintime) ? null : date('Y-m-d H:i:s', $begintime);
         });
+        $form->display('created_at', trans('admin.created_at'));
+        $form->display('updated_at', trans('admin.updated_at'));
 
         return $form;
     }
