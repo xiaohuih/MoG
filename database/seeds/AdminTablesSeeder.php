@@ -29,101 +29,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 18,
+                    "order" => 16,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-23 09:06:20"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 19,
+                    "order" => 17,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-23 09:06:20"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 20,
+                    "order" => 18,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-23 09:06:20"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 21,
+                    "order" => 19,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-23 09:06:20"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 22,
+                    "order" => 20,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-23 09:06:20"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 23,
+                    "order" => 21,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-23 09:06:20"
-                ],
-                [
-                    "id" => 9,
-                    "parent_id" => 0,
-                    "order" => 11,
-                    "title" => "活动",
-                    "icon" => "fa-adjust",
-                    "uri" => "/activity",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-03 02:23:26",
-                    "updated_at" => "2019-04-17 07:24:57"
-                ],
-                [
-                    "id" => 11,
-                    "parent_id" => 9,
-                    "order" => 13,
-                    "title" => "Templates",
-                    "icon" => "fa-product-hunt",
-                    "uri" => "/schedule/templates",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-03 06:25:11",
-                    "updated_at" => "2019-04-17 07:24:57"
-                ],
-                [
-                    "id" => 12,
-                    "parent_id" => 9,
-                    "order" => 12,
-                    "title" => "Activities",
-                    "icon" => "fa-fire",
-                    "uri" => "/activity/activities",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-03 06:28:46",
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 13,
@@ -197,10 +164,10 @@ class AdminTablesSeeder extends Seeder
                     "order" => 8,
                     "title" => "邮件",
                     "icon" => "fa-envelope",
-                    "uri" => "email",
+                    "uri" => "mail",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 06:52:41",
-                    "updated_at" => "2019-04-17 07:23:34"
+                    "updated_at" => "2019-04-26 08:24:02"
                 ],
                 [
                     "id" => 20,
@@ -227,46 +194,57 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 22,
                     "parent_id" => 0,
-                    "order" => 14,
+                    "order" => 11,
                     "title" => "配置",
                     "icon" => "fa-gears",
                     "uri" => "admin/config",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 07:17:46",
-                    "updated_at" => "2019-04-17 11:02:09"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 23,
                     "parent_id" => 22,
-                    "order" => 17,
+                    "order" => 14,
                     "title" => "计划",
                     "icon" => "fa-clock-o",
                     "uri" => "config/schedules",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 07:18:25",
-                    "updated_at" => "2019-04-17 07:44:39"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 24,
                     "parent_id" => 22,
-                    "order" => 15,
+                    "order" => 12,
                     "title" => "宠物",
                     "icon" => "fa-qq",
                     "uri" => "config/pets",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 07:19:21",
-                    "updated_at" => "2019-04-17 07:46:55"
+                    "updated_at" => "2019-04-28 05:47:31"
                 ],
                 [
                     "id" => 25,
                     "parent_id" => 22,
-                    "order" => 16,
+                    "order" => 13,
                     "title" => "道具",
                     "icon" => "fa-info",
                     "uri" => "config/items",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 07:21:01",
-                    "updated_at" => "2019-04-17 07:24:57"
+                    "updated_at" => "2019-04-28 05:47:31"
+                ],
+                [
+                    "id" => 26,
+                    "parent_id" => 22,
+                    "order" => 15,
+                    "title" => "角色",
+                    "icon" => "fa-user",
+                    "uri" => "config/roles",
+                    "permission" => NULL,
+                    "created_at" => "2019-04-23 10:56:08",
+                    "updated_at" => "2019-04-28 05:47:31"
                 ]
             ]
         );

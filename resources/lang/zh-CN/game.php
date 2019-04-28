@@ -8,6 +8,7 @@ return [
     'player'                => '玩家',
     'guild'                 => '公会',
     'rank'                  => '排行榜',
+    'gcode'                 => '礼包码',
     'yes'                   => '是',
     'no'                    => '否',
     'info'                  => [
@@ -51,6 +52,12 @@ return [
         'starttime'     => '开始时间',
         'endtime'       => '结束时间',
         'interval'      => '间隔',
+        'platform'      => '渠道',
+        'group'         => '组号',
+        'key'           => '密钥',
+        'email'         => '邮件',
+        'begintime'     => '开始时间',
+        'endtime'       => '结束时间',
     ],
     'ranks'                  => [
         'level'         => '等级',
@@ -60,24 +67,9 @@ return [
         'arena'         => '竞技场',
         'parkour'       => '跑酷',
     ],
-    'gcodes'                => '礼包码',
-    'gcode'                 => [
-        'name'          => '名称',
-        'type'          => '类型',
-        'type_nolimit'  => '无限制',
-        'type_once'     => '仅一次',
-        'platform'      => '渠道',
-        'group'         => '组号',
-        'key'           => '密钥',
-        'timerange'     => '时间范围',
-        'begintime'     => '开始时间',
-        'endtime'       => '结束时间',
-        'mails'         => '邮件',
-        'mail'          => [
-            'title'     => '标题',
-            'content'   => '内容',
-            'attachments' => '附件'
-        ],
+    'gcodes'                => [
+        'nolimit'       => '无限制',
+        'once'          => '单次',
     ],
     'select_zone'       => '请选择区服',
 ];

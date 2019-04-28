@@ -93,8 +93,8 @@ class NoticeController extends Controller
         $grid->endtime(trans('game.info.endtime'))->sortable();
         $grid->interval(trans('game.info.interval'));
         $grid->zones(trans('game.info.zone'));
-        $grid->status(trans('game.info.status'))->switch();
         $grid->created_at(trans('admin.created_at'))->sortable();
+        $grid->status(trans('game.info.status'))->switch();
 
         return $grid;
     }
