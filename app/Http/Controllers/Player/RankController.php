@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Player;
 
 use App\Admin\Extensions\Grid\SwitchDisplay;
+use App\Admin\Extensions\Grid\KickButton;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PlayerController;
 use App\Models\Player;
@@ -86,6 +87,7 @@ class RankController extends Controller
         $grid->actions(function ($actions) {
             $actions->disableEdit();
             $actions->disableDelete();
+            $actions->append(new KickButton($actions->getResource(), $actions->getRouteKey()));
         });
         // 列
         $grid->rank(trans('game.info.rank'));

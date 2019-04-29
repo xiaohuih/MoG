@@ -78,21 +78,7 @@ class Player extends Model
             ]
         ]);
         $data = json_decode($res->getBody(), true);
-        // if ($data['status'] == true) {
-        //     $data['message'] => trans('admin.update_succeeded')；
-        // }
+
         return $data;
-        
-        // if ($this->form()->destroy($id)) {
-        //     $data = [
-        //         'status'  => true,
-        //         'message' => trans('admin.delete_succeeded'),
-        //     ];
-        // } else {
-        //     $data = [
-        //         'status'  => false,
-        //         'message' => trans('admin.delete_failed'),
-        //     ];
-        // }
     }
 }

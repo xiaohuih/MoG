@@ -18,9 +18,9 @@ class PlayerController extends Controller
     ];
 
     /**
-     * 可禁止玩家行为
+     * 可操作玩家行为
      */
-    public static $forbidActions = ['forbidlogin', 'forbidchat'];
+    public static $forbidActions = ['forbidlogin', 'forbidchat', 'kickout'];
 
     /**
      * Make a show builder.

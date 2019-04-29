@@ -49,11 +49,11 @@ $('.$class').bootstrapSwitch({
             },
             success: function (data) {
                 if (data.status == true) {
+                    // $('.$class}').val(!state).trigger('change');
                     $.pjax.reload('#pjax-container');
                     toastr.success(data.message);
                 } else {
                     toastr.error(data.message);
-                    $('.$class}').val(!state).trigger('change');
                 }
             }
         });

@@ -59,7 +59,11 @@ return [
         'begintime'     => '开始时间',
         'endtime'       => '结束时间',
     ],
-    'ranks'                  => [
+    'actions'               => [
+        'kickout'       => '踢下线',
+        'kickout_confirm'   => '确认踢下线?',
+    ],
+    'ranks'                 => [
         'level'         => '等级',
         'power'         => '战力',
         'recharge'      => '充值',
