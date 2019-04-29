@@ -65,36 +65,7 @@ class Search extends Model
             'pageName' => $pageName
         ]);
     }
-
-    /**
-     * Find a model by its primary key or throw an exception.
-     *
-     * @param  mixed  $id
-     * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static|static[]
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
-    protected function findOrFail($id, $columns = ['*'])
-    {
-        $params = [
-            'funId' => 'GET_PLAYER_DETAIL',
-            'id' => $id
-        ];
-        $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
-            'connect_timeout' => 10,
-            'query' => [
-                'CmdId' => static::$cmd,
-                'ZoneId' => Game::getZone(),
-                'params' => json_encode($params)
-            ]
-        ]);
-        $data = json_decode($res->getBody(), true);
-        
-        return static::newFromBuilder($data);
-    }
-
+    
     /**
      * Add a basic where clause to the query.
      *
@@ -107,29 +78,5 @@ class Search extends Model
     public function where($column, $operator = null, $value = null, $boolean = 'and')
     {
         return $this;
-    }
-
-    /**
-     * 执行操作
-     *
-     * @param mixed $id
-     * @param int $action
-     */
-    public static function perform($id, $action)
-    {
-        $params = [
-            'funId' => 'CTRL_PLAYER',
-            'id' => $id,
-            'action' => $action,
-        ];
-        $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
-            'timeout' => 10,
-            'query' => [
-                'CmdId' => static::$cmd,
-                'params' => json_encode($params)
-            ]
-        ]);
-        $data = json_decode($res->getBody(), true);
     }
 }

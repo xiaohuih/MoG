@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Player;
 
-use App\Admin\Extensions\Grid\PlayerActions;
+use App\Admin\Extensions\Grid\SwitchDisplay;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PlayerController;
 use App\Models\Player;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
-use Encore\Admin\Show;
 
 class RankController extends Controller
 {
@@ -25,15 +25,6 @@ class RankController extends Controller
         11 => 'game.ranks.consume',   // 消费排行榜
         7 => 'game.ranks.parkour',    // 跑酷排行榜
         5 => 'game.ranks.arena',      // 竞技场排行榜
-    ];
-
-    /**
-     * Player status
-     */
-    protected $statusInfo = [
-        0 => ['name' => 'offline', 'style' => 'default'],    // 离线
-        1 => ['name' => 'online', 'style' => 'success'],     // 在线
-        2 => ['name' => 'forbid', 'style' => 'danger']       // 封禁
     ];
 
     /**
@@ -104,16 +95,14 @@ class RankController extends Controller
         $grid->role(trans('game.info.role'));
         $grid->vip(trans('game.info.vip'));
         $grid->guild(trans('game.info.guild'));
-        $statusInfo = $this->statusInfo;
-        $grid->status(trans('game.info.status'))->display(function ($status) use ($statusInfo) {
-            $status = $statusInfo[$status];
+        $grid->status(trans('game.info.status'))->display(function ($status) {
+            $status = PlayerController::$statusInfo[$status];
 
             $name = trans('game.info.'.$status['name']);
             $style = $status['style'];
             return "<span class='label label-{$style}'>$name</span>";
         });
-        $grid->forbidlogin('封禁')->switch();
-        //$grid->column('control')->displayUsing(PlayerActions::class);
+        $grid->forbidlogin('封禁')->displayUsing(SwitchDisplay::Class);
 
         return $grid;
     }
@@ -126,40 +115,18 @@ class RankController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Player::findOrFail($id));
-        // 工具
-        $show->panel()->tools(function ($tools) {
-            $tools->disableEdit();
-            $tools->disableList();
-            $tools->disableDelete();
-        });
-        $show->id('ID');
-        $show->name(trans('game.info.name'));
-        $show->accname(trans('game.info.account'));
-        $show->guild(trans('game.info.guild'));
-        $show->level(trans('game.info.level'));
-        $show->power(trans('game.info.power'));
-        $show->vip(trans('game.info.vip'));
-        $show->paper_level(trans('game.info.paperlevel'));
-        $show->diamond(trans('game.info.diamond'));
-        $show->gold(trans('game.info.gold'));
-        $show->diamond(trans('game.info.diamond'));
-        $show->exp(trans('game.info.exp'));
-        $statusInfo = $this->statusInfo;
-        $show->status(trans('game.info.status'))->unescape()->as(function ($status) use ($statusInfo) {
-            $status = $statusInfo[$status];
+        return PlayerController::detail($id);
+    }
 
-            $name = trans('game.info.'.$status['name']);
-            $style = $status['style'];
-            return "<span class='label label-{$style}'>$name</span>";
-        });
-        $show->createtime(trans('game.info.createtime'))->as(function ($createtime) {
-            return date('Y-m-d H:i:s', $createtime);
-        });
-        $show->offlinetime(trans('game.info.offlinetime'))->as(function ($offlinetime) {
-            return date('Y-m-d H:i:s', $offlinetime);
-        });
-
-        return $show;
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        return PlayerController::update($id);
     }
 }
