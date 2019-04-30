@@ -26,6 +26,8 @@ Route::group([
         // 玩家
         $router->resource('player/search', Player\SearchController::class);
         $router->resource('player/ranks', Player\RankController::class);
+        $router->resource('player/pets', Player\PetController::class);
+        $router->resource('player/items', Player\ItemController::class);
         // 公会
         $router->resource('guild/search', Guild\SearchController::class);
         $router->resource('guild/ranks', Guild\RankController::class);

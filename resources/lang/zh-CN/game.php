@@ -9,6 +9,8 @@ return [
     'guild'                 => '公会',
     'rank'                  => '排行榜',
     'gcode'                 => '礼包码',
+    'pet'                   => '精灵',
+    'item'                  => '道具',
     'yes'                   => '是',
     'no'                    => '否',
     'info'                  => [
@@ -58,6 +60,13 @@ return [
         'email'         => '邮件',
         'begintime'     => '开始时间',
         'endtime'       => '结束时间',
+        'star'          => '星级',
+        'quality'       => '训练等级',
+        'nature'        => '天性',
+        'count'         => '数量',
+        'is_equiped'    => '是否装备',
+        'equiped'       => '已装备',
+        'unequiped'     => '未装备',
     ],
     'actions'               => [
         'kickout'       => '踢下线',

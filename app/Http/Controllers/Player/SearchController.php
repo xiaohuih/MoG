@@ -88,7 +88,7 @@ class SearchController extends Controller
             $style = $status['style'];
             return "<span class='label label-{$style}'>$name</span>";
         });
-        $grid->forbidlogin('封禁')->displayUsing(SwitchDisplay::Class);
+        $grid->forbidlogin(trans('game.info.forbid'))->displayUsing(SwitchDisplay::Class);
 
         return $grid;
     }

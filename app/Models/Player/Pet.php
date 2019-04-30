@@ -9,13 +9,10 @@ use Illuminate\Pagination\Paginator;
 use GuzzleHttp\Client;
 use App\Facades\Game;
 
-class Rank extends Model
+class Pet extends Model
 {
     protected static $cmd = 10003;
-    /**
-     * Rank type
-     */
-    protected $type = 0;
+
     /**
      * Paginate the given query.
      *
@@ -32,13 +29,18 @@ class Rank extends Model
         $currentPage = $page ?: Paginator::resolveCurrentPage($pageName);
         $perPage = $perPage ?: $this->getPerPage();
 
-        if ($this->type != 0) {
-            $params = [
-                'funId' => 'GET_PLAYER_RANK',
-                'type' => $this->type,
-                'perPage' => $perPage,
-                'currentPage' => $currentPage
-            ];
+        $params = [
+            'funId' => 'GET_PLAYER_PETS',
+            'perPage' => $perPage,
+            'currentPage' => $currentPage
+        ];
+        if (Request::get('id')) {
+            $params['id'] = (int)Request::get('id');
+        }
+        if (Request::get('name')) {
+            $params['name'] = Request::get('name');
+        }
+        if (isset($params['id']) || isset($params['name'])) {
             $client = new Client();
             $res = $client->request('GET', config('game.gm.url'), [
                 'timeout' => 10,
@@ -63,36 +65,7 @@ class Rank extends Model
             'pageName' => $pageName
         ]);
     }
-
-    /**
-     * Find a model by its primary key or throw an exception.
-     *
-     * @param  mixed  $id
-     * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static|static[]
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
-    protected function findOrFail($id, $columns = ['*'])
-    {
-        $params = [
-            'funId' => 'GET_PLAYER_DETAIL',
-            'id' => $id
-        ];
-        $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
-            'connect_timeout' => 10,
-            'query' => [
-                'CmdId' => static::$cmd,
-                'ZoneId' => Game::getZone(),
-                'params' => json_encode($params)
-            ]
-        ]);
-        $data = json_decode($res->getBody(), true);
-        
-        return static::newFromBuilder($data);
-    }
-
+    
     /**
      * Add a basic where clause to the query.
      *
@@ -104,7 +77,6 @@ class Rank extends Model
      */
     public function where($column, $operator = null, $value = null, $boolean = 'and')
     {
-        $this->type = (int)$operator;
         return $this;
     }
 }
