@@ -24,7 +24,7 @@ class SearchController extends Controller
     {
         return $content
             ->header(trans('game.guild'))
-            ->description(trans('game.rank'))
+            ->description(trans('admin.search'))
             ->body($this->grid());
     }
 
@@ -68,6 +68,7 @@ class SearchController extends Controller
         });
         // 行操作
         $grid->actions(function ($actions) {
+            $actions->disableView();
             $actions->disableEdit();
         });
         // 列
@@ -79,52 +80,21 @@ class SearchController extends Controller
         $grid->joinlimit(trans('game.info.joinlimit'));
         $grid->membercount(trans('game.info.membercount'));
         $grid->leader(trans('game.info.leader'));
+        $grid->fund(trans('game.info.fund'));
+        $grid->exp(trans('game.info.exp'));
 
         return $grid;
     }
 
     /**
-     * Make a show builder.
+     * Remove the specified resource from storage.
      *
-     * @param mixed $id
-     * @return Show
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
      */
-    protected function detail($id)
+    public function destroy($id)
     {
-        $show = new Show(Guild::findOrFail($id));
-        // 工具
-        $show->panel()->tools(function ($tools) {
-            $tools->disableEdit();
-            $tools->disableList();
-            $tools->disableDelete();
-        });
-        $show->id('ID');
-        $show->name(trans('game.info.name'));
-        $show->accname(trans('game.info.account'));
-        $show->guild(trans('game.info.guild'));
-        $show->level(trans('game.info.level'));
-        $show->power(trans('game.info.power'));
-        $show->vip(trans('game.info.vip'));
-        $show->paper_level(trans('game.info.paperlevel'));
-        $show->diamond(trans('game.info.diamond'));
-        $show->gold(trans('game.info.gold'));
-        $show->diamond(trans('game.info.diamond'));
-        $show->exp(trans('game.info.exp'));
-        $statusInfo = $this->statusInfo;
-        $show->status(trans('game.info.status'))->unescape()->as(function ($status) use ($statusInfo) {
-            $status = $statusInfo[$status];
-
-            $name = trans('game.info.'.$status['name']);
-            $style = $status['style'];
-            return "<span class='label label-{$style}'>$name</span>";
-        });
-        $show->createtime(trans('game.info.createtime'))->as(function ($createtime) {
-            return date('Y-m-d H:i:s', $createtime);
-        });
-        $show->offlinetime(trans('game.info.offlinetime'))->as(function ($offlinetime) {
-            return date('Y-m-d H:i:s', $offlinetime);
-        });
-
-        return $show;
+        return Guild::disband($id);
     }
 }

@@ -31,5 +31,6 @@ Route::group([
         // 公会
         $router->resource('guild/search', Guild\SearchController::class);
         $router->resource('guild/ranks', Guild\RankController::class);
+        $router->resource('guild/members', Guild\MemberController::class);
     });
 });

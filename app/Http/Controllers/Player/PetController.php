@@ -50,15 +50,11 @@ class PetController extends Controller
             $filter->like('name', trans('game.info.name'));
         });
         // 行操作
-        $grid->actions(function ($actions) {
-            $actions->disableView();
-            $actions->disableEdit();
-        });
+        $grid->disableActions();
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
         $grid->level(trans('game.info.level'));
-        //$grid->power(trans('game.info.power'));
         $grid->nature(trans('game.info.nature'));
         $grid->star(trans('game.info.star'));
         $grid->quality(trans('game.info.quality'));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Extensions\Grid\ConfirmButton;
 use App\Models\Mail;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -10,10 +11,13 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
+use GuzzleHttp\Client;
 
 class MailController extends Controller
 {
     use HasResourceActions;
+
+    protected static $cmd = 10003;
 
     /**
      * Index interface.
@@ -87,6 +91,11 @@ class MailController extends Controller
             $filter->between('sendtime', trans('game.info.sendtime'))->datetime();
             $filter->between('created_at', trans('admin.created_at'))->datetime();
         });
+        // 行操作
+        $grid->actions(function ($actions) {
+            $actions->disableView();
+            $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'send', 'fa-paper-plane'));
+        });
         // 列
         $grid->id('ID');
         $grid->title(trans('game.info.title'));
@@ -104,6 +113,15 @@ class MailController extends Controller
         $grid->zones(trans('game.info.zone'));
         $grid->sendtime(trans('game.info.sendtime'))->sortable();
         $grid->created_at(trans('admin.created_at'))->sortable();
+        $grid->status(trans('game.info.status'))->display(function ($status) {
+            if ($status == 1) {
+                $name = trans('game.info.sent');
+                return "<span class='label label-success'>$name</span>";
+            } else {
+                $name = trans('game.info.unsent');
+                return "<span class='label label-default'>$name</span>";
+            }
+        });
 
         return $grid;
     }
@@ -127,6 +145,15 @@ class MailController extends Controller
         $show->sendtime(trans('game.info.sendtime'));
         $show->created_at(trans('admin.created_at'));
         $show->updated_at(trans('admin.updated_at'));
+        $show->status(trans('game.info.status'))->unescape()->as(function ($status) {
+            if ($status == 1) {
+                $name = trans('game.info.sent');
+                return "<span class='label label-success'>$name</span>";
+            } else {
+                $name = trans('game.info.unsent');
+                return "<span class='label label-default'>$name</span>";
+            }
+        });
 
         return $show;
     }
@@ -152,7 +179,54 @@ class MailController extends Controller
         $form->datetime('sendtime', trans('game.info.sendtime'));
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
+        $form->display('status', trans('game.info.status'))->with(function ($status) {
+            if ($status == 1) {
+                $name = trans('game.info.sent');
+                return "<span class='label label-success'>$name</span>";
+            } else {
+                $name = trans('game.info.unsent');
+                return "<span class='label label-default'>$name</span>";
+            }
+        });
 
         return $form;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        if (Input::get('send')) {
+            return $this->send($id);
+        } else {
+            return $this->form()->update($id);
+        }
+    }
+
+    protected function send($id)
+    {
+        $params = [
+            'funId' => 'PERFORM_PLAYER_ACTION',
+            'id' => (int)$id,
+            'action' => $action,
+            'value' => $value
+        ];
+        $client = new Client();
+        $res = $client->request('GET', config('game.gm.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd,
+                'ZoneId' => Game::getZone(),
+                'params' => json_encode($params)
+            ]
+        ]);
+        $data = json_decode($res->getBody(), true);
+
+        return $data;
     }
 }

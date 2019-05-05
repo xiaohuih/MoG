@@ -66,6 +66,7 @@ class RankController extends Controller
         // 行操作
         $grid->actions(function ($actions) {
             $actions->disableEdit();
+            $actions->disableView();
         });
         // 列
         $grid->rank(trans('game.info.rank'));
@@ -122,5 +123,17 @@ class RankController extends Controller
         });
 
         return $show;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        return Guild::disband($id);
     }
 }

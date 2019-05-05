@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Player;
+namespace App\Models\Guild;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -9,13 +9,10 @@ use Illuminate\Pagination\Paginator;
 use GuzzleHttp\Client;
 use App\Facades\Game;
 
-class Rank extends Model
+class Member extends Model
 {
     protected static $cmd = 10003;
-    /**
-     * Rank type
-     */
-    protected $type = 0;
+
     /**
      * Paginate the given query.
      *
@@ -32,13 +29,18 @@ class Rank extends Model
         $currentPage = $page ?: Paginator::resolveCurrentPage($pageName);
         $perPage = $perPage ?: $this->getPerPage();
 
-        if ($this->type != 0) {
-            $params = [
-                'funId' => 'GET_PLAYER_RANK',
-                'type' => $this->type,
-                'perPage' => $perPage,
-                'currentPage' => $currentPage
-            ];
+        $params = [
+            'funId' => 'GET_GUILD_MEMBERS',
+            'perPage' => $perPage,
+            'currentPage' => $currentPage
+        ];
+        if (Request::get('id')) {
+            $params['id'] = (int)Request::get('id');
+        }
+        if (Request::get('name')) {
+            $params['name'] = Request::get('name');
+        }
+        if (isset($params['id']) || isset($params['name'])) {
             $client = new Client();
             $res = $client->request('GET', config('game.gm.url'), [
                 'timeout' => 10,
@@ -49,8 +51,14 @@ class Rank extends Model
                 ]
             ]);
             $data = json_decode($res->getBody(), true);
+            $id = $data['id'];
+            $data['list'] = collect($data['list'])->map(function($item) use ($id) {
+                $item['guild'] = $id;
+                return $item;
+            })->all();
         } else {
             $data = [
+                'id' => 0,
                 'list' => [],
                 'pagination' => ['total' => 0, 'perPage' => $perPage , 'currentPage' => $currentPage],
             ];
@@ -63,7 +71,7 @@ class Rank extends Model
             'pageName' => $pageName
         ]);
     }
-
+    
     /**
      * Add a basic where clause to the query.
      *
@@ -75,7 +83,6 @@ class Rank extends Model
      */
     public function where($column, $operator = null, $value = null, $boolean = 'and')
     {
-        $this->type = (int)$operator;
         return $this;
     }
 }

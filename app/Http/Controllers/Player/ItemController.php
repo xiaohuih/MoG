@@ -50,22 +50,11 @@ class ItemController extends Controller
             $filter->like('name', trans('game.info.name'));
         });
         // 行操作
-        $grid->actions(function ($actions) {
-            $actions->disableView();
-            $actions->disableEdit();
-        });
+        $grid->disableActions();
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
         $grid->count(trans('game.info.count'));
-        $grid->is_setup(trans('game.info.is_equiped'))->display(function ($is_setup) {
-            $name = $is_setup ? trans('game.info.equiped') : trans('game.info.unequiped');
-            if ($is_setup) {
-                return "<span class='label label-primary'>$name</span>";
-            } else {
-                return "<span class='label label-default'>$name</span>";
-            }
-        });;
 
         return $grid;
     }
