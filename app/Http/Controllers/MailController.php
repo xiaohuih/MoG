@@ -11,13 +11,11 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Input;
 
 class MailController extends Controller
 {
     use HasResourceActions;
-
-    protected static $cmd = 10003;
 
     /**
      * Index interface.
@@ -95,6 +93,9 @@ class MailController extends Controller
         $grid->actions(function ($actions) {
             $actions->disableView();
             $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'send', 'fa-paper-plane'));
+            if ($actions->row['status'] == 1) {
+                $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'revoke', 'fa-reply'));
+            }
         });
         // 列
         $grid->id('ID');
@@ -103,7 +104,7 @@ class MailController extends Controller
         $grid->attachments(trans('game.info.attachments'));
         $grid->type(trans('game.info.type'))->display(function ($type) {
             if ($type == Mail::TYPE_GLBOAL) {
-                return rans('game.info.globalmail');
+                return trans('game.info.globalmail');
             } else if ($type == Mail::TYPE_NORMAL) {
                 return trans('game.info.normalmail');
             }
@@ -171,23 +172,14 @@ class MailController extends Controller
             Mail::TYPE_GLBOAL => trans('game.info.globalmail'), 
             Mail::TYPE_NORMAL => trans('game.info.normalmail')
         ])->rules('required');
-        $form->text('receivers', trans('game.info.receivers'));
+        $form->text('receivers', trans('game.info.receivers'))->rules('required|regex:/^\d{1,}(;\d{1,}){0,}$/')->help(trans('game.helps.receivers'));
         $form->text('title', trans('game.info.title'))->rules('required|max:30');
         $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
-        $form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('required|max:255');
-        $form->text('zones', trans('game.info.zone'));
+        $form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('max:255|regex:/^(\d{1,},\d{1,})(;(\d{1,},\d{1,})){0,}$/')->help(trans('game.helps.items'));
+        $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones');
         $form->datetime('sendtime', trans('game.info.sendtime'));
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
-        $form->display('status', trans('game.info.status'))->with(function ($status) {
-            if ($status == 1) {
-                $name = trans('game.info.sent');
-                return "<span class='label label-success'>$name</span>";
-            } else {
-                $name = trans('game.info.unsent');
-                return "<span class='label label-default'>$name</span>";
-            }
-        });
 
         return $form;
     }
@@ -202,31 +194,12 @@ class MailController extends Controller
     public function update($id)
     {
         if (Input::get('send')) {
-            return $this->send($id);
+            return Mail::find($id)->send();
+        }
+        else if (Input::get('revoke')) {
+            return Mail::revoke($id);
         } else {
             return $this->form()->update($id);
         }
-    }
-
-    protected function send($id)
-    {
-        $params = [
-            'funId' => 'PERFORM_PLAYER_ACTION',
-            'id' => (int)$id,
-            'action' => $action,
-            'value' => $value
-        ];
-        $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
-            'timeout' => 10,
-            'query' => [
-                'CmdId' => static::$cmd,
-                'ZoneId' => Game::getZone(),
-                'params' => json_encode($params)
-            ]
-        ]);
-        $data = json_decode($res->getBody(), true);
-
-        return $data;
     }
 }

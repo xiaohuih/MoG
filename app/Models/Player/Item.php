@@ -29,8 +29,8 @@ class Item extends Model
         $currentPage = $page ?: Paginator::resolveCurrentPage($pageName);
         $perPage = $perPage ?: $this->getPerPage();
 
+        $cmd = 'GET_PLAYER_ITEMS';
         $params = [
-            'funId' => 'GET_PLAYER_ITEMS',
             'perPage' => $perPage,
             'currentPage' => $currentPage
         ];
@@ -47,7 +47,7 @@ class Item extends Model
                 'query' => [
                     'CmdId' => static::$cmd,
                     'ZoneId' => Game::getZone(),
-                    'params' => json_encode($params)
+                    'params' => json_encode([$cmd, $params])
                 ]
             ]);
             $data = json_decode($res->getBody(), true);

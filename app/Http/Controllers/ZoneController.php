@@ -37,6 +37,31 @@ class ZoneController extends Controller
         return $result;
     }
 
+    public function zones()
+    {
+        $client = new Client();
+        $res = $client->request('GET', config('game.gm.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd
+            ]
+        ]);
+        $zones = json_decode($res->getBody(), true);
+
+        $result = [];
+        array_push($result, [
+            "id"=> '*',
+            "text"=> '所有区'
+        ]);
+        foreach ($zones as $zone) {
+            array_push($result, [
+                "id"=> $zone,
+                "text"=> sprintf("%d%s", $zone, trans('game.zone'))
+            ]);
+        }
+        return $result;
+    }
+
     public function select()
     {
         Game::setZone((int)Input::get('_zone', 0));

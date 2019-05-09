@@ -19,9 +19,9 @@ class Guild extends Model
      */
     public static function disband($id)
     {
+        $cmd = 'DISBAND_GUILD';
         $params = [
-            'funId' => 'DISBAND_GUILD',
-            'id' => (int)$id,
+            'id' => (int)$id
         ];
         $client = new Client();
         $res = $client->request('GET', config('game.gm.url'), [
@@ -29,7 +29,7 @@ class Guild extends Model
             'query' => [
                 'CmdId' => static::$cmd,
                 'ZoneId' => Game::getZone(),
-                'params' => json_encode($params)
+                'params' => json_encode([$cmd, $params])
             ]
         ]);
         $data = json_decode($res->getBody(), true);
@@ -45,10 +45,10 @@ class Guild extends Model
      */
     public static function removeMember($id, $member_id)
     {
+        $cmd = 'REMOVE_GUILD_MEMBER';
         $params = [
-            'funId' => 'REMOVE_GUILD_MEMBER',
             'id' => (int)$id,
-            'member_id' => (int)$member_id,
+            'member_id' => (int)$member_id
         ];
         $client = new Client();
         $res = $client->request('GET', config('game.gm.url'), [
@@ -56,7 +56,7 @@ class Guild extends Model
             'query' => [
                 'CmdId' => static::$cmd,
                 'ZoneId' => Game::getZone(),
-                'params' => json_encode($params)
+                'params' => json_encode([$cmd, $params])
             ]
         ]);
         $data = json_decode($res->getBody(), true);

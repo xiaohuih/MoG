@@ -9,6 +9,7 @@ Route::group([
     'namespace'     => config('admin.route.namespace'),
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
+    $router->get('zones', 'ZoneController@zones');
     $router->get('zone', 'ZoneController@index');
     $router->post('zone/select', 'ZoneController@select');
 

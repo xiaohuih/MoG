@@ -62,8 +62,8 @@ class Player extends Model
      */
     public static function perform($id, $action, $value)
     {
+        $cmd = 'PERFORM_PLAYER_ACTION';
         $params = [
-            'funId' => 'PERFORM_PLAYER_ACTION',
             'id' => (int)$id,
             'action' => $action,
             'value' => $value
@@ -74,7 +74,7 @@ class Player extends Model
             'query' => [
                 'CmdId' => static::$cmd,
                 'ZoneId' => Game::getZone(),
-                'params' => json_encode($params)
+                'params' => json_encode([$cmd, $params])
             ]
         ]);
         $data = json_decode($res->getBody(), true);

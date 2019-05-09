@@ -85,6 +85,7 @@ return [
         'publish'       => '发布',
         'send'          => '发送',
         'kick'          => '踢出',
+        'revoke'        => '撤回',
     ],
     'ranks'                 => [
         'level'         => '等级',
@@ -97,6 +98,11 @@ return [
     'gcodes'                => [
         'nolimit'       => '无限制',
         'once'          => '单次',
+    ],
+    'helps'                 => [
+        'receivers'     => '多个玩家ID以分号[;]分隔',
+        'items'         => '道具ID和数量以逗号[,]分隔，多个道具以[;]分隔',
+        'zones'         => '多个区服以分号[;]分隔，全区请填星号[*]',
     ],
     'select_zone'       => '请选择区服',
 ];

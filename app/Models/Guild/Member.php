@@ -29,8 +29,8 @@ class Member extends Model
         $currentPage = $page ?: Paginator::resolveCurrentPage($pageName);
         $perPage = $perPage ?: $this->getPerPage();
 
+        $cmd = 'GET_GUILD_MEMBERS';
         $params = [
-            'funId' => 'GET_GUILD_MEMBERS',
             'perPage' => $perPage,
             'currentPage' => $currentPage
         ];
@@ -47,7 +47,7 @@ class Member extends Model
                 'query' => [
                     'CmdId' => static::$cmd,
                     'ZoneId' => Game::getZone(),
-                    'params' => json_encode($params)
+                    'params' => json_encode([$cmd, $params])
                 ]
             ]);
             $data = json_decode($res->getBody(), true);

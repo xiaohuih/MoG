@@ -33,8 +33,8 @@ class Rank extends Model
         $perPage = $perPage ?: $this->getPerPage();
 
         if ($this->type != 0) {
+            $cmd = 'GET_PLAYER_RANK';
             $params = [
-                'funId' => 'GET_PLAYER_RANK',
                 'type' => $this->type,
                 'perPage' => $perPage,
                 'currentPage' => $currentPage
@@ -45,7 +45,7 @@ class Rank extends Model
                 'query' => [
                     'CmdId' => static::$cmd,
                     'ZoneId' => Game::getZone(),
-                    'params' => json_encode($params)
+                    'params' => json_encode([$cmd, $params])
                 ]
             ]);
             $data = json_decode($res->getBody(), true);
