@@ -15,12 +15,12 @@ class CreateNoticesTable extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content');
+            $table->string('content')->nullable();
             $table->string('zones')->nullable();
-            $table->timestamp('starttime')->nullable();
-            $table->timestamp('endtime')->nullable();
+            $table->timestamp('starttime');
+            $table->timestamp('endtime');
             $table->integer('interval');
-            $table->integer('status')->nullable();
+            $table->integer('status');
             $table->timestamps();
         });
     }

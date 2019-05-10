@@ -32,21 +32,6 @@ class MailController extends Controller
     }
 
     /**
-     * Show interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
-    public function show($id, Content $content)
-    {
-        return $content
-            ->header(trans('game.mail'))
-            ->description(trans('admin.detail'))
-            ->body($this->detail($id));
-    }
-
-    /**
      * Edit interface.
      *
      * @param mixed $id
@@ -97,6 +82,8 @@ class MailController extends Controller
                 $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'revoke', 'fa-reply'));
             }
         });
+        // 倒序
+        $grid->model()->orderBy('id', 'desc');
         // 列
         $grid->id('ID');
         $grid->title(trans('game.info.title'));
@@ -113,7 +100,6 @@ class MailController extends Controller
         $grid->receivers(trans('game.info.receivers'));
         $grid->zones(trans('game.info.zone'));
         $grid->sendtime(trans('game.info.sendtime'))->sortable();
-        $grid->created_at(trans('admin.created_at'))->sortable();
         $grid->status(trans('game.info.status'))->display(function ($status) {
             if ($status == 1) {
                 $name = trans('game.info.sent');
@@ -123,40 +109,9 @@ class MailController extends Controller
                 return "<span class='label label-default'>$name</span>";
             }
         });
+        $grid->created_at(trans('admin.created_at'))->sortable();
 
         return $grid;
-    }
-
-    /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(Mail::findOrFail($id));
-        $show->id('ID');
-        $show->title(trans('game.info.title'));
-        $show->content(trans('game.info.content'));
-        $show->attachments(trans('game.info.attachments'));
-        $show->type(trans('game.info.type'));
-        $show->receivers(trans('game.info.receivers'));
-        $show->zones(trans('game.info.zone'));
-        $show->sendtime(trans('game.info.sendtime'));
-        $show->created_at(trans('admin.created_at'));
-        $show->updated_at(trans('admin.updated_at'));
-        $show->status(trans('game.info.status'))->unescape()->as(function ($status) {
-            if ($status == 1) {
-                $name = trans('game.info.sent');
-                return "<span class='label label-success'>$name</span>";
-            } else {
-                $name = trans('game.info.unsent');
-                return "<span class='label label-default'>$name</span>";
-            }
-        });
-
-        return $show;
     }
 
     /**
@@ -167,6 +122,10 @@ class MailController extends Controller
     protected function form()
     {
         $form = new Form(new Mail);
+        // 工具栏
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableView();
+        });
         $form->display('id');
         $form->select('type', trans('game.info.type'))->options([
             Mail::TYPE_GLBOAL => trans('game.info.globalmail'), 
@@ -176,7 +135,7 @@ class MailController extends Controller
         $form->text('title', trans('game.info.title'))->rules('required|max:30');
         $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
         $form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('max:255|regex:/^(\d{1,},\d{1,})(;(\d{1,},\d{1,})){0,}$/')->help(trans('game.helps.items'));
-        $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones');
+        $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones')->rules('required');
         $form->datetime('sendtime', trans('game.info.sendtime'));
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
