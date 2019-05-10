@@ -53,7 +53,6 @@ class ZoneSelect extends Widget implements Renderable
         $urlSelectZone = static::URL_SELECTZONE;
         $language = config('app.locale');
         $placeholder = trans('game.select_zone');
-        $zonePrefix = trans('game.name');
         $zonePost = trans('game.zone');
 
         $script = <<<SCRIPT
@@ -65,7 +64,7 @@ function initSelector() {
     }).done( function(data) {    
         $(".{$this->getElementClassName()}").select2({
             data: $.map(data.items, function(id) {
-                return {id: id, text: '$zonePrefix' + id + '$zonePost'};
+                return {id: id, text: id + '$zonePost'};
             }),
             allowClear: true,
             placeholder: '{$placeholder}',
@@ -87,7 +86,6 @@ function selectZone(zone) {
     },
     function(){
         $.pjax.reload('#pjax-container');
-        toastr.success('$zonePrefix' + zone + '$zonePost');
     });
 }
 
