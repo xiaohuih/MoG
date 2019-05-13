@@ -29,68 +29,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 19,
+                    "order" => 21,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-05 03:33:31"
+                    "updated_at" => "2019-05-13 03:41:19"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 20,
+                    "order" => 22,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-05 03:33:31"
+                    "updated_at" => "2019-05-13 03:41:19"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 21,
+                    "order" => 23,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-05 03:33:31"
+                    "updated_at" => "2019-05-13 03:41:19"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 22,
+                    "order" => 24,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-05 03:33:31"
+                    "updated_at" => "2019-05-13 03:41:19"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 23,
+                    "order" => 25,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-05 03:33:31"
+                    "updated_at" => "2019-05-13 03:41:19"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 24,
+                    "order" => 26,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-05 03:33:31"
+                    "updated_at" => "2019-05-13 03:41:19"
                 ],
                 [
                     "id" => 13,
@@ -278,6 +278,28 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL,
                     "created_at" => "2019-05-05 03:23:32",
                     "updated_at" => "2019-05-05 03:33:30"
+                ],
+                [
+                    "id" => 31,
+                    "parent_id" => 0,
+                    "order" => 19,
+                    "title" => "其它",
+                    "icon" => "fa-plug",
+                    "uri" => NULL,
+                    "permission" => NULL,
+                    "created_at" => "2019-05-13 03:37:44",
+                    "updated_at" => "2019-05-13 03:41:19"
+                ],
+                [
+                    "id" => 32,
+                    "parent_id" => 31,
+                    "order" => 20,
+                    "title" => "脚本命令",
+                    "icon" => "fa-scribd",
+                    "uri" => "script",
+                    "permission" => NULL,
+                    "created_at" => "2019-05-13 03:40:38",
+                    "updated_at" => "2019-05-13 10:33:16"
                 ]
             ]
         );

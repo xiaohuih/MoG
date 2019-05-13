@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'name'                  => '精灵',
     'zone'                  => '区',
     'mail'                  => '邮件',
     'notice'                => '公告',
@@ -11,6 +10,7 @@ return [
     'gcode'                 => '礼包码',
     'pet'                   => '精灵',
     'item'                  => '道具',
+    'script'                => '脚本',
     'yes'                   => '是',
     'no'                    => '否',
     'info'                  => [
@@ -78,6 +78,7 @@ return [
         'unpublished'   => '未发布',
         'sent'          => '已发送',
         'unsent'        => '未发送',
+        'server'        => '服务器',
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',
@@ -104,6 +105,9 @@ return [
         'receivers'     => '多个玩家ID以分号[;]分隔',
         'items'         => '道具ID和数量以逗号[,]分隔，多个道具以[;]分隔',
         'interval'      => '单为（秒），立即发送填0',
+    ],
+    'servers'               => [
+
     ],
     'select_zone'       => '请选择区服',
 ];

@@ -8,6 +8,15 @@ use GuzzleHttp\Client;
 class Script extends Model
 {
     protected static $cmd = 10002;
+    /**
+     * 服务器类型
+     */
+    public static $servers = [
+        1 => "客户端",  // 客户端 
+        2 => '场景服',  // 场景服
+        3 => '会话服',  // 会话服
+    ];
+
 
     public function setZonesAttribute($value)
     {
@@ -19,8 +28,9 @@ class Script extends Model
      */
     public function perform()
     {
-        $cmd = 'PERFORM_SCRIPT';
+        $cmd = 'PERFORM_SCRIPTCMD';
         $params = [
+            'type' => $this->server,
             'content' => $this->content,
             'zones' => $this->zones,
         ];

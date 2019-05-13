@@ -82,10 +82,9 @@ class ScriptController extends Controller
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
-        $grid->content(trans('game.info.content'));
+        $grid->content(trans('game.info.content'))->editable();
+        $grid->server(trans('game.info.server'))->using(Script::$servers)->label('success');
         $grid->zones(trans('game.info.zone'));
-        $grid->created_at(trans('admin.created_at'))->sortable();
-        $grid->updated_at(trans('admin.updated_at'))->sortable();
 
         return $grid;
     }
@@ -107,6 +106,7 @@ class ScriptController extends Controller
         $form->text('name', trans('game.info.name'))->rules('required|max:50');
         $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
         $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones')->rules('required');
+        $form->select('server', trans('game.info.server'))->options(Script::$servers)->rules('required');
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
@@ -124,7 +124,7 @@ class ScriptController extends Controller
     public function update($id)
     {
         if (Input::get('perform')) {
-            return Notice::find($id)->perform();
+            return Script::find($id)->perform();
         } else {
             return $this->form()->update($id);
         }
