@@ -80,7 +80,9 @@ class SearchController extends Controller
         $grid->level(trans('game.info.level'));
         $grid->power(trans('game.info.power'));
         $grid->vip(trans('game.info.vip'));
-        $grid->guild(trans('game.info.guild'));
+        $grid->guild(trans('game.info.guild'))->display(function ($link) {
+            return "<a href='/admin/guild/search?&name={$link}'>{$link}</a>";
+        });
         $grid->status(trans('game.info.status'))->display(function ($status) {
             $status = PlayerController::$statusInfo[$status];
 

@@ -22,6 +22,7 @@ Route::group([
     $router->resource('mail', MailController::class);
     $router->resource('notice', NoticeController::class);
     $router->resource('gcode', GCodeController::class);
+    $router->resource('script', ScriptController::class);
     // 区服操作
     $router->group(['middleware' => 'zone'], function (Router $router) {
         // 玩家

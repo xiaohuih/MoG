@@ -86,6 +86,7 @@ return [
         'send'          => '发送',
         'kick'          => '踢出',
         'revoke'        => '撤回',
+        'perform'       => '执行',
     ],
     'ranks'                 => [
         'level'         => '等级',

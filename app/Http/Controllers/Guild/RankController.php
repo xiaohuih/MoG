@@ -70,12 +70,16 @@ class RankController extends Controller
         });
         // 列
         $grid->rank(trans('game.info.rank'));
-        $grid->id('ID');
+        $grid->id('ID')->display(function ($link) {
+            return "<a href='search?&id={$link}'>{$link}</a>";
+        });
         $grid->name(trans('game.info.name'));
         $grid->level(trans('game.info.level'));
         $grid->flag(trans('game.info.flag'));
         $grid->membercount(trans('game.info.membercount'));
-        $grid->leader(trans('game.info.leader'));
+        $grid->leader(trans('game.info.leader'))->display(function ($link) {
+            return "<a href='/admin/player/search?&id={$link}'>{$link}</a>";
+        });
 
         return $grid;
     }

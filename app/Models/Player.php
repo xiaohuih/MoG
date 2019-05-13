@@ -21,8 +21,8 @@ class Player extends Model
      */
     protected function findOrFail($id, $columns = ['*'])
     {
+        $cmd = 'GET_PLAYER_DETAIL';
         $params = [
-            'funId' => 'GET_PLAYER_DETAIL',
             'id' => (int)$id
         ];
         $client = new Client();
@@ -31,7 +31,7 @@ class Player extends Model
             'query' => [
                 'CmdId' => static::$cmd,
                 'ZoneId' => Game::getZone(),
-                'params' => json_encode($params)
+                'params' => json_encode([$cmd, $params])
             ]
         ]);
         $data = json_decode($res->getBody(), true);

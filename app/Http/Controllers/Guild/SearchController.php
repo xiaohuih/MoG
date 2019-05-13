@@ -9,6 +9,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Input;
 
 class SearchController extends Controller
 {
@@ -76,10 +77,12 @@ class SearchController extends Controller
         $grid->name(trans('game.info.name'));
         $grid->level(trans('game.info.level'));
         $grid->flag(trans('game.info.flag'));
-        $grid->declaration(trans('game.info.declaration'));
+        $grid->declaration(trans('game.info.declaration'))->editable();
         $grid->joinlimit(trans('game.info.joinlimit'));
         $grid->membercount(trans('game.info.membercount'));
-        $grid->leader(trans('game.info.leader'));
+        $grid->leader(trans('game.info.leader'))->display(function ($link) {
+            return "<a href='/admin/player/search?&id={$link}'>{$link}</a>";
+        });
         $grid->fund(trans('game.info.fund'));
         $grid->exp(trans('game.info.exp'));
 
@@ -96,5 +99,20 @@ class SearchController extends Controller
     public function destroy($id)
     {
         return Guild::disband($id);
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        $name = Input::get('name');
+        $value = Input::get('value');
+
+        return Guild::mofify($id, $name, $value);
     }
 }

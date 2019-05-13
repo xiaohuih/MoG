@@ -63,4 +63,33 @@ class Guild extends Model
 
         return $data;
     }
+
+    /**
+     * 更新
+     *
+     * @param int $id
+     * @param int $name
+     * @param int $value
+     */
+    public static function mofify($id, $name, $value)
+    {
+        $cmd = 'UPDATE_GUILD';
+        $params = [
+            'id' => (int)$id,
+            'name' => $name,
+            'value' => $value
+        ];
+        $client = new Client();
+        $res = $client->request('GET', config('game.gm.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd,
+                'ZoneId' => Game::getZone(),
+                'params' => json_encode([$cmd, $params])
+            ]
+        ]);
+        $data = json_decode($res->getBody(), true);
+
+        return $data;
+    }
 }

@@ -91,12 +91,16 @@ class RankController extends Controller
         });
         // 列
         $grid->rank(trans('game.info.rank'));
-        $grid->id('ID');
+        $grid->id('ID')->display(function ($link) {
+            return "<a href='search?&id={$link}'>{$link}</a>";
+        });;
         $grid->name(trans('game.info.name'));
         $grid->value(trans('game.info.value'));
         $grid->role(trans('game.info.role'));
         $grid->vip(trans('game.info.vip'));
-        $grid->guild(trans('game.info.guild'));
+        $grid->guild(trans('game.info.guild'))->display(function ($link) {
+            return "<a href='/admin/guild/search?&name={$link}'>{$link}</a>";
+        });
         $grid->status(trans('game.info.status'))->display(function ($status) {
             $status = PlayerController::$statusInfo[$status];
 

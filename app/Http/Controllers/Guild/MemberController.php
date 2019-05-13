@@ -62,7 +62,9 @@ class MemberController extends Controller
             $actions->append(new ConfirmButton($actions->getResource(), sprintf("%d_%d", $actions->row['guild'], $actions->getRouteKey()), 'kick', 'fa-trash'));
         });
         // 列
-        $grid->id('ID');
+        $grid->id('ID')->display(function ($link) {
+            return "<a href='/admin/player/search?&id={$link}'>{$link}</a>";
+        });
         $grid->name(trans('game.info.name'));
         $authorities = self::$authorities;
         $grid->authority(trans('game.info.authority'))->display(function ($authority) use ($authorities) {

@@ -49,13 +49,14 @@ class PlayerController extends Controller
         $show->gold(trans('game.info.gold'));
         $show->diamond(trans('game.info.diamond'));
         $show->exp(trans('game.info.exp'));
-        $statusInfo = self::$statusInfo;
-        $show->status(trans('game.info.status'))->unescape()->as(function ($status) use ($statusInfo) {
-            $status = $statusInfo[$status];
-
-            $name = trans('game.info.'.$status['name']);
-            $style = $status['style'];
-            return "<span class='label label-{$style}'>$name</span>";
+        $show->status(trans('game.info.status'))->unescape()->as(function ($status) {
+            if ($status == 1) {
+                $name = trans('game.info.online');
+                return "<span class='label label-success'>$name</span>";
+            } else {
+                $name = trans('game.info.offline');
+                return "<span class='label label-default'>$name</span>";
+            }
         });
         $show->createtime(trans('game.info.createtime'))->as(function ($createtime) {
             return date('Y-m-d H:i:s', $createtime);
