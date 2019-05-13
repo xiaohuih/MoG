@@ -117,7 +117,7 @@ return [
         ],
 
         // Add "remember me" to login form
-        'remember' => true,
+        'remember' => false,
     ],
 
     /*
