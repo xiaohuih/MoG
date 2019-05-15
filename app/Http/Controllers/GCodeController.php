@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use App\Models\GCode;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -10,6 +11,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
+use App\Admin\Extensions\Grid\SwitchDisplay;
 
 class GCodeController extends Controller
 {
@@ -81,26 +83,31 @@ class GCodeController extends Controller
     protected function grid()
     {
         $grid = new Grid(new GCode);
+        // 筛选
+        $grid->filter(function($filter){
+            $filter->like('name', trans('game.info.name'));
+            $filter->like('platform', trans('game.info.platform'));
+        });
+        // 行操作
+        $grid->actions(function ($actions) {
+            if ($actions->row['status'] == 1) {
+                $actions->disableEdit();
+            }
+        });
+        // 倒序
+        $grid->model()->orderBy('created_at', 'desc');
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
-        $grid->type(trans('game.info.type'))->display(function ($type) {
-            if ($type == GCode::TYPE_NOLIMIT) {
-                return trans('game.gcodes.nolimit');
-            } else if ($type == GCode::TYPE_ONCE) {
-                return trans('game.gcodes.once');
-            }
-            return 'unknown';
-        });
+        $options = collect(GCode::$types)->map(function ($item) {
+            return trans('game.gcodes.' . $item);
+        })->all();
+        $grid->type(trans('game.info.type'))->using($options)->label('primary');
         $grid->platform(trans('game.info.platform'));
         $grid->group(trans('game.info.group'));
-        $grid->column('begintime', trans('game.info.begintime'))->display(function ($begintime) {
-            return empty($begintime) ? '--' : date('Y-m-d H:i:s', $begintime);
-        });
-        $grid->column('endtime', trans('game.info.endtime'))->display(function ($endtime) {
-            return empty($endtime) ? '--' : date('Y-m-d H:i:s', $endtime);
-        });
-        $grid->created_at(trans('admin.created_at'))->sortable();
+        $grid->column('begintime', trans('game.info.begintime'))->sortable();
+        $grid->column('endtime', trans('game.info.endtime'))->sortable();
+        $grid->status(trans('game.info.status'))->displayUsing(SwitchDisplay::Class);
 
         return $grid;
     }
@@ -116,23 +123,19 @@ class GCodeController extends Controller
         $show = new Show(GCode::findOrFail($id));
         $show->id('ID');
         $show->name(trans('game.info.name'));
-        $show->type(trans('game.info.type'))->as(function ($type) {
-            if ($type == GCode::TYPE_NOLIMIT) {
-                return trans('game.gcodes.nolimit');
-            } else if ($type == GCode::TYPE_ONCE) {
-                return trans('game.gcodes.once');
-            }
-            return 'unknown';
-        });
+        $options = collect(GCode::$types)->map(function ($item) {
+            return trans('game.gcodes.' . $item);
+        })->all();
+        $show->type(trans('game.info.type'))->using($options)->label('primary');
+        $show->key(trans('game.info.key'));
         $show->platform(trans('game.info.platform'));
         $show->group(trans('game.info.group'));
-        $form->email(trans('game.info.email'));
-        $show->begintime(trans('game.info.begintime'))->as(function ($begintime) {
-            return empty($begintime) ? '--' : date('Y-m-d H:i:s', $begintime);
+        $show->begintime(trans('game.info.begintime'));
+        $show->endtime(trans('game.info.endtime'));
+        $show->mail(trans('game.info.mail'))->unescape()->as(function ($value) {
+            return '<code>'.json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE).'</code>';
         });
-        $show->endtime(trans('game.info.endtime'))->as(function ($endtime) {
-            return empty($endtime) ? '--' : date('Y-m-d H:i:s', $endtime);
-        });
+
         $show->created_at(trans('admin.created_at'));
         $show->updated_at(trans('admin.updated_at'));
 
@@ -147,23 +150,46 @@ class GCodeController extends Controller
     protected function form()
     {
         $form = new Form(new GCode);
-        $form->text('name', trans('game.info.name'));
-        $form->select('type', trans('game.info.type'))->options([
-            GCode::TYPE_NOLIMIT => trans('game.gcodes.nolimit'), 
-            GCode::TYPE_ONCE => trans('game.gcodes.once')
-        ]);
-        $form->text('platform', trans('game.info.platform'));
-        $form->text('group', trans('game.info.group'));
-        $form->text('email', trans('game.info.email'));
-        $form->datetime('begintime', trans('game.info.begintime'))->customFormat(function ($begintime) {
-            return empty($begintime) ? null : date('Y-m-d H:i:s', $begintime);
-        });
-        $form->datetime('endtime', trans('game.info.endtime'))->customFormat(function ($begintime) {
-            return empty($begintime) ? null : date('Y-m-d H:i:s', $begintime);
+        $form->display('id');
+        $form->text('name', trans('game.info.name'))->rules('required|max:50');
+        $options = collect(GCode::$types)->map(function ($item) {
+            return trans('game.gcodes.' . $item);
+        })->all();
+        $form->select('type', trans('game.info.type'))->options($options)->rules('required');
+        $form->randpassword('key', trans('game.info.key'))->length(8)->rules('required|alpha_num|size:8');
+        $form->text('platform', trans('game.info.platform'))->rules('nullable|regex:/^\d+$/');
+        $form->text('group', trans('game.info.group'))->rules('nullable|regex:/^\d+$/');
+        $form->datetime('begintime', trans('game.info.begintime'));
+        $form->datetime('endtime', trans('game.info.endtime'));
+        $form->embeds('mail', trans('game.info.mail'), function ($form) {
+            $form->text('title', trans('game.info.title'))->rules('required|max:30');
+            $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
+            $form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('required|max:255|regex:/^(\d{1,},\d{1,})(;(\d{1,},\d{1,})){0,}$/')->help(trans('game.helps.items'));
         });
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
 
         return $form;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        $status = Input::get('status');
+        if ($status) {
+            if ($status == 'on') {
+                return GCode::find($id)->publish();
+            } else {
+                return GCode::find($id)->unpublish();
+            }
+        } else {
+            return $this->form()->update($id);
+        }
     }
 }

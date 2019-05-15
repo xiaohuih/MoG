@@ -18,6 +18,9 @@
  *
  */
 
+ use App\Admin\Extensions;
+
 Encore\Admin\Form::forget(['map', 'editor']);
+Encore\Admin\Form::extend('randpassword', Extensions\Form\Field\RandPassword::class);
 // 重写内置视图
 app('view')->prependNamespace('admin', resource_path('views/admin'));

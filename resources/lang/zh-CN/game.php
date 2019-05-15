@@ -56,15 +56,13 @@ return [
         'attachments'   => '附件',
         'receivers'     => '收件人',
         'sendtime'      => '发送时间',
-        'globalmail'    => '全局邮件',
-        'normalmail'    => '普通邮件',
         'starttime'     => '开始时间',
         'endtime'       => '结束时间',
         'interval'      => '间隔',
         'platform'      => '渠道',
         'group'         => '组号',
         'key'           => '密钥',
-        'email'         => '邮件',
+        'mail'          => '邮件',
         'begintime'     => '开始时间',
         'endtime'       => '结束时间',
         'star'          => '星级',
@@ -97,6 +95,10 @@ return [
         'arena'         => '竞技场',
         'parkour'       => '跑酷',
     ],
+    'mails'                 => [
+        'normal'        => '普通',
+        'global'        => '全服',
+    ],
     'gcodes'                => [
         'nolimit'       => '无限制',
         'once'          => '单次',
@@ -105,9 +107,12 @@ return [
         'receivers'     => '多个玩家ID以分号[;]分隔',
         'items'         => '道具ID和数量以逗号[,]分隔，多个道具以[;]分隔',
         'interval'      => '单为（秒），立即发送填0',
+        'gcode_group'   => '玩家同一礼包组只能领取一次，0：无限制',
     ],
     'servers'               => [
-
+        'client'        => '客户端',
+        'scene'         => '场景服',
+        'session'       => '会话服',
     ],
     'select_zone'       => '请选择区服',
 ];

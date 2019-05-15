@@ -83,7 +83,10 @@ class ScriptController extends Controller
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
         $grid->content(trans('game.info.content'))->editable();
-        $grid->server(trans('game.info.server'))->using(Script::$servers)->label('success');
+        $options = collect(Script::$servers)->map(function ($item) {
+            return trans('game.servers.' . $item);
+        })->all();
+        $grid->server(trans('game.info.server'))->using($options)->label('primary');
         $grid->zones(trans('game.info.zone'));
 
         return $grid;
@@ -106,7 +109,10 @@ class ScriptController extends Controller
         $form->text('name', trans('game.info.name'))->rules('required|max:50');
         $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
         $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones')->rules('required');
-        $form->select('server', trans('game.info.server'))->options(Script::$servers)->rules('required');
+        $options = collect(Script::$servers)->map(function ($item) {
+            return trans('game.servers.' . $item);
+        })->all();
+        $form->select('server', trans('game.info.server'))->options($options)->rules('required');
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

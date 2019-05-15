@@ -71,7 +71,6 @@ class NoticeController extends Controller
         // 筛选
         $grid->filter(function($filter){
             $filter->like('content', trans('game.info.content'));
-            $filter->between('created_at', trans('admin.created_at'))->datetime();
         });
         // 行操作
         $grid->actions(function ($actions) {
@@ -99,7 +98,6 @@ class NoticeController extends Controller
                 return "<span class='label label-default'>$name</span>";
             }
         });
-        $grid->created_at(trans('admin.created_at'))->sortable();
 
         return $grid;
     }
@@ -121,7 +119,7 @@ class NoticeController extends Controller
         $form->text('content', trans('game.info.content'))->rules('required|max:255');
         $form->datetime('starttime', trans('game.info.starttime'));
         $form->datetime('endtime', trans('game.info.endtime'));
-        $form->text('interval', trans('game.info.interval'))->rules('regex:/^\d+$/')->help(trans('game.helps.interval'));
+        $form->text('interval', trans('game.info.interval'))->rules('required|regex:/^\d+$/')->help(trans('game.helps.interval'));
         $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones')->rules('required');
 
         $form->display('created_at', trans('admin.created_at'));

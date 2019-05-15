@@ -22,7 +22,7 @@ class CreateMailsTable extends Migration
             $table->string('receivers')->nullable();
             $table->string('zones');
             $table->timestamp('sendtime')->nullable();
-            $table->integer('status');
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

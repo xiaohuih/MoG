@@ -12,11 +12,10 @@ class Script extends Model
      * 服务器类型
      */
     public static $servers = [
-        1 => "客户端",  // 客户端 
-        2 => '场景服',  // 场景服
-        3 => '会话服',  // 会话服
+        1 => 'client',  // 客户端 
+        2 => 'scene',   // 场景服
+        3 => 'session', // 会话服
     ];
-
 
     public function setZonesAttribute($value)
     {

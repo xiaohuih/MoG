@@ -17,10 +17,10 @@ class CreateNoticesTable extends Migration
             $table->bigIncrements('id');
             $table->string('content')->nullable();
             $table->string('zones')->nullable();
-            $table->timestamp('starttime');
-            $table->timestamp('endtime');
-            $table->integer('interval');
-            $table->integer('status');
+            $table->timestamp('starttime')->nullable();
+            $table->timestamp('endtime')->nullable();
+            $table->integer('interval')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

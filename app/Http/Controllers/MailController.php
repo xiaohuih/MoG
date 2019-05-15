@@ -72,7 +72,6 @@ class MailController extends Controller
         $grid->filter(function($filter){
             $filter->like('title', trans('game.info.title'));
             $filter->between('sendtime', trans('game.info.sendtime'))->datetime();
-            $filter->between('created_at', trans('admin.created_at'))->datetime();
         });
         // 行操作
         $grid->actions(function ($actions) {
@@ -89,14 +88,10 @@ class MailController extends Controller
         $grid->title(trans('game.info.title'));
         $grid->content(trans('game.info.content'));
         $grid->attachments(trans('game.info.attachments'));
-        $grid->type(trans('game.info.type'))->display(function ($type) {
-            if ($type == Mail::TYPE_GLBOAL) {
-                return trans('game.info.globalmail');
-            } else if ($type == Mail::TYPE_NORMAL) {
-                return trans('game.info.normalmail');
-            }
-            return 'unknown';
-        });
+        $options = collect(Mail::$types)->map(function ($item) {
+            return trans('game.mails.' . $item);
+        })->all();
+        $grid->type(trans('game.info.type'))->using($options)->label('primary');
         $grid->receivers(trans('game.info.receivers'));
         $grid->zones(trans('game.info.zone'));
         $grid->sendtime(trans('game.info.sendtime'))->sortable();
@@ -109,7 +104,6 @@ class MailController extends Controller
                 return "<span class='label label-default'>$name</span>";
             }
         });
-        $grid->created_at(trans('admin.created_at'))->sortable();
 
         return $grid;
     }
@@ -127,15 +121,15 @@ class MailController extends Controller
             $tools->disableView();
         });
         $form->display('id');
-        $form->select('type', trans('game.info.type'))->options([
-            Mail::TYPE_GLBOAL => trans('game.info.globalmail'), 
-            Mail::TYPE_NORMAL => trans('game.info.normalmail')
-        ])->rules('required');
-        $form->text('receivers', trans('game.info.receivers'))->rules('required|regex:/^\d{1,}(;\d{1,}){0,}$/')->help(trans('game.helps.receivers'));
+        $options = collect(Mail::$types)->map(function ($item) {
+            return trans('game.mails.' . $item);
+        })->all();
+        $form->select('type', trans('game.info.type'))->options($options)->rules('required');
+        $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones')->rules('required');
+        $form->text('receivers', trans('game.info.receivers'))->rules('required_if:type,1|nullable|regex:/^\d{1,}(;\d{1,}){0,}$/')->help(trans('game.helps.receivers'));
         $form->text('title', trans('game.info.title'))->rules('required|max:30');
         $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
         $form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('max:255|regex:/^(\d{1,},\d{1,})(;(\d{1,},\d{1,})){0,}$/')->help(trans('game.helps.items'));
-        $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones')->rules('required');
         $form->datetime('sendtime', trans('game.info.sendtime'));
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

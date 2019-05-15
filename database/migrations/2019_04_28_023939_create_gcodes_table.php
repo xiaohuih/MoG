@@ -17,13 +17,14 @@ class CreateGCodesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('type');
-            $table->integer('group');
-            $table->integer('platform');
-            $table->integer('email');
-            $table->integer('count');
+            $table->string('key');
+            $table->integer('group')->nullable();
+            $table->integer('platform')->nullable();
             $table->timestamp('begintime')->nullable();
             $table->timestamp('endtime')->nullable();
-            $table->string('key');
+            $table->integer('count');
+            $table->string('mail');
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

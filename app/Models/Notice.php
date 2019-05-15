@@ -8,6 +8,12 @@ use GuzzleHttp\Client;
 class Notice extends Model
 {
     protected static $cmd = 10002;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'status',
+    ];
 
     public function setZonesAttribute($value)
     {
@@ -39,8 +45,7 @@ class Notice extends Model
         $data = json_decode($res->getBody(), true);
         // 更新状态
         if (true == $data['status']) {
-            $this->status = 1;
-            $this->save();
+            $this->update(['status' => 1]);
         }
 
         return $data;
