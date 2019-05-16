@@ -158,9 +158,9 @@ class GCode extends Model
         $codesDict = [];
         for ($i = 0; $i < $this->count; $i++) {
             $rand = $this->randCode(self::kRandCodeLength, $codesDict);
-            $sign = $this->baseEncode(crc32($rand . $this->key) & 0xFFFFFFFF, self::kSignatureLenth);
+            $sign = $this->baseEncode(crc32($version.$rand.$this->key) & 0xFFFFFFFF, self::kSignatureLenth);
             $code = $version.$rand.$sign;
-
+            
             array_push($codes, [$code]);
         }
         return $codes;
