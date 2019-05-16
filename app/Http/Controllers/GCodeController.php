@@ -193,13 +193,18 @@ class GCodeController extends Controller
             } else {
                 return GCode::find($id)->unpublish();
             }
-        } else if (Input::get('download')) {
-            return GCode::find($id)->export();
         } else {
             return $this->form()->update($id);
         }
     }
 
+    /**
+     * Export gcodes.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function export($id)
     {
         return GCode::find($id)->export();

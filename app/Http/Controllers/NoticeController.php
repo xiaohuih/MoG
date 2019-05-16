@@ -81,7 +81,7 @@ class NoticeController extends Controller
             }
         });
         // 倒序
-        $grid->model()->orderBy('id', 'desc');
+        $grid->model()->orderBy('updated_at', 'desc');
         // 列
         $grid->id('ID');
         $grid->content(trans('game.info.content'));

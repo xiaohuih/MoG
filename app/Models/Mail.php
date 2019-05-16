@@ -35,12 +35,11 @@ class Mail extends Model
         $cmd = 'SEND_MAIL';
         $params = [
             'id' => (int)$this->id,
-            'type' => (int)$this->type,
+            'receivers' => $this->receivers,
             'title' => $this->title,
             'content' => $this->content,
             'attachments' => $this->attachments ?: "",
             'zones' => $this->zones,
-            'receivers' => $this->receivers ?: "",
             'sendtime' => isset($this->sendtime) ? strtotime($this->sendtime):0,
         ];
         $client = new Client();

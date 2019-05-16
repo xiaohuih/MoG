@@ -78,7 +78,7 @@ class ScriptController extends Controller
             $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'perform', 'fa-paper-plane'));
         });
         // 倒序
-        $grid->model()->orderBy('id', 'desc');
+        $grid->model()->orderBy('updated_at', 'desc');
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
