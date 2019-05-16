@@ -86,6 +86,7 @@ return [
         'kick'          => '踢出',
         'revoke'        => '撤回',
         'perform'       => '执行',
+        'download'      => '下载',
     ],
     'ranks'                 => [
         'level'         => '等级',

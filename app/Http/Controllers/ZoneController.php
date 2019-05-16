@@ -32,8 +32,6 @@ class ZoneController extends Controller
             Game::setZone(0);
         }
         $result["selected"] = Game::getZone();
-        
-        Log::debug($result);
         return $result;
     }
 

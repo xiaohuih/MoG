@@ -4,9 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
+use App\Exports\BaseExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GCode extends Model
 {
+    // 礼包码 = 版本号 + 随机码 + 签名
+    // 加密字符表
+    const R = "vPh7zZwA2LyU4bGq5tcVfMxJi6XaSK9CNpWjYTHQ8REnmu3BrdgeDkFs";
+    // 随机码字符长度
+    const kRandCodeLength = 4;
+    // 签名字符长度
+    const kSignatureLenth = 6;
+    // 版本长度
+    const kVersionLenth = 2;
+
     protected static $cmd = 10002;
     /**
      * @var array
@@ -41,6 +53,40 @@ class GCode extends Model
     public static function realId($id)
     {
         return $id + 1000;
+    }
+
+    /**
+     * 加密
+     */
+    static function baseEncode($num, $length = 0)
+    {
+        $baseLength = strlen(self::R);
+        $str = "";
+        while ($num > 0 || strlen($str) < $length) {
+            $i = $num % $baseLength;
+            $str = $str . substr(self::R, $i, 1);
+            $num = (int)(($num - 1) / $baseLength);
+        }
+        return $str;
+    }
+    /**
+     * 生成随机码
+     */
+    static function randCode($length, $codes)
+    {
+        $baseLength = strlen(self::R);
+        $code = "";
+        $i = 0;
+        while (++$i < 1000) {
+            for ($i = 0; $i < $length; $i++) {
+                $code = $code . substr(self::R, mt_rand(0, $baseLength-1), 1);
+            }
+            if (!in_array($code, $codes, true)) {
+                break;
+            }
+        }
+        array_push($codes, $code);
+        return $code;
     }
     
     /**
@@ -100,5 +146,31 @@ class GCode extends Model
         }
 
         return $data;
+    }
+
+    /**
+     * 生成码
+     */
+    public function generate()
+    {
+        $version = $this->baseEncode(self::realId((int)$this->id), self::kVersionLenth);
+        $codes = [];
+        $codesDict = [];
+        for ($i = 0; $i < $this->count; $i++) {
+            $rand = $this->randCode(self::kRandCodeLength, $codesDict);
+            $sign = $this->baseEncode(crc32($rand . $this->key) & 0xFFFFFFFF, self::kSignatureLenth);
+            $code = $version.$rand.$sign;
+
+            array_push($codes, [$code]);
+        }
+        return $codes;
+    }
+
+    /**
+     * 生成码
+     */
+    public function export()
+    {
+        return Excel::download(new BaseExport(collect($this->generate())), $this->name.'.xlsx');
     }
 }

@@ -21,6 +21,7 @@ Route::group([
     $router->resource('config/roles', Config\GameRoleController::class);
     $router->resource('mail', MailController::class);
     $router->resource('notice', NoticeController::class);
+    $router->get('gcode/export/{id}', 'GCodeController@export');
     $router->resource('gcode', GCodeController::class);
     $router->resource('script', ScriptController::class);
     // 区服操作
