@@ -29,68 +29,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 21,
+                    "order" => 18,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
-                    "permission" => NULL,
+                    "permission" => "auth.management",
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-13 03:41:19"
+                    "updated_at" => "2019-05-16 09:23:39"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 22,
+                    "order" => 19,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-13 03:41:19"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 23,
+                    "order" => 20,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-13 03:41:19"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 24,
+                    "order" => 21,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-13 03:41:19"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 25,
+                    "order" => 22,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-13 03:41:19"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 26,
+                    "order" => 23,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-13 03:41:19"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 13,
@@ -99,31 +99,31 @@ class AdminTablesSeeder extends Seeder
                     "title" => "玩家",
                     "icon" => "fa-user-md",
                     "uri" => "admin/player",
-                    "permission" => NULL,
+                    "permission" => "player.management",
                     "created_at" => "2019-04-17 06:40:44",
-                    "updated_at" => "2019-04-17 06:43:53"
+                    "updated_at" => "2019-05-16 09:18:51"
                 ],
                 [
                     "id" => 14,
                     "parent_id" => 13,
-                    "order" => 3,
+                    "order" => 4,
                     "title" => "查询",
                     "icon" => "fa-search",
                     "uri" => "player/search",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 06:41:54",
-                    "updated_at" => "2019-04-17 07:48:49"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 15,
                     "parent_id" => 13,
-                    "order" => 4,
+                    "order" => 3,
                     "title" => "排行榜",
                     "icon" => "fa-list-ol",
                     "uri" => "player/ranks",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 06:42:50",
-                    "updated_at" => "2019-04-30 04:53:53"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 16,
@@ -132,31 +132,31 @@ class AdminTablesSeeder extends Seeder
                     "title" => "公会",
                     "icon" => "fa-bank",
                     "uri" => "admin/guild",
-                    "permission" => NULL,
+                    "permission" => "guild.management",
                     "created_at" => "2019-04-17 06:47:21",
-                    "updated_at" => "2019-04-29 10:36:52"
+                    "updated_at" => "2019-05-16 09:18:33"
                 ],
                 [
                     "id" => 17,
                     "parent_id" => 16,
-                    "order" => 8,
+                    "order" => 9,
                     "title" => "查询",
                     "icon" => "fa-search",
                     "uri" => "guild/search",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 06:48:13",
-                    "updated_at" => "2019-04-29 10:36:52"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 18,
                     "parent_id" => 16,
-                    "order" => 9,
+                    "order" => 8,
                     "title" => "排行榜",
                     "icon" => "fa-list-ol",
                     "uri" => "guild/ranks",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 06:48:53",
-                    "updated_at" => "2019-04-29 10:36:52"
+                    "updated_at" => "2019-05-14 01:38:30"
                 ],
                 [
                     "id" => 19,
@@ -165,9 +165,9 @@ class AdminTablesSeeder extends Seeder
                     "title" => "邮件",
                     "icon" => "fa-envelope",
                     "uri" => "mail",
-                    "permission" => NULL,
+                    "permission" => "mail.managerment",
                     "created_at" => "2019-04-17 06:52:41",
-                    "updated_at" => "2019-05-05 03:33:30"
+                    "updated_at" => "2019-05-16 09:17:55"
                 ],
                 [
                     "id" => 20,
@@ -176,9 +176,9 @@ class AdminTablesSeeder extends Seeder
                     "title" => "公告",
                     "icon" => "fa-bullhorn",
                     "uri" => "notice",
-                    "permission" => NULL,
+                    "permission" => "notice.management",
                     "created_at" => "2019-04-17 06:54:36",
-                    "updated_at" => "2019-05-05 03:33:30"
+                    "updated_at" => "2019-05-16 09:18:09"
                 ],
                 [
                     "id" => 21,
@@ -187,64 +187,9 @@ class AdminTablesSeeder extends Seeder
                     "title" => "礼包",
                     "icon" => "fa-briefcase",
                     "uri" => "gcode",
-                    "permission" => NULL,
+                    "permission" => "gcode.management",
                     "created_at" => "2019-04-17 06:58:37",
-                    "updated_at" => "2019-05-05 03:33:31"
-                ],
-                [
-                    "id" => 22,
-                    "parent_id" => 0,
-                    "order" => 14,
-                    "title" => "配置",
-                    "icon" => "fa-gears",
-                    "uri" => "admin/config",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-17 07:17:46",
-                    "updated_at" => "2019-05-05 03:33:31"
-                ],
-                [
-                    "id" => 23,
-                    "parent_id" => 22,
-                    "order" => 17,
-                    "title" => "计划",
-                    "icon" => "fa-clock-o",
-                    "uri" => "config/schedules",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-17 07:18:25",
-                    "updated_at" => "2019-05-05 03:33:31"
-                ],
-                [
-                    "id" => 24,
-                    "parent_id" => 22,
-                    "order" => 15,
-                    "title" => "宠物",
-                    "icon" => "fa-linux",
-                    "uri" => "config/pets",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-17 07:19:21",
-                    "updated_at" => "2019-05-05 03:33:31"
-                ],
-                [
-                    "id" => 25,
-                    "parent_id" => 22,
-                    "order" => 16,
-                    "title" => "道具",
-                    "icon" => "fa-shopping-bag",
-                    "uri" => "config/items",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-17 07:21:01",
-                    "updated_at" => "2019-05-05 03:33:31"
-                ],
-                [
-                    "id" => 26,
-                    "parent_id" => 22,
-                    "order" => 18,
-                    "title" => "角色",
-                    "icon" => "fa-user",
-                    "uri" => "config/roles",
-                    "permission" => NULL,
-                    "created_at" => "2019-04-23 10:56:08",
-                    "updated_at" => "2019-05-05 03:33:31"
+                    "updated_at" => "2019-05-16 09:18:19"
                 ],
                 [
                     "id" => 28,
@@ -280,26 +225,15 @@ class AdminTablesSeeder extends Seeder
                     "updated_at" => "2019-05-05 03:33:30"
                 ],
                 [
-                    "id" => 31,
-                    "parent_id" => 0,
-                    "order" => 19,
-                    "title" => "其它",
-                    "icon" => "fa-plug",
-                    "uri" => NULL,
-                    "permission" => NULL,
-                    "created_at" => "2019-05-13 03:37:44",
-                    "updated_at" => "2019-05-13 03:41:19"
-                ],
-                [
                     "id" => 32,
-                    "parent_id" => 31,
-                    "order" => 20,
-                    "title" => "脚本命令",
+                    "parent_id" => 0,
+                    "order" => 14,
+                    "title" => "脚本",
                     "icon" => "fa-scribd",
                     "uri" => "script",
-                    "permission" => NULL,
+                    "permission" => "script.management",
                     "created_at" => "2019-05-13 03:40:38",
-                    "updated_at" => "2019-05-13 10:33:16"
+                    "updated_at" => "2019-05-16 09:17:31"
                 ]
             ]
         );
@@ -351,6 +285,69 @@ class AdminTablesSeeder extends Seeder
                     "http_path" => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs",
                     "created_at" => NULL,
                     "updated_at" => NULL
+                ],
+                [
+                    "id" => 7,
+                    "name" => "Zone setting",
+                    "slug" => "zone.setting",
+                    "http_method" => "",
+                    "http_path" => "/zone*",
+                    "created_at" => "2019-05-16 08:50:06",
+                    "updated_at" => "2019-05-16 09:10:23"
+                ],
+                [
+                    "id" => 8,
+                    "name" => "Player management",
+                    "slug" => "player.management",
+                    "http_method" => "",
+                    "http_path" => "/player*",
+                    "created_at" => "2019-05-16 08:59:41",
+                    "updated_at" => "2019-05-16 09:08:03"
+                ],
+                [
+                    "id" => 9,
+                    "name" => "Guild management",
+                    "slug" => "guild.management",
+                    "http_method" => "",
+                    "http_path" => "/guild*",
+                    "created_at" => "2019-05-16 09:06:36",
+                    "updated_at" => "2019-05-16 09:08:11"
+                ],
+                [
+                    "id" => 10,
+                    "name" => "Mail management",
+                    "slug" => "mail.managerment",
+                    "http_method" => "",
+                    "http_path" => "/mail*",
+                    "created_at" => "2019-05-16 09:07:49",
+                    "updated_at" => "2019-05-16 09:07:49"
+                ],
+                [
+                    "id" => 11,
+                    "name" => "Notice management",
+                    "slug" => "notice.management",
+                    "http_method" => "",
+                    "http_path" => "/notice*",
+                    "created_at" => "2019-05-16 09:08:39",
+                    "updated_at" => "2019-05-16 09:08:39"
+                ],
+                [
+                    "id" => 12,
+                    "name" => "GCode management",
+                    "slug" => "gcode.management",
+                    "http_method" => "",
+                    "http_path" => "/gcode*",
+                    "created_at" => "2019-05-16 09:09:10",
+                    "updated_at" => "2019-05-16 09:09:10"
+                ],
+                [
+                    "id" => 13,
+                    "name" => "Script management",
+                    "slug" => "script.management",
+                    "http_method" => "",
+                    "http_path" => "/script*",
+                    "created_at" => "2019-05-16 09:09:36",
+                    "updated_at" => "2019-05-16 09:09:36"
                 ]
             ]
         );
@@ -364,6 +361,20 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "administrator",
                     "created_at" => "2019-03-12 08:39:11",
                     "updated_at" => "2019-03-12 08:39:11"
+                ],
+                [
+                    "id" => 2,
+                    "name" => "Development Engineer",
+                    "slug" => "dev",
+                    "created_at" => "2019-05-16 08:45:20",
+                    "updated_at" => "2019-05-16 08:45:43"
+                ],
+                [
+                    "id" => 3,
+                    "name" => "Operators",
+                    "slug" => "ops",
+                    "created_at" => "2019-05-16 09:12:11",
+                    "updated_at" => "2019-05-16 09:12:11"
                 ]
             ]
         );
@@ -372,12 +383,7 @@ class AdminTablesSeeder extends Seeder
         DB::table('admin_role_menu')->truncate();
         DB::table('admin_role_menu')->insert(
             [
-                [
-                    "role_id" => 1,
-                    "menu_id" => 2,
-                    "created_at" => NULL,
-                    "updated_at" => NULL
-                ]
+
             ]
         );
 
@@ -387,6 +393,120 @@ class AdminTablesSeeder extends Seeder
                 [
                     "role_id" => 1,
                     "permission_id" => 1,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 7,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 4,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 3,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 2,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 8,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 9,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 10,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 11,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 12,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 13,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 2,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 3,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 4,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 7,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 8,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 9,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 10,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 11,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 12,
                     "created_at" => NULL,
                     "updated_at" => NULL
                 ]
