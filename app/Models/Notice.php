@@ -35,7 +35,7 @@ class Notice extends Model
             'interval' => $this->interval ?: 0,
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
@@ -62,7 +62,7 @@ class Notice extends Model
             'id' => (int)$id,
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,

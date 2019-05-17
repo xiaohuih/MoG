@@ -26,7 +26,7 @@ class Player extends Model
             'id' => (int)$id
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
@@ -69,7 +69,7 @@ class Player extends Model
             'value' => $value
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,

@@ -43,7 +43,7 @@ class Mail extends Model
             'sendtime' => isset($this->sendtime) ? strtotime($this->sendtime):0,
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
@@ -70,7 +70,7 @@ class Mail extends Model
             'id' => (int)$id,
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,

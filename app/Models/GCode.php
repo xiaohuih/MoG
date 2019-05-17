@@ -106,7 +106,7 @@ class GCode extends Model
             'endtime' => isset($this->endtime) ? strtotime($this->endtime):0,
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
@@ -132,7 +132,7 @@ class GCode extends Model
             'id' => self::realId((int)$this->id),
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
