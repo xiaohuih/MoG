@@ -24,7 +24,7 @@ class Guild extends Model
             'id' => (int)$id
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
@@ -51,7 +51,7 @@ class Guild extends Model
             'member_id' => (int)$member_id
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
@@ -80,7 +80,7 @@ class Guild extends Model
             'value' => $value
         ];
         $client = new Client();
-        $res = $client->request('GET', config('game.gm.url'), [
+        $res = $client->request('GET', config('game.url'), [
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$cmd,
