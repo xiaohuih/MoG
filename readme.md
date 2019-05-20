@@ -84,7 +84,8 @@ $ php artisan config:cache
 $ php artisan route:cache
 
 
-
+# 注意：
+# 1. ningx跟php-fpm运行用户不一致，可能导致权限问题，保持同一用户即可解决
 
 
 ##############################################
