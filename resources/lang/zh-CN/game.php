@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'welcome'               => '欢迎使用:appname',
     'zone'                  => '区',
     'mail'                  => '邮件',
     'notice'                => '公告',
