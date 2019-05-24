@@ -15,21 +15,6 @@ $ systemctl start nginx
 $ systemctl enable nginx
 
 ##############################################
-# MYSQL 5.7
-##############################################
-# 源
-$ yum -y localinstall http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
-# 安装
-$ yum -y install mysql-community-server mysql-community-devel
-# 启动
-$ systemctl start mysqld
-# 设置开机启动
-$ systemctl enable mysqld
-# 初始密码
-$ mysql_secure_installation
-$ mysqladmin -u root password '123456'
-
-##############################################
 # Mariadb
 ##############################################
 # 安装
@@ -49,9 +34,7 @@ $ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 # 安装
 $ yum -y install php72w php72w-fpm php72w-devel 
 # 安装扩展
-$ yum -y install php72w-pdo php72w-mbstring php72w-xml php72w-ctype php72w-bcmath php72w-gd
-# 重载
-$ systemctl reload php-fpm
+$ yum -y install php72w-pdo php72w-mbstring php72w-xml php72w-ctype php72w-bcmath php72w-gd php72w-mysql
 # 启动
 $ systemctl start php-fpm
 # 设置开机启动
@@ -65,17 +48,16 @@ $ curl -sS https://getcomposer.org/installer | php
 $ mv composer.phar /usr/local/bin/composer
 # 使用国内镜像
 $ composer config -g repo.packagist composer https://packagist.phpcomposer.com
-$ composer -v
 
 ##############################################
 # 部署
 ##############################################
+# 安装依赖
+$ composer install
 # 拷贝.env.example到.env并配置
 $ cp .env.example .env
 # 生成KEY
 $ php artisan key:generate
-# 安装依赖
-$ composer install
 # 安装admin
 $ php artisan admin:install
 
