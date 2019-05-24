@@ -52,12 +52,14 @@ $ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 ##############################################
 # 部署
 ##############################################
-# 拷贝.env.example到.env并配置
-$ cp .env.example .env
 # 安装依赖
 $ composer install
+# 拷贝.env.example到.env并配置
+$ cp .env.example .env
 # 生成KEY
 $ php artisan key:generate
+# 安装admin
+$ php artisan admin:install
 
 # 创建数据库
 $ MySql> CREATE DATABASE IF NOT EXISTS mog default charset utf8 COLLATE utf8_general_ci;
@@ -65,28 +67,20 @@ $ MySql> CREATE DATABASE IF NOT EXISTS mog default charset utf8 COLLATE utf8_gen
 $ php artisan migrate
 $ php artisan db:seed
 # 目录权限
-$ chown -R nginx .
-$ chmod -R 775 ./storage
+$ chown -R :www /var/www/mog
+$ chmod -R 775 /var/www/mog/storage
 # 链接存储目录
 $ php artisan storage:link
 
 # 配置站点
-$ cp .mog.conf /etc/nginx/conf.d/mog.conf
+$ cp nginx.conf /etc/nginx/conf.d/mog.conf
 # 重启NGINX
 $ systemctl restart nginx
-
-# 创建管理员
-$ php artisan admin:create-user
 
 # 优化
 $ composer install --optimize-autoloader --no-dev
 $ php artisan config:cache
 $ php artisan route:cache
-
-
-# 注意：
-# 1. ningx跟php-fpm运行用户不一致，可能导致权限问题，保持同一用户即可解决
-
 
 ##############################################
 # 开发环境
