@@ -79,6 +79,8 @@ $ composer install
 # 安装admin
 $ php artisan admin:install
 
+# 创建数据库
+$ MySql> CREATE DATABASE IF NOT EXISTS mog default charset utf8 COLLATE utf8_general_ci;
 # 数据库安装
 $ php artisan migrate
 $ php artisan db:seed
