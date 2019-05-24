@@ -92,16 +92,16 @@ class GCodeController extends Controller
         // 行操作
         $grid->actions(function ($actions) {
             if ($actions->row['status'] == 1) {
+                $id = $actions->row['id'];
                 $actions->disableEdit();
+                $actions->append("<a href='gcode/export/{$id}' target='_blank'><i class='fa fa-download'></i></a>");
             }
         });
         // 倒序
         $grid->model()->orderBy('created_at', 'desc');
         // 列
         $grid->id('ID');
-        $grid->name(trans('game.info.name'))->display(function ($name) {
-            return "<a href='gcode/export/{$this->id}' target='_blank'>{$name}</a>";
-        });
+        $grid->name(trans('game.info.name'));
         $options = collect(GCode::$types)->map(function ($item) {
             return trans('game.gcodes.' . $item);
         })->all();
@@ -161,7 +161,7 @@ class GCodeController extends Controller
         })->all();
         $form->select('type', trans('game.info.type'))->options($options)->rules('required');
         $form->randpassword('key', trans('game.info.key'))->length(8)->rules('required|alpha_num|size:8');
-        $form->number('count', trans('game.info.count'))->rules('required|regex:/^\d{1,7}$/');
+        $form->text('count', trans('game.info.count'))->rules('required|regex:/^\d{1,6}$/');
         $form->text('platform', trans('game.info.platform'))->rules('nullable|regex:/^\d+$/');
         $form->text('group', trans('game.info.group'))->rules('nullable|regex:/^\d+$/');
         $form->datetime('begintime', trans('game.info.begintime'));
