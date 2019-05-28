@@ -46,7 +46,7 @@ class Server extends Model
         try {
             $contents = json_decode(Storage::disk('admin')->get(self::$file), true);
             $servers = $contents['servers'];
-            $data['list'] = $servers;
+            $data['list'] = array_slice($servers, ($currentPage-1)*$perPage, $perPage);
             $data['pagination']['total'] = count($servers);
         } catch (\Exception $exception) {
             throw $exception;
@@ -61,6 +61,32 @@ class Server extends Model
     }
     
     /**
+     * Find a model by its primary key or throw an exception.
+     *
+     * @param  mixed  $id
+     * @param  array  $columns
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static|static[]
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function findOrFail($id)
+    {
+        $servers = json_decode(Storage::disk('admin')->get(self::$file), true)['servers'];
+       
+        $server = null;
+        for ($i = 0, $c = count($servers); $i < $c; ++$i) {
+            if ($servers[$i]['id'] == (int)$id) {
+                $server = &$servers[$i];
+                break;
+            }
+        }
+        if (!isset($server)){
+            return false;
+        }
+        return static::newFromBuilder($server);
+    }
+
+    /**
      * Add a basic where clause to the query.
      *
      * @param  string|array|\Closure  $column
@@ -72,6 +98,49 @@ class Server extends Model
     public function where($column, $operator = null, $value = null, $boolean = 'and')
     {
         return $this;
+    }
+
+    /**
+     * Set the relationships that should be eager loaded.
+     *
+     * @param mixed $relations
+     *
+     * @return $this|Model
+     */
+    public static function with($relations)
+    {
+        return new static;
+    }
+
+    /**
+     * Save the model.
+     *
+     * @param  array  $options
+     * @return bool
+     */
+    public function save(array $options = [])
+    {
+        $contents = json_decode(Storage::disk('admin')->get(self::$file), true);
+        $servers = &$contents['servers'];
+       
+        $server = null;
+        for ($i = 0, $c = count($servers); $i < $c; ++$i) {
+            if ($servers[$i]['id'] == (int)$this->id) {
+                $server = &$servers[$i];
+                break;
+            }
+        }
+        if (!isset($server)){
+            return false;
+        }
+        foreach ($this->getAttributes() as $key => $value) {
+            $type = gettype($server[$key]);
+            $server[$key] = $value;
+            settype($server[$key], $type);
+        }
+
+        Storage::disk('admin')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        return true;
     }
 
     public static function modify($id, $name, $value)

@@ -65,16 +65,18 @@ class ServerController extends Controller
             });
         });
         // 行操作
-        $grid->disableActions();
+        $grid->actions(function ($actions) {
+            $actions->disableView();
+            $actions->disableDelete();
+        });
         // 列
         $grid->id('ID');
-        $grid->name(trans('game.info.name'))->editable();
-        // $options = collect(OM\Server::$states)->map(function ($value) {
-        //     return "<span class='badge bg-{$style}'>$name</span>";
-        // })->all();
-        $grid->state(trans('game.info.state'))->editable('select', collect(OM\Server::$states)->map(function ($value) {
-            return trans('game.serverstates.' . $value['name']);
-        }));
+        $grid->name(trans('game.info.name'));
+        $options = collect(OM\Server::$states)->map(function ($item) {
+            $name = trans('game.serverstates.' . $item['name']);
+            return "<span class='badge bg-{$item['style']}'>{$name}</span>";
+        })->all();
+        $grid->state(trans('game.info.state'))->using($options);
 
         return $grid;
     }
@@ -86,34 +88,22 @@ class ServerController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Server);
+        $form = new Form(new OM\Server);
         // 工具栏
         $form->tools(function (Form\Tools $tools) {
             $tools->disableView();
+            $tools->disableDelete();
         });
-        $form->display('id');
+        $form->disableViewCheck();
+        $form->disableCreatingCheck();
 
-        $form->display('created_at', trans('admin.created_at'));
-        $form->display('updated_at', trans('admin.updated_at'));
+        $form->display('id');
+        $form->text('name', trans('game.info.name'))->rules('required|max:128');
+        $options = collect(OM\Server::$states)->map(function ($item) {
+            return trans('game.serverstates.' . $item['name']);
+        })->all();
+        $form->select('state', trans('game.info.state'))->options($options)->rules('required');
 
         return $form;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update($id)
-    {
-        $name = Input::get('name');
-        $value = Input::get('value');
-
-        if (!in_array($name, ['name', 'state'])) {
-            return false;
-        }
-        return OM\Server::modify($id, $name, $value);
     }
 }
