@@ -29,68 +29,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 18,
+                    "order" => 20,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
                     "permission" => "auth.management",
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-16 09:23:39"
+                    "updated_at" => "2019-05-25 17:37:21"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 19,
+                    "order" => 21,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "updated_at" => "2019-05-25 17:37:21"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 20,
+                    "order" => 22,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "updated_at" => "2019-05-25 17:37:21"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 21,
+                    "order" => 23,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "updated_at" => "2019-05-25 17:37:21"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 22,
+                    "order" => 24,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "updated_at" => "2019-05-25 17:37:21"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 23,
+                    "order" => 25,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "updated_at" => "2019-05-25 17:37:21"
                 ],
                 [
                     "id" => 13,
@@ -234,6 +234,72 @@ class AdminTablesSeeder extends Seeder
                     "permission" => "script.management",
                     "created_at" => "2019-05-13 03:40:38",
                     "updated_at" => "2019-05-16 09:17:31"
+                ],
+                [
+                    "id" => 33,
+                    "parent_id" => 0,
+                    "order" => 15,
+                    "title" => "运维",
+                    "icon" => "fa-opera",
+                    "uri" => NULL,
+                    "permission" => "om.management",
+                    "created_at" => "2019-05-25 15:57:21",
+                    "updated_at" => "2019-05-25 16:01:47"
+                ],
+                [
+                    "id" => 34,
+                    "parent_id" => 33,
+                    "order" => 17,
+                    "title" => "计划",
+                    "icon" => "fa-calendar",
+                    "uri" => "om/schedules",
+                    "permission" => "om.management",
+                    "created_at" => "2019-05-25 15:58:18",
+                    "updated_at" => "2019-05-27 09:49:25"
+                ],
+                [
+                    "id" => 35,
+                    "parent_id" => 33,
+                    "order" => 16,
+                    "title" => "任务",
+                    "icon" => "fa-spinner",
+                    "uri" => "om/jobs",
+                    "permission" => "om.management",
+                    "created_at" => "2019-05-25 15:59:42",
+                    "updated_at" => "2019-05-27 09:49:25"
+                ],
+                [
+                    "id" => 36,
+                    "parent_id" => 33,
+                    "order" => 19,
+                    "title" => "区服列表",
+                    "icon" => "fa-navicon",
+                    "uri" => "om/servers",
+                    "permission" => "om.management",
+                    "created_at" => "2019-05-25 16:02:55",
+                    "updated_at" => "2019-05-25 17:37:21"
+                ],
+                [
+                    "id" => 37,
+                    "parent_id" => 0,
+                    "order" => 26,
+                    "title" => "Scheduling",
+                    "icon" => "fa-clock-o",
+                    "uri" => "scheduling",
+                    "permission" => NULL,
+                    "created_at" => "2019-05-25 16:03:43",
+                    "updated_at" => "2019-05-25 17:37:21"
+                ],
+                [
+                    "id" => 38,
+                    "parent_id" => 33,
+                    "order" => 18,
+                    "title" => "公告",
+                    "icon" => "fa-bullhorn",
+                    "uri" => "om/notices",
+                    "permission" => NULL,
+                    "created_at" => "2019-05-25 17:37:14",
+                    "updated_at" => "2019-05-27 09:49:25"
                 ]
             ]
         );
@@ -348,6 +414,24 @@ class AdminTablesSeeder extends Seeder
                     "http_path" => "/script*",
                     "created_at" => "2019-05-16 09:09:36",
                     "updated_at" => "2019-05-16 09:09:36"
+                ],
+                [
+                    "id" => 14,
+                    "name" => "O&M management",
+                    "slug" => "om.management",
+                    "http_method" => "",
+                    "http_path" => "/om*",
+                    "created_at" => "2019-05-25 16:00:39",
+                    "updated_at" => "2019-05-25 16:01:24"
+                ],
+                [
+                    "id" => 15,
+                    "name" => "Scheduling",
+                    "slug" => "ext.scheduling",
+                    "http_method" => NULL,
+                    "http_path" => "/scheduling*",
+                    "created_at" => "2019-05-25 16:03:43",
+                    "updated_at" => "2019-05-25 16:03:43"
                 ]
             ]
         );
@@ -383,7 +467,12 @@ class AdminTablesSeeder extends Seeder
         DB::table('admin_role_menu')->truncate();
         DB::table('admin_role_menu')->insert(
             [
-
+                [
+                    "role_id" => 3,
+                    "menu_id" => 38,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ]
             ]
         );
 

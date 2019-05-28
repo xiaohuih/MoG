@@ -36,4 +36,9 @@ Route::group([
         $router->resource('guild/ranks', Guild\RankController::class);
         $router->resource('guild/members', Guild\MemberController::class);
     });
+    // 运维
+    $router->resource('om/jobs', OM\JobController::class);
+    $router->resource('om/schedules', OM\ScheduleController::class);
+    $router->resource('om/notices', OM\NoticeController::class);
+    $router->resource('om/servers', OM\ServerController::class);
 });

@@ -78,6 +78,8 @@ return [
         'sent'          => '已发送',
         'unsent'        => '未发送',
         'server'        => '服务器',
+        'state'         => '状态',
+        'show'          => '显示',
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',
@@ -116,6 +118,19 @@ return [
         'client'        => '客户端',
         'scene'         => '场景服',
         'session'       => '会话服',
+    ],
+    'serverstates'          => [
+        'new'           => '新服',
+        'burst'         => '爆满',
+        'hot'           => '火爆',
+        'maintain'      => '维护',
+        'hide'          => '隐藏'
+    ],
+    'notices'               => [
+        'maintain'      => '维护',
+        'update'        => '更新',
+        'operation'     => '运营',
+        'mandatory'     => '强更',
     ],
     'select_zone'       => '请选择区服',
 ];
