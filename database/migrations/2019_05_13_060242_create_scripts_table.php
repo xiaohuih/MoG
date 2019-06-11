@@ -15,9 +15,10 @@ class CreateScriptsTable extends Migration
     {
         Schema::create('scripts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('content')->nullable();
-            $table->string('zones')->nullable();
+            $table->string('name');
+            $table->string('content');
+            $table->string('zones');
+            $table->integer('server');
             $table->timestamps();
         });
     }
