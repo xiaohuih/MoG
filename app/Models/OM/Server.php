@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Server extends Model
 {
-    public static $file = 'files/server_list.json';
+    public static $file = 'server_list.json';
     /**
      * 状态
      */
@@ -44,10 +44,10 @@ class Server extends Model
             'pagination' => ['total' => 0, 'perPage' => $perPage , 'currentPage' => $currentPage],
         ];
         try {
-            $contents = json_decode(Storage::disk('admin')->get(self::$file), true);
-            $servers = $contents['servers'];
-            $data['list'] = array_slice($servers, ($currentPage-1)*$perPage, $perPage);
-            $data['pagination']['total'] = count($servers);
+            $contents = json_decode(Storage::disk('game')->get(self::$file), true);
+            $games = $contents['games'];
+            $data['list'] = array_slice($games, ($currentPage-1)*$perPage, $perPage);
+            $data['pagination']['total'] = count($games);
         } catch (\Exception $exception) {
             throw $exception;
         }
@@ -71,19 +71,19 @@ class Server extends Model
      */
     public function findOrFail($id)
     {
-        $servers = json_decode(Storage::disk('admin')->get(self::$file), true)['servers'];
+        $games = json_decode(Storage::disk('game')->get(self::$file), true)['games'];
        
-        $server = null;
-        for ($i = 0, $c = count($servers); $i < $c; ++$i) {
-            if ($servers[$i]['id'] == (int)$id) {
-                $server = &$servers[$i];
+        $game = null;
+        for ($i = 0, $c = count($games); $i < $c; ++$i) {
+            if ($games[$i]['id'] == (int)$id) {
+                $game = &$games[$i];
                 break;
             }
         }
-        if (!isset($server)){
+        if (!isset($game)){
             return false;
         }
-        return static::newFromBuilder($server);
+        return static::newFromBuilder($game);
     }
 
     /**
@@ -120,55 +120,55 @@ class Server extends Model
      */
     public function save(array $options = [])
     {
-        $contents = json_decode(Storage::disk('admin')->get(self::$file), true);
-        $servers = &$contents['servers'];
+        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
+        $games = &$contents['games'];
        
-        $server = null;
-        for ($i = 0, $c = count($servers); $i < $c; ++$i) {
-            if ($servers[$i]['id'] == (int)$this->id) {
-                $server = &$servers[$i];
+        $game = null;
+        for ($i = 0, $c = count($games); $i < $c; ++$i) {
+            if ($games[$i]['id'] == (int)$this->id) {
+                $game = &$games[$i];
                 break;
             }
         }
-        if (!isset($server)){
+        if (!isset($game)){
             return false;
         }
         foreach ($this->getAttributes() as $key => $value) {
-            $type = gettype($server[$key]);
-            $server[$key] = $value;
-            settype($server[$key], $type);
+            $type = gettype($game[$key]);
+            $game[$key] = $value;
+            settype($game[$key], $type);
         }
 
-        Storage::disk('admin')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        Storage::disk('game')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         return true;
     }
 
     public static function modify($id, $name, $value)
     {
-        $contents = json_decode(Storage::disk('admin')->get(self::$file), true);
-        $servers = &$contents['servers'];
+        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
+        $games = &$contents['games'];
 
-        $server = null;
-        for ($i = 0, $c = count($servers); $i < $c; ++$i) {
-            if ($servers[$i]['id'] == (int)$id) {
-                $server = &$servers[$i];
+        $game = null;
+        for ($i = 0, $c = count($games); $i < $c; ++$i) {
+            if ($games[$i]['id'] == (int)$id) {
+                $game = &$games[$i];
                 break;
             }
         }
-        if (!isset($server)){
+        if (!isset($game)){
             return false;
         }
-        $type = gettype($server[$name]);
-        $server[$name] = $value;
-        settype($server[$name], $type);
+        $type = gettype($game[$name]);
+        $game[$name] = $value;
+        settype($game[$name], $type);
 
-        Storage::disk('admin')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        Storage::disk('game')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         return 200;
     }
 
     public static function list()
     {
-        $contents = json_decode(Storage::disk('admin')->get(self::$file), true);
-        return $contents['servers'];
+        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
+        return $contents['games'];
     }
 }

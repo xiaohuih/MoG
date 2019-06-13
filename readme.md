@@ -56,7 +56,7 @@ $ chmod -R 775 /var/www/mog/storage
 # 链接存储目录
 $ php artisan storage:link
 # 链接区服目录
-$ ln -s * storage/public/files
+$ ln -s group storage/app/game
 
 # 启动计划程序
 # * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1

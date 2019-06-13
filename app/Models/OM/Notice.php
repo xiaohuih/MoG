@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Notice extends Model
 {
-    public static $file = 'files/notice.json';
+    public static $file = 'notice.json';
     /**
      * The primary key for the model.
      *
@@ -49,7 +49,7 @@ class Notice extends Model
             'pagination' => ['total' => 0, 'perPage' => $perPage , 'currentPage' => $currentPage],
         ];
         try {
-            $contents = Storage::disk('admin')->get(self::$file);
+            $contents = Storage::disk('game')->get(self::$file);
             $data['list'] = json_decode($contents, true);
         } catch (\Exception $exception) {
             throw $exception;
@@ -74,7 +74,7 @@ class Notice extends Model
      */
     public function findOrFail($id)
     {
-        $notices = json_decode(Storage::disk('admin')->get(self::$file), true);
+        $notices = json_decode(Storage::disk('game')->get(self::$file), true);
        
         $notice = null;
         for ($i = 0, $c = count($notices); $i < $c; ++$i) {
@@ -128,7 +128,7 @@ class Notice extends Model
      */
     public function save(array $options = [])
     {
-        $notices = json_decode(Storage::disk('admin')->get(self::$file), true);
+        $notices = json_decode(Storage::disk('game')->get(self::$file), true);
        
         $notice = null;
         for ($i = 0, $c = count($notices); $i < $c; ++$i) {
@@ -146,13 +146,13 @@ class Notice extends Model
             settype($notice[$key], $type);
         }
 
-        Storage::disk('admin')->put(self::$file, json_encode($notices, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        Storage::disk('game')->put(self::$file, json_encode($notices, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         return true;
     }
 
     public static function setProperty($type, $name, $value)
     {
-        $notices = json_decode(Storage::disk('admin')->get(self::$file), true);
+        $notices = json_decode(Storage::disk('game')->get(self::$file), true);
        
         $notice = null;
         for ($i = 0, $c = count($notices); $i < $c; ++$i) {
@@ -168,7 +168,7 @@ class Notice extends Model
         $notice[$name] = $value;
         settype($notice[$name], $vartype);
 
-        Storage::disk('admin')->put(self::$file, json_encode($notices, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        Storage::disk('game')->put(self::$file, json_encode($notices, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         return true;
     }
 }
