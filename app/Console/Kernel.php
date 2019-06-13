@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\OM;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +25,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        // $schedule->command('inspire')
+        //          ->hourly();
+        // $schedule->exec('ls -l')
+        //         ->everyMinute();
+        OM\Schedule::schedule($schedule);
+        OM\ServerStart::schedule($schedule);
     }
 
     /**

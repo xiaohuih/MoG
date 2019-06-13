@@ -47,6 +47,29 @@ class ServerController extends Controller
     }
 
     /**
+     * List interface.
+     *
+     * @return Array
+     */
+    public function list()
+    {
+        $state = Input::get('state');
+
+        $result = [];
+        $servers = OM\Server::list();
+        
+        foreach ($servers as $server) {
+            if (!$state || $server['state'] == $state) {
+                array_push($result, [
+                    "id"=> $server['id'],
+                    "text"=> $server['name']
+                ]);
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Make a grid builder.
      *
      * @return Grid

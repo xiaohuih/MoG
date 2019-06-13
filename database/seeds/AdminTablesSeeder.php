@@ -35,7 +35,7 @@ class AdminTablesSeeder extends Seeder
                     "uri" => NULL,
                     "permission" => "auth.management",
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-25 17:37:21"
+                    "updated_at" => "2019-06-13 14:56:49"
                 ],
                 [
                     "id" => 3,
@@ -46,7 +46,7 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-25 17:37:21"
+                    "updated_at" => "2019-06-13 14:56:49"
                 ],
                 [
                     "id" => 4,
@@ -57,7 +57,7 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-25 17:37:21"
+                    "updated_at" => "2019-06-13 14:56:49"
                 ],
                 [
                     "id" => 5,
@@ -68,7 +68,7 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-25 17:37:21"
+                    "updated_at" => "2019-06-13 14:56:49"
                 ],
                 [
                     "id" => 6,
@@ -79,7 +79,7 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-25 17:37:21"
+                    "updated_at" => "2019-06-13 14:56:49"
                 ],
                 [
                     "id" => 7,
@@ -90,7 +90,7 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-05-25 17:37:21"
+                    "updated_at" => "2019-06-13 14:56:49"
                 ],
                 [
                     "id" => 13,
@@ -249,24 +249,13 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 34,
                     "parent_id" => 33,
-                    "order" => 17,
+                    "order" => 16,
                     "title" => "计划",
                     "icon" => "fa-calendar",
                     "uri" => "om/schedules",
                     "permission" => "om.management",
                     "created_at" => "2019-05-25 15:58:18",
-                    "updated_at" => "2019-05-27 09:49:25"
-                ],
-                [
-                    "id" => 35,
-                    "parent_id" => 33,
-                    "order" => 16,
-                    "title" => "任务",
-                    "icon" => "fa-spinner",
-                    "uri" => "om/jobs",
-                    "permission" => "om.management",
-                    "created_at" => "2019-05-25 15:59:42",
-                    "updated_at" => "2019-05-27 09:49:25"
+                    "updated_at" => "2019-06-13 15:15:37"
                 ],
                 [
                     "id" => 36,
@@ -277,18 +266,7 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "om/servers",
                     "permission" => "om.management",
                     "created_at" => "2019-05-25 16:02:55",
-                    "updated_at" => "2019-05-25 17:37:21"
-                ],
-                [
-                    "id" => 37,
-                    "parent_id" => 0,
-                    "order" => 26,
-                    "title" => "Scheduling",
-                    "icon" => "fa-clock-o",
-                    "uri" => "scheduling",
-                    "permission" => NULL,
-                    "created_at" => "2019-05-25 16:03:43",
-                    "updated_at" => "2019-05-25 17:37:21"
+                    "updated_at" => "2019-06-13 15:15:37"
                 ],
                 [
                     "id" => 38,
@@ -299,7 +277,18 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "om/notices",
                     "permission" => NULL,
                     "created_at" => "2019-05-25 17:37:14",
-                    "updated_at" => "2019-05-27 09:49:25"
+                    "updated_at" => "2019-06-13 15:15:37"
+                ],
+                [
+                    "id" => 39,
+                    "parent_id" => 33,
+                    "order" => 17,
+                    "title" => "开服",
+                    "icon" => "fa-plane",
+                    "uri" => "om/startserver",
+                    "permission" => "om.management",
+                    "created_at" => "2019-06-12 10:04:25",
+                    "updated_at" => "2019-06-13 15:15:37"
                 ]
             ]
         );

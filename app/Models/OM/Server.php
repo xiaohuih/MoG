@@ -163,7 +163,12 @@ class Server extends Model
         settype($server[$name], $type);
 
         Storage::disk('admin')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
-
         return 200;
+    }
+
+    public static function list()
+    {
+        $contents = json_decode(Storage::disk('admin')->get(self::$file), true);
+        return $contents['servers'];
     }
 }

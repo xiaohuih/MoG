@@ -124,9 +124,10 @@ class MailController extends Controller
         $form->text('receivers', trans('game.info.receivers'))->rules(['required', 'regex:/^(\*|\d{1,})(;\d{1,}){0,}$/'])->help(trans('game.helps.receivers'));
         $form->text('title', trans('game.info.title'))->rules('required|max:30');
         $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
-        $form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('nullable|max:255|regex:/^(\d{1,},\d{1,})(;(\d{1,},\d{1,})){0,}$/')->help(trans('game.helps.items'));
+        //$form->textarea('attachments', trans('game.info.attachments'))->rows(3)->rules('nullable|max:255|regex:/^(\d{1,},\d{1,})(;(\d{1,},\d{1,})){0,}$/')->help(trans('game.helps.items'));
         $form->multipleSelect('zones', trans('game.info.zone'))->options('/admin/zones')->rules('required');
         $form->datetime('sendtime', trans('game.info.sendtime'))->help(trans('game.helps.sendtime'));
+        $form->tagsinput('attachments', trans('game.info.attachments'))->rules('nullable|max:255|regex:/^(\d{1,},\d{1,})(;(\d{1,},\d{1,})){0,}$/')->help(trans('game.helps.items'));
         
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

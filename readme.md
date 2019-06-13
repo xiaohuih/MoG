@@ -55,6 +55,13 @@ $ chown -R :www /var/www/mog
 $ chmod -R 775 /var/www/mog/storage
 # 链接存储目录
 $ php artisan storage:link
+# 链接区服目录
+$ ln -s * storage/public/files
+
+# 启动计划程序
+# * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+# 启动任务队列（延时）
+$ php artisan queue:work -daemon
 
 # 配置站点
 $ cp nginx.conf /etc/nginx/conf.d/mog.conf
