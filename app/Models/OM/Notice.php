@@ -141,9 +141,9 @@ class Notice extends Model
             return false;
         }
         foreach ($this->getAttributes() as $key => $value) {
-            $type = gettype($server[$key]);
-            $server[$key] = $value;
-            settype($server[$key], $type);
+            $type = gettype($notice[$key]);
+            $notice[$key] = $value;
+            settype($notice[$key], $type);
         }
 
         Storage::disk('admin')->put(self::$file, json_encode($notices, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
