@@ -79,7 +79,9 @@ class SearchController extends Controller
         $grid->flag(trans('game.info.flag'));
         $grid->declaration(trans('game.info.declaration'))->editable();
         $grid->joinlimit(trans('game.info.joinlimit'));
-        $grid->membercount(trans('game.info.membercount'));
+        $grid->membercount(trans('game.info.membercount'))->display(function ($link) {
+            return "<a href='/admin/guild/members?&id={$this->id}'>{$link}</a>";
+        });
         $grid->leader(trans('game.info.leader'))->display(function ($link) {
             return "<a href='/admin/player/search?&id={$link}'>{$link}</a>";
         });
