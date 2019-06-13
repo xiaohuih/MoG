@@ -122,7 +122,8 @@ return [
         'interval'      => '单为（秒），立即发送填0',
         'gcode_group'   => '玩家同一礼包组只能领取一次，0：无限制',
         'sendtime'      => '不填则代表立即发送',
-        'opentime'      => '不填则代表需要手动开启'
+        'opentime'      => '不填则代表需要手动开启',
+        'nolimit'       => '不填则代表无限制'
     ],
     'servers'               => [
         'client'        => '客户端',

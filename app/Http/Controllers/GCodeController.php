@@ -162,10 +162,10 @@ class GCodeController extends Controller
         $form->select('type', trans('game.info.type'))->options($options)->rules('required');
         $form->randpassword('key', trans('game.info.key'))->length(8)->rules('required|alpha_num|size:8');
         $form->text('count', trans('game.info.count'))->rules('required|regex:/^\d{1,6}$/');
-        $form->text('platform', trans('game.info.platform'))->rules('nullable|regex:/^\d+$/');
-        $form->text('group', trans('game.info.group'))->rules('nullable|regex:/^\d+$/');
-        $form->datetime('begintime', trans('game.info.begintime'));
-        $form->datetime('endtime', trans('game.info.endtime'));
+        $form->text('platform', trans('game.info.platform'))->rules('nullable|regex:/^\d+$/')->help(trans('game.helps.nolimit'));
+        $form->text('group', trans('game.info.group'))->rules('nullable|regex:/^\d+$/')->help(trans('game.helps.nolimit'));
+        $form->datetime('begintime', trans('game.info.begintime'))->help(trans('game.helps.nolimit'));
+        $form->datetime('endtime', trans('game.info.endtime'))->help(trans('game.helps.nolimit'));
         $form->embeds('mail', trans('game.info.mail'), function ($form) {
             $form->text('title', trans('game.info.title'))->rules('required|max:30');
             $form->textarea('content', trans('game.info.content'))->rows(3)->rules('required|max:255');
