@@ -12,6 +12,7 @@ return [
     'pet'                   => '精灵',
     'item'                  => '道具',
     'script'                => '脚本',
+    'schedule'              => '计划',
     'startserver'           => '开服',
     'yes'                   => '是',
     'no'                    => '否',
