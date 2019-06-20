@@ -46,5 +46,7 @@ class StartServerCommand extends Command
         // 打开入口
         Jobs\StartServerEntranceJob::dispatch($zone)
             ->delay(now()->addMinutes(1));
+            
+        $this->info(sprintf("Start server {%d} by version {%s}.", $zone, $version));
     }
 }

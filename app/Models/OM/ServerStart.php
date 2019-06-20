@@ -23,11 +23,9 @@ class ServerStart extends Model
         $schedules = self::all();
         
         foreach ($schedules as $key => $value) {
-            if ($value['starttime'] && ($value['status'] && $value['status'] == 1)) {
+            if ($value['starttime'] && empty($value['status'])) {
                 $cron = Schedule::formatTimestampToCron(strtotime($value['starttime']));
-                $schedule->command('game:start', [$value['zone']])->cron($cron);
-                
-                self::find($value['id'])->update(['status' => 1]);
+                $schedule->command('game:schedule-start', [$value['id']])->cron($cron);
             }
         }
     }

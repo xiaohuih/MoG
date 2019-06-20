@@ -3,23 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Jobs;
+use App\Models\OM;
 
-class StopServerCommand extends Command
+class ScheduleStartServerCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'game:stop {zone=*}';
+    protected $signature = 'game:schedule-start {id}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Stop a specific game zone';
+    protected $description = 'Start a specific game zone by schedule';
 
     /**
      * Create a new command instance.
@@ -38,17 +38,11 @@ class StopServerCommand extends Command
      */
     public function handle()
     {
-        $zone = $this->argument('zone');
+        $id = $this->argument('id');
 
-        // 关闭入口
-        if ("*" == $zone) {
-            Jobs\StopServerEntranceJob::dispatch($zone);
-        } else {
-            Jobs\StopMainServerEntranceJob::dispatch();
-        }
-        // 关服
-        Jobs\StopServerJob::dispatch($zone);
-        
-        $this->info(sprintf("Stop server %d.", $zone));
+        $schedule = OM\ServerStart::findOrFail($id);
+        $schedule->start();
+
+        $this->info(sprintf("Start server by schedule %d.", $id));
     }
 }
