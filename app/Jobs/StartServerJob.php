@@ -34,7 +34,7 @@ class StartServerJob implements ShouldQueue
     public function handle()
     {
         Log::debug(sprintf("Start server {%s} {%s}", $this->zone, $this->version));
-        $shell = sprintf("salt '*' state.apply game.start pillar='{\"zone\": \"%s\", \"version\": \"%s\"}'", $this->zone, $this->version);
+        $shell = sprintf("sudo salt '*' state.apply game.start pillar='{\"zone\": \"%s\", \"version\": \"%s\"}'", $this->zone, $this->version);
         exec($shell, $result, $status);
         Log::debug($result);
     }

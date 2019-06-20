@@ -31,7 +31,7 @@ class StopServerJob implements ShouldQueue
     public function handle()
     {
         Log::debug(sprintf("Stop server {%s}", $this->zone, $this->version));
-        $shell = sprintf("salt '*' state.apply game.stop pillar='{\"zone\": \"%s\"}'", $this->zone);
+        $shell = sprintf("sudo salt '*' state.apply game.stop pillar='{\"zone\": \"%s\"}'", $this->zone);
         exec($shell, $result, $status);
         Log::debug($result);
     }
