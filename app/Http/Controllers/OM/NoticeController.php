@@ -131,7 +131,7 @@ class NoticeController extends Controller
         
         $form->display('type', 'ID');
         $form->text('title', trans('game.info.title'))->rules('required|max:128');
-        $form->textarea('content', trans('game.info.content'))->rows(5)->rules('required|max:2048');
+        $form->textarea('content', trans('game.info.content'))->rows(5)->rules('required|max:4096');
 
         return $form;
     }
