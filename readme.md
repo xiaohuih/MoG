@@ -27,6 +27,20 @@ $ systemctl enable mariadb
 $ mysqladmin -u root password '123456'
 
 ##############################################
+# PHP 7.2
+##############################################
+# 源
+$ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+# 安装
+$ yum -y install php72w php72w-fpm php72w-devel 
+# 安装扩展
+$ yum -y install php72w-pdo php72w-mbstring php72w-xml php72w-ctype php72w-bcmath php72w-gd php72w-mysql
+# 启动
+$ systemctl start php-fpm
+# 设置开机启动
+$ systemctl enable php-fpm
+
+##############################################
 # Composer
 ##############################################
 # 安装
