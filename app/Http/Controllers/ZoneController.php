@@ -22,6 +22,7 @@ class ZoneController extends Controller
             ]
         ]);
         $zones = json_decode($res->getBody(), true);
+        sort($zones);
         
         $result = ['items' => [], 'selected' => 0];
         if ($zones) {
@@ -45,6 +46,7 @@ class ZoneController extends Controller
             ]
         ]);
         $zones = json_decode($res->getBody(), true);
+        sort($zones);
 
         $result = [];
         array_push($result, [
