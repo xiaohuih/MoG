@@ -84,7 +84,9 @@ class NoticeController extends Controller
         $grid->model()->orderBy('updated_at', 'desc');
         // 列
         $grid->id('ID');
-        $grid->content(trans('game.info.content'));
+        $grid->content(trans('game.info.content'))->display(function($text) {
+            return str_limit($text, 100, '...');
+        });
         $grid->starttime(trans('game.info.starttime'))->sortable();
         $grid->endtime(trans('game.info.endtime'))->sortable();
         $grid->interval(trans('game.info.interval'));

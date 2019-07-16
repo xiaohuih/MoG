@@ -85,13 +85,21 @@ class MailController extends Controller
         // 列
         $grid->id('ID');
         $grid->title(trans('game.info.title'));
-        $grid->content(trans('game.info.content'));
-        $grid->attachments(trans('game.info.attachments'));
+        $grid->content(trans('game.info.content'))->display(function($text) {
+            return str_limit($text, 100, '...');
+        });
+        $grid->attachments(trans('game.info.attachments'))->display(function($text) {
+            return str_limit($text, 15, '...');
+        });
         $options = collect(Mail::$types)->map(function ($item) {
             return trans('game.mails.' . $item);
         })->all();
-        $grid->receivers(trans('game.info.receivers'));
-        $grid->zones(trans('game.info.zone'));
+        $grid->receivers(trans('game.info.receivers'))->display(function($text) {
+            return str_limit($text, 15, '...');
+        });
+        $grid->zones(trans('game.info.zone'))->display(function($text) {
+            return str_limit($text, 15, '...');
+        });
         $grid->sendtime(trans('game.info.sendtime'))->sortable();
         $grid->status(trans('game.info.status'))->display(function ($status) {
             if ($status == 1) {
