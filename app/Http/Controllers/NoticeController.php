@@ -90,7 +90,9 @@ class NoticeController extends Controller
         $grid->starttime(trans('game.info.starttime'))->sortable();
         $grid->endtime(trans('game.info.endtime'))->sortable();
         $grid->interval(trans('game.info.interval'));
-        $grid->zones(trans('game.info.zone'));
+        $grid->zones(trans('game.info.zone'))->display(function($text) {
+            return str_limit($text, 15, '...');
+        });
         $grid->status(trans('game.info.status'))->display(function ($status) {
             if ($status == 1) {
                 $name = trans('game.info.sent');
