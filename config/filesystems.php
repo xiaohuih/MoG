@@ -67,6 +67,11 @@ return [
             'root' => storage_path('app/game'),
         ],
 
+        'salt' => [
+            'driver' => 'local',
+            'root' => storage_path('app/salt'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

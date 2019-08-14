@@ -166,6 +166,15 @@ class Server extends Model
         return 200;
     }
 
+    public static function modifyMaxVersion($version)
+    {
+        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
+        $contents['version_max'] = $version;
+
+        Storage::disk('game')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        return 200;
+    }
+
     public static function list()
     {
         $contents = json_decode(Storage::disk('game')->get(self::$file), true);

@@ -40,6 +40,7 @@ Route::group([
     $router->resource('om/schedules', OM\ScheduleController::class);
     $router->resource('om/notices', OM\NoticeController::class);
     $router->resource('om/servers', OM\ServerController::class);
+    $router->resource('om/patches', OM\PatchController::class);
     $router->resource('om/startserver', OM\ServerStartController::class);
     $router->get('om/server/list', 'OM\ServerController@list');
 });

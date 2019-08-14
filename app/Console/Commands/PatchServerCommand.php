@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Jobs;
 
-class StopServerCommand extends Command
+class PatchServerCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'game:stop {zone=*}';
+    protected $signature = 'game:patch {zone} {sversion} {tversion=0.0.0.0}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Stop a specific game zone';
+    protected $description = 'Patch to a specific game zone';
 
     /**
      * Create a new command instance.
@@ -39,16 +39,12 @@ class StopServerCommand extends Command
     public function handle()
     {
         $zone = $this->argument('zone');
+        $sversion = $this->argument('sversion');
+        $tversion = $this->argument('tversion');
 
-        // 关闭入口
-        if ("*" == $zone) {
-            Jobs\StopServerEntranceJob::dispatch($zone);
-        } else {
-            Jobs\StopMainServerEntranceJob::dispatch();
-        }
-        // 关服
-        Jobs\StopServerJob::dispatch($zone);
-        
-        $this->info(sprintf("Stop server %s.", $zone));
+        // 补丁
+        Jobs\PatchServerJob::dispatch($zone, $sversion, $tversion);
+            
+        $this->info(sprintf("patch server {%s} from version {%s} to {%s}.", $zone, $tversion, $sversion));
     }
 }

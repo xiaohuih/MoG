@@ -1,0 +1,7 @@
+{
+    "log_view_flag"        : 1,
+	"log_view_flag_des"    : "手势开启日志界面的标志位: 1 打开 0 关闭",
+	"gm_view_flag"        : 1,
+	"gm_view_flag_des"    : "GM界面的标志位: 1 打开 0 关闭",
+	"battle_replay_ip": "http://139.196.211.77/Replay_DM/",
+}

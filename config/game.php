@@ -11,4 +11,8 @@ return [
     |
     */
     'url' => env('GAME_URL', 'http://192.168.52.220:8020/gm'),
+
+    'salt' => [
+        'root' => env('SALT_ROOT', '/data/salt'),
+    ],
 ];

@@ -1,0 +1,19 @@
+{
+	"battle_error_upload_ip": "192.168.51.222",
+	"config_type": "main",
+	"config_type_des": "AB包变体配置:",
+	"default_config_type": "main",
+	"battle_replay_ip": "http://139.196.211.77/Replay_DM/",
+	"channels": [{
+		"sdk_id": 1,
+		"channel_id": 81001,
+		"pay_callback_url": "120.76.63.193:8081/agamerecharge"
+	}],
+	"res_update_config": {
+		"show_image_type": 0,
+		"show_btn_type": 0,
+		"show_btn_url1": "",
+		"show_btn_url2": ""
+	},
+	"languages": ["Chinese"]
+}

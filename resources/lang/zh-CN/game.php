@@ -11,9 +11,9 @@ return [
     'gcode'                 => '礼包码',
     'pet'                   => '精灵',
     'item'                  => '道具',
-    'script'                => '脚本',
     'schedule'              => '计划',
     'startserver'           => '开服',
+    'patch'                 => '补丁',
     'yes'                   => '是',
     'no'                    => '否',
     'info'                  => [
@@ -89,6 +89,8 @@ return [
         'opentime'      => '开启时间',
         'executed'      => '已执行',
         'unexecuted'    => '未执行',
+        'script'        => '脚本',
+        'file'          => '文件'
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',

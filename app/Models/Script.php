@@ -23,15 +23,20 @@ class Script extends Model
     }
 
     /**
-     * 发送公告
+     * 执行脚本
      */
     public function perform()
     {
+        return self::performScript($this->content, $this->server, $this->zones);
+    }
+
+    public static function performScript($script, $server, $zones)
+    {
         $cmd = 'PERFORM_SCRIPTCMD';
         $params = [
-            'type' => $this->server,
-            'content' => $this->content,
-            'zones' => $this->zones,
+            'type' => $server,
+            'content' => $script,
+            'zones' => $zones,
         ];
         $client = new Client();
         $res = $client->request('GET', config('game.url'), [

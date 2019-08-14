@@ -37,6 +37,10 @@ class StartServerJob implements ShouldQueue
         $shell = sprintf("sudo salt '*' state.apply game.start pillar='{\"zone\": \"%s\", \"version\": \"%s\"}'", $this->zone, $this->version);
         exec($shell, $result, $status);
         Log::debug($result);
+        if ($status != 0) {
+            Log::error(sprintf("Start server {%s} {%s} failed", $this->zone, $this->version));
+            return;
+        }
     }
     
     /**
