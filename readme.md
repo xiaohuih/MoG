@@ -58,6 +58,8 @@ $ composer install
 $ cp .env.example .env
 # 生成KEY
 $ php artisan key:generate
+# 拷贝资源
+$ php artisan aetherupload:publish
 
 # 创建数据库
 $ MySql> CREATE DATABASE IF NOT EXISTS mog default charset utf8 COLLATE utf8_general_ci;
