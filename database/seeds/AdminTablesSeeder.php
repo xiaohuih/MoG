@@ -24,73 +24,73 @@ class AdminTablesSeeder extends Seeder
                     "uri" => "/",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-04-17 07:15:38"
+                    "updated_at" => "2019-04-17 15:15:38"
                 ],
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 20,
+                    "order" => 21,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
                     "permission" => "auth.management",
                     "created_at" => NULL,
-                    "updated_at" => "2019-06-13 14:56:49"
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 21,
+                    "order" => 22,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-06-13 14:56:49"
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 22,
+                    "order" => 23,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-06-13 14:56:49"
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 23,
+                    "order" => 24,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-06-13 14:56:49"
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 24,
+                    "order" => 25,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-06-13 14:56:49"
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 25,
+                    "order" => 26,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-06-13 14:56:49"
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 13,
@@ -100,8 +100,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-user-md",
                     "uri" => "admin/player",
                     "permission" => "player.management",
-                    "created_at" => "2019-04-17 06:40:44",
-                    "updated_at" => "2019-05-16 09:18:51"
+                    "created_at" => "2019-04-17 14:40:44",
+                    "updated_at" => "2019-05-16 17:18:51"
                 ],
                 [
                     "id" => 14,
@@ -111,8 +111,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-search",
                     "uri" => "player/search",
                     "permission" => NULL,
-                    "created_at" => "2019-04-17 06:41:54",
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "created_at" => "2019-04-17 14:41:54",
+                    "updated_at" => "2019-05-14 09:38:30"
                 ],
                 [
                     "id" => 15,
@@ -122,8 +122,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-list-ol",
                     "uri" => "player/ranks",
                     "permission" => NULL,
-                    "created_at" => "2019-04-17 06:42:50",
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "created_at" => "2019-04-17 14:42:50",
+                    "updated_at" => "2019-05-14 09:38:30"
                 ],
                 [
                     "id" => 16,
@@ -133,8 +133,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-bank",
                     "uri" => "admin/guild",
                     "permission" => "guild.management",
-                    "created_at" => "2019-04-17 06:47:21",
-                    "updated_at" => "2019-05-16 09:18:33"
+                    "created_at" => "2019-04-17 14:47:21",
+                    "updated_at" => "2019-05-16 17:18:33"
                 ],
                 [
                     "id" => 17,
@@ -144,8 +144,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-search",
                     "uri" => "guild/search",
                     "permission" => NULL,
-                    "created_at" => "2019-04-17 06:48:13",
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "created_at" => "2019-04-17 14:48:13",
+                    "updated_at" => "2019-05-14 09:38:30"
                 ],
                 [
                     "id" => 18,
@@ -155,8 +155,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-list-ol",
                     "uri" => "guild/ranks",
                     "permission" => NULL,
-                    "created_at" => "2019-04-17 06:48:53",
-                    "updated_at" => "2019-05-14 01:38:30"
+                    "created_at" => "2019-04-17 14:48:53",
+                    "updated_at" => "2019-05-14 09:38:30"
                 ],
                 [
                     "id" => 19,
@@ -166,8 +166,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-envelope",
                     "uri" => "mail",
                     "permission" => "mail.managerment",
-                    "created_at" => "2019-04-17 06:52:41",
-                    "updated_at" => "2019-05-16 09:17:55"
+                    "created_at" => "2019-04-17 14:52:41",
+                    "updated_at" => "2019-05-16 17:17:55"
                 ],
                 [
                     "id" => 20,
@@ -177,8 +177,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-bullhorn",
                     "uri" => "notice",
                     "permission" => "notice.management",
-                    "created_at" => "2019-04-17 06:54:36",
-                    "updated_at" => "2019-05-16 09:18:09"
+                    "created_at" => "2019-04-17 14:54:36",
+                    "updated_at" => "2019-05-16 17:18:09"
                 ],
                 [
                     "id" => 21,
@@ -188,8 +188,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-briefcase",
                     "uri" => "gcode",
                     "permission" => "gcode.management",
-                    "created_at" => "2019-04-17 06:58:37",
-                    "updated_at" => "2019-05-16 09:18:19"
+                    "created_at" => "2019-04-17 14:58:37",
+                    "updated_at" => "2019-05-16 17:18:19"
                 ],
                 [
                     "id" => 28,
@@ -199,8 +199,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-linux",
                     "uri" => "player/pets",
                     "permission" => NULL,
-                    "created_at" => "2019-04-29 09:28:09",
-                    "updated_at" => "2019-04-30 04:53:53"
+                    "created_at" => "2019-04-29 17:28:09",
+                    "updated_at" => "2019-04-30 12:53:53"
                 ],
                 [
                     "id" => 29,
@@ -210,8 +210,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-shopping-bag",
                     "uri" => "player/items",
                     "permission" => NULL,
-                    "created_at" => "2019-04-29 10:36:40",
-                    "updated_at" => "2019-04-30 04:53:53"
+                    "created_at" => "2019-04-29 18:36:40",
+                    "updated_at" => "2019-04-30 12:53:53"
                 ],
                 [
                     "id" => 30,
@@ -221,8 +221,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-users",
                     "uri" => "guild/members",
                     "permission" => NULL,
-                    "created_at" => "2019-05-05 03:23:32",
-                    "updated_at" => "2019-05-05 03:33:30"
+                    "created_at" => "2019-05-05 11:23:32",
+                    "updated_at" => "2019-05-05 11:33:30"
                 ],
                 [
                     "id" => 32,
@@ -232,8 +232,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-scribd",
                     "uri" => "script",
                     "permission" => "script.management",
-                    "created_at" => "2019-05-13 03:40:38",
-                    "updated_at" => "2019-05-16 09:17:31"
+                    "created_at" => "2019-05-13 11:40:38",
+                    "updated_at" => "2019-05-16 17:17:31"
                 ],
                 [
                     "id" => 33,
@@ -243,8 +243,8 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-opera",
                     "uri" => NULL,
                     "permission" => "om.management",
-                    "created_at" => "2019-05-25 15:57:21",
-                    "updated_at" => "2019-05-25 16:01:47"
+                    "created_at" => "2019-05-25 23:57:21",
+                    "updated_at" => "2019-05-26 00:01:47"
                 ],
                 [
                     "id" => 34,
@@ -254,30 +254,30 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-calendar",
                     "uri" => "om/schedules",
                     "permission" => "om.management",
-                    "created_at" => "2019-05-25 15:58:18",
-                    "updated_at" => "2019-06-13 15:15:37"
+                    "created_at" => "2019-05-25 23:58:18",
+                    "updated_at" => "2019-06-13 23:15:37"
                 ],
                 [
                     "id" => 36,
                     "parent_id" => 33,
-                    "order" => 19,
+                    "order" => 20,
                     "title" => "区服列表",
                     "icon" => "fa-navicon",
                     "uri" => "om/servers",
                     "permission" => "om.management",
-                    "created_at" => "2019-05-25 16:02:55",
-                    "updated_at" => "2019-06-13 15:15:37"
+                    "created_at" => "2019-05-26 00:02:55",
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 38,
                     "parent_id" => 33,
-                    "order" => 18,
+                    "order" => 19,
                     "title" => "公告",
                     "icon" => "fa-bullhorn",
                     "uri" => "om/notices",
                     "permission" => NULL,
-                    "created_at" => "2019-05-25 17:37:14",
-                    "updated_at" => "2019-06-13 15:15:37"
+                    "created_at" => "2019-05-26 01:37:14",
+                    "updated_at" => "2019-08-12 10:25:47"
                 ],
                 [
                     "id" => 39,
@@ -287,8 +287,19 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-plane",
                     "uri" => "om/startserver",
                     "permission" => "om.management",
-                    "created_at" => "2019-06-12 10:04:25",
-                    "updated_at" => "2019-06-13 15:15:37"
+                    "created_at" => "2019-06-12 18:04:25",
+                    "updated_at" => "2019-06-13 23:15:37"
+                ],
+                [
+                    "id" => 40,
+                    "parent_id" => 33,
+                    "order" => 18,
+                    "title" => "补丁",
+                    "icon" => "fa-plus",
+                    "uri" => "/om/patches",
+                    "permission" => "om.management",
+                    "created_at" => "2019-08-12 10:25:35",
+                    "updated_at" => "2019-08-12 10:35:57"
                 ]
             ]
         );
@@ -347,8 +358,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "zone.setting",
                     "http_method" => "",
                     "http_path" => "/zone*",
-                    "created_at" => "2019-05-16 08:50:06",
-                    "updated_at" => "2019-05-16 09:10:23"
+                    "created_at" => "2019-05-16 16:50:06",
+                    "updated_at" => "2019-05-16 17:10:23"
                 ],
                 [
                     "id" => 8,
@@ -356,8 +367,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "player.management",
                     "http_method" => "",
                     "http_path" => "/player*",
-                    "created_at" => "2019-05-16 08:59:41",
-                    "updated_at" => "2019-05-16 09:08:03"
+                    "created_at" => "2019-05-16 16:59:41",
+                    "updated_at" => "2019-05-16 17:08:03"
                 ],
                 [
                     "id" => 9,
@@ -365,8 +376,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "guild.management",
                     "http_method" => "",
                     "http_path" => "/guild*",
-                    "created_at" => "2019-05-16 09:06:36",
-                    "updated_at" => "2019-05-16 09:08:11"
+                    "created_at" => "2019-05-16 17:06:36",
+                    "updated_at" => "2019-05-16 17:08:11"
                 ],
                 [
                     "id" => 10,
@@ -374,8 +385,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "mail.managerment",
                     "http_method" => "",
                     "http_path" => "/mail*",
-                    "created_at" => "2019-05-16 09:07:49",
-                    "updated_at" => "2019-05-16 09:07:49"
+                    "created_at" => "2019-05-16 17:07:49",
+                    "updated_at" => "2019-05-16 17:07:49"
                 ],
                 [
                     "id" => 11,
@@ -383,8 +394,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "notice.management",
                     "http_method" => "",
                     "http_path" => "/notice*",
-                    "created_at" => "2019-05-16 09:08:39",
-                    "updated_at" => "2019-05-16 09:08:39"
+                    "created_at" => "2019-05-16 17:08:39",
+                    "updated_at" => "2019-05-16 17:08:39"
                 ],
                 [
                     "id" => 12,
@@ -392,8 +403,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "gcode.management",
                     "http_method" => "",
                     "http_path" => "/gcode*",
-                    "created_at" => "2019-05-16 09:09:10",
-                    "updated_at" => "2019-05-16 09:09:10"
+                    "created_at" => "2019-05-16 17:09:10",
+                    "updated_at" => "2019-05-16 17:09:10"
                 ],
                 [
                     "id" => 13,
@@ -401,8 +412,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "script.management",
                     "http_method" => "",
                     "http_path" => "/script*",
-                    "created_at" => "2019-05-16 09:09:36",
-                    "updated_at" => "2019-05-16 09:09:36"
+                    "created_at" => "2019-05-16 17:09:36",
+                    "updated_at" => "2019-05-16 17:09:36"
                 ],
                 [
                     "id" => 14,
@@ -410,8 +421,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "om.management",
                     "http_method" => "",
                     "http_path" => "/om*",
-                    "created_at" => "2019-05-25 16:00:39",
-                    "updated_at" => "2019-05-25 16:01:24"
+                    "created_at" => "2019-05-26 00:00:39",
+                    "updated_at" => "2019-05-26 00:01:24"
                 ],
                 [
                     "id" => 15,
@@ -419,8 +430,8 @@ class AdminTablesSeeder extends Seeder
                     "slug" => "ext.scheduling",
                     "http_method" => NULL,
                     "http_path" => "/scheduling*",
-                    "created_at" => "2019-05-25 16:03:43",
-                    "updated_at" => "2019-05-25 16:03:43"
+                    "created_at" => "2019-05-26 00:03:43",
+                    "updated_at" => "2019-05-26 00:03:43"
                 ]
             ]
         );
@@ -432,22 +443,22 @@ class AdminTablesSeeder extends Seeder
                     "id" => 1,
                     "name" => "Administrator",
                     "slug" => "administrator",
-                    "created_at" => "2019-03-12 08:39:11",
-                    "updated_at" => "2019-03-12 08:39:11"
+                    "created_at" => "2019-03-12 16:39:11",
+                    "updated_at" => "2019-03-12 16:39:11"
                 ],
                 [
                     "id" => 2,
                     "name" => "Development Engineer",
                     "slug" => "dev",
-                    "created_at" => "2019-05-16 08:45:20",
-                    "updated_at" => "2019-05-16 08:45:43"
+                    "created_at" => "2019-05-16 16:45:20",
+                    "updated_at" => "2019-05-16 16:45:43"
                 ],
                 [
                     "id" => 3,
                     "name" => "Operators",
                     "slug" => "ops",
-                    "created_at" => "2019-05-16 09:12:11",
-                    "updated_at" => "2019-05-16 09:12:11"
+                    "created_at" => "2019-05-16 17:12:11",
+                    "updated_at" => "2019-05-16 17:12:11"
                 ]
             ]
         );
