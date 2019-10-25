@@ -65,7 +65,7 @@ class GCode extends Model
         while ($num > 0 || strlen($str) < $length) {
             $i = $num % $baseLength;
             $str = $str . substr(self::R, $i, 1);
-            $num = (int)(($num - 1) / $baseLength);
+            $num = (int)(($num - $i) / $baseLength);
         }
         return $str;
     }
