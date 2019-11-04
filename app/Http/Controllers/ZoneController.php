@@ -21,7 +21,7 @@ class ZoneController extends Controller
                 'CmdId' => static::$cmd
             ]
         ]);
-        $zones = json_decode($res->getBody(), true);
+        $zones = json_decode($res->getBody(), true) ?? [];
         sort($zones);
         
         $result = ['items' => [], 'selected' => 0];
