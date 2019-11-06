@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
-use App\Exports\BaseExport;
-use Maatwebsite\Excel\Facades\Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class GCode extends Model
 {
@@ -151,26 +150,22 @@ class GCode extends Model
     /**
      * 生成码
      */
-    public function generate()
-    {
-        $version = $this->baseEncode(self::realId((int)$this->id), self::kVersionLenth);
-        $codes = [];
-        $codesDict = [];
-        for ($i = 0; $i < $this->count; $i++) {
-            $rand = $this->randCode(self::kRandCodeLength, $codesDict);
-            $sign = $this->baseEncode(crc32($version.$rand.$this->key) & 0xFFFFFFFF, self::kSignatureLenth);
-            $code = $version.$rand.$sign;
-            
-            array_push($codes, [$code]);
-        }
-        return $codes;
-    }
-
-    /**
-     * 生成码
-     */
     public function export()
     {
-        return Excel::download(new BaseExport(collect($this->generate())), $this->name.'.xlsx');
+        $model = $this;
+        function gcodesGenerator($model) {
+            $version = $model->baseEncode(GCode::realId((int)$model->id), GCode::kVersionLenth);
+            $codesDict = [];
+            for ($i = 0; $i < $model->count; $i++) {
+                $rand = $model->randCode(GCode::kRandCodeLength, $codesDict);
+                $sign = $model->baseEncode(crc32($version.$rand.$model->key) & 0xFFFFFFFF, GCode::kSignatureLenth);
+                $code = $version.$rand.$sign;
+                yield [$code];
+            }
+        }
+        
+        set_time_limit(0);
+        // Export consumes only a few MB, even with 10M+ rows.
+        return (new FastExcel(gcodesGenerator($model)))->withoutHeaders()->download($this->name.'.xlsx');
     }
 }
