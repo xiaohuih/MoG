@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Player;
 
+use App\Admin\Extensions\Grid\ConfirmButton;
 use App\Http\Controllers\Controller;
 use App\Models\Player;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
+use Illuminate\Support\Facades\Input;
 
 class ItemController extends Controller
 {
@@ -50,12 +52,34 @@ class ItemController extends Controller
             $filter->like('name', trans('game.info.name'));
         });
         // 行操作
-        $grid->disableActions();
+        $grid->actions(function ($actions) {
+            $actions->disableEdit();
+            $actions->disableView();
+            $actions->disableDelete();
+            $actions->append(new ConfirmButton($actions->getResource(), sprintf("%d_%d", $actions->row['player'], $actions->getRouteKey()), 'remove', 'fa-trash'));
+        });
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
         $grid->count(trans('game.info.count'));
 
         return $grid;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        if (Input::get('remove')) {
+            $params = explode("_", $id);
+            return Player\Item::remove($params[0], $params[1]);
+        } else {
+            return $this->form()->update($id);
+        }
     }
 }

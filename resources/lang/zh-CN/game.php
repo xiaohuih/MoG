@@ -102,6 +102,7 @@ return [
         'perform'       => '执行',
         'download'      => '下载',
         'start'         => '开启',
+        'remove'        => '删除'
     ],
     'ranks'                 => [
         'level'         => '等级',

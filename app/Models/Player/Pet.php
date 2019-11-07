@@ -51,6 +51,11 @@ class Pet extends Model
                 ]
             ]);
             $data = json_decode($res->getBody(), true);
+            $id = $data['id'] ?? 0;
+            $data['list'] = collect($data['list'])->map(function($item) use ($id) {
+                $item['player'] = $id;
+                return $item;
+            })->all();
         } else {
             $data = [
                 'list' => [],
@@ -66,6 +71,33 @@ class Pet extends Model
         ]);
     }
     
+    /**
+     * 删除宠物
+     *
+     * @param int $id
+     * @param int $pet_id
+     */
+    public static function remove($id, $pet_id)
+    {
+        $cmd = 'REMOVE_PLAYER_PET';
+        $params = [
+            'id' => (int)$id,
+            'pet_id' => (int)$pet_id
+        ];
+        $client = new Client();
+        $res = $client->request('GET', config('game.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd,
+                'ZoneId' => Game::getZone(),
+                'params' => json_encode([$cmd, $params])
+            ]
+        ]);
+        $data = json_decode($res->getBody(), true);
+
+        return $data;
+    }
+
     /**
      * Add a basic where clause to the query.
      *
