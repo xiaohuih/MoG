@@ -20,14 +20,6 @@ class Products extends Model
      */
     // protected $primaryKey = 'ids';
     /**
-     * 类型
-     */
-    // public static $types = [
-    //     1 => ['name' => 'product_ios', 'switch' => true],              // 提审服
-    //     100 => ['name' => 'product_ios_100', 'switch' => true],         // 提审服100
-    //     200 => ['name' => 'product_ios_200', 'switch' => true],         // 提审服200
-    // ];
-    /**
      * Paginate the given query.
      *
      * @param  int  $perPage

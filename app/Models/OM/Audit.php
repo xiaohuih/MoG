@@ -13,14 +13,7 @@ use Illuminate\Support\Str;
 class Audit extends Model
 {
     public static $file = 'package.json';
-    /**
-     * 类型
-     */
-    public static $types = [
-        1 => ['name' => 'audit_ios', 'switch' => true],              // 提审服
-        100 => ['name' => 'audit_ios_100', 'switch' => true],         // 提审服100
-        200 => ['name' => 'audit_ios_200', 'switch' => true],         // 提审服200
-    ];
+
     /**
      * Paginate the given query.
      *
