@@ -126,7 +126,7 @@ class AuditController extends Controller
         
         $form->display('id', 'ID');
         $form->text('name', trans('game.info.title'))->rules('required|max:128');
-        $form->text('packages', trans('game.info.package'))->rules(['required', 'regex:/^((\w){1,}\.*){1,}\@{0,1}\w{1,}((,((\w){1,}\.*){1,})\@{0,1}\w{1,}){0,}$/']);
+        $form->text('packages', trans('game.info.package'))->rules(['nullable', 'regex:/^((\w){1,}\.*){1,}\@{0,1}\w{1,}((,((\w){1,}\.*){1,})\@{0,1}\w{1,}){0,}$/']);
 
         return $form;
     }
