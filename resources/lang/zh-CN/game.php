@@ -14,6 +14,8 @@ return [
     'schedule'              => '计划',
     'startserver'           => '开服',
     'patch'                 => '补丁',
+    'audit'                 => '提审',
+    'products'              => '商品',
     'yes'                   => '是',
     'no'                    => '否',
     'info'                  => [
@@ -90,7 +92,9 @@ return [
         'executed'      => '已执行',
         'unexecuted'    => '未执行',
         'script'        => '脚本',
-        'file'          => '文件'
+        'file'          => '文件',
+        'surl'          => '链接',
+        'package'       => '包名'
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',
