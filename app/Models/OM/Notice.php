@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Notice extends Model
 {
-    public static $file = 'notice.json';
+    public static $file = 'group/notice.json';
     /**
      * The primary key for the model.
      *

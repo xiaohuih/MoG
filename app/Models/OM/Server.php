@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Server extends Model
 {
-    public static $file = 'server_list.json';
+    public static $file = 'group/server_list.json';
     /**
      * 状态
      */
