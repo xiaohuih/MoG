@@ -51,6 +51,11 @@ class Item extends Model
                 ]
             ]);
             $data = json_decode($res->getBody(), true);
+            $id = $data['id'] ?? 0;
+            $data['list'] = collect($data['list'])->map(function($item) use ($id) {
+                $item['player'] = $id;
+                return $item;
+            })->all();
         } else {
             $data = [
                 'list' => [],
@@ -66,6 +71,33 @@ class Item extends Model
         ]);
     }
     
+    /**
+     * 删除道具
+     *
+     * @param int $id
+     * @param int $item_id
+     */
+    public static function remove($id, $item_id)
+    {
+        $cmd = 'REMOVE_PLAYER_ITEM';
+        $params = [
+            'id' => (int)$id,
+            'item_id' => (int)$item_id
+        ];
+        $client = new Client();
+        $res = $client->request('GET', config('game.url'), [
+            'timeout' => 10,
+            'query' => [
+                'CmdId' => static::$cmd,
+                'ZoneId' => Game::getZone(),
+                'params' => json_encode([$cmd, $params])
+            ]
+        ]);
+        $data = json_decode($res->getBody(), true);
+
+        return $data;
+    }
+
     /**
      * Add a basic where clause to the query.
      *
