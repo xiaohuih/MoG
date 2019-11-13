@@ -86,7 +86,7 @@ class ProductsController extends Controller
     {
         $grid = new Grid(new OM\Products);
         // 新增按钮
-        $grid->disableCreateButton();
+        // $grid->disableCreateButton();
         // 导出按钮
         $grid->disableExport();
         // 查看按钮
@@ -133,7 +133,7 @@ class ProductsController extends Controller
     
 
         $form->display('id', 'ID');
-        // $form->text('surl', trans('game.info.surl'));
+        // $form->text('surl', trans('game.info.surl'))->rules('required');
         $form->text('ids', trans('game.info.package'))->rules(['required', 'regex:/^((\w){1,}\.*){1,}\@{0,1}\w{1,}((,((\w){1,}\.*){1,})\@{0,1}\w{1,}){0,}$/']);
         $form->file('file', trans('game.info.file'));
 

@@ -131,12 +131,17 @@ class Products extends Model
             if ($products[$i]['id'] == (int)$this->id) {
                 $product = &$products[$i];
                 break;
+            }else{
+                $product['id']  = $c+1;
+                $product['ids'] = (array)$this->ids;
+                $product['surl'] = 'pay/product_' . $product['id'] . '.json';
+                $product = &$products[$c];
             }
         }
-
         if (!isset($product)){
             return false;
         }
+        
         $product['file'] = "";
         foreach ($this->getAttributes() as $key => $value) {
             $type = gettype($product[$key]);
