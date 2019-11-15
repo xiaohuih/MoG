@@ -5,6 +5,7 @@ namespace App\Models\OM;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Console\Scheduling;
 use Illuminate\Support\Facades\Artisan;
+use PDOException;
 
 class ServerStart extends Model
 {
@@ -20,7 +21,11 @@ class ServerStart extends Model
      */
     public static function schedule(Scheduling\Schedule $schedule)
     {
-        $schedules = self::all();
+        try {
+            $schedules = self::all();
+        } catch(\PDOException $exception) {
+            $schedules = [];
+        }
         
         foreach ($schedules as $key => $value) {
             if ($value['starttime'] && empty($value['status'])) {
