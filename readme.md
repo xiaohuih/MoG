@@ -94,5 +94,5 @@ $ php artisan route:cache
 ##############################################
 # 开发环境
 ##############################################
-$ composer require laravel/homestead --dev
-$ php vendor/bin/homestead make
+$ composer install
+$ vagrant up
