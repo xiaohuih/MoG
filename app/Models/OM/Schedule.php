@@ -4,6 +4,7 @@ namespace App\Models\OM;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Console\Scheduling;
+use PDOException;
 
 class Schedule extends Model
 {
@@ -33,7 +34,11 @@ class Schedule extends Model
      */
     public static function schedule(Scheduling\Schedule $schedule)
     {
-        $schedules = self::all();
+        try {
+            $schedules = self::all();
+        } catch(\PDOException $exception) {
+            $schedules = [];
+        }
 
         foreach ($schedules as $key => $value) {
             $schedule->command($value['cmd'])->cron($value['cron']);
