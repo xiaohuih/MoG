@@ -94,13 +94,15 @@ return [
         'script'        => '脚本',
         'file'          => '文件',
         'surl'          => '链接',
-        'package'       => '包名'
+        'package'       => '包名',
+        'unapproved'    => '未审核'
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',
         'kickout'       => '踢下线',
         'publish'       => '发布',
         'send'          => '发送',
+        'approval'      => '审核通过',
         'kick'          => '踢出',
         'revoke'        => '撤回',
         'perform'       => '执行',

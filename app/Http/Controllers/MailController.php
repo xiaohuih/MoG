@@ -12,6 +12,7 @@ use Encore\Admin\Show;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
 use Illuminate\Support\Facades\Input;
+use Encore\Admin\Facades\Admin;
 
 class MailController extends Controller
 {
@@ -75,7 +76,9 @@ class MailController extends Controller
         // 行操作
         $grid->actions(function ($actions) {
             $actions->disableView();
-            $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'send', 'fa-paper-plane'));
+            if (Admin::user()->can('mail.appovel') && ($actions->row['status'] != 1)){
+                $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'approval', 'fa-paper-plane'));
+            }
             if ($actions->row['status'] == 1) {
                 $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'revoke', 'fa-reply'));
             }
@@ -106,7 +109,7 @@ class MailController extends Controller
                 $name = trans('game.info.sent');
                 return "<span class='label label-success'>$name</span>";
             } else {
-                $name = trans('game.info.unsent');
+                $name = trans('game.info.unapproved');
                 return "<span class='label label-default'>$name</span>";
             }
         });
@@ -151,7 +154,7 @@ class MailController extends Controller
      */
     public function update($id)
     {
-        if (Input::get('send')) {
+        if (Input::get('approval')) {
             return Mail::find($id)->send();
         }
         else if (Input::get('revoke')) {
