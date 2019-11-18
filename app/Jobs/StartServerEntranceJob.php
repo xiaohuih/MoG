@@ -38,6 +38,8 @@ class StartServerEntranceJob implements ShouldQueue
     public function handle()
     {
         Log::debug(sprintf("Start server {%d} entrance", $this->zone));
+        $prve_zone = $this->zone - 1;
+        OM\Server::modify($prve_zone, 'state', 2);
         OM\Server::modify($this->zone, 'state', 1);
     }
 }
