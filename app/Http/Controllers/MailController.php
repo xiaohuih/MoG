@@ -13,7 +13,6 @@ use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
 use Illuminate\Support\Facades\Input;
 use Encore\Admin\Facades\Admin;
-use Illuminate\Support\Facades\Log;
 
 class MailController extends Controller
 {
@@ -77,11 +76,6 @@ class MailController extends Controller
         // 行操作
         $grid->actions(function ($actions) {
             $actions->disableView();
-
-            Log::debug([
-                'info' => Admin::user()->permissions
-            ]);
-
             if (Admin::user()->can('mail.approval') && ($actions->row['status'] != 1)){
                 $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'approval', 'fa-paper-plane'));
             }
