@@ -131,17 +131,17 @@ class Products extends Model
             if ($products[$i]['id'] == (int)$this->id) {
                 $product = &$products[$i];
                 break;
-            }else{
-                $product['id']  = $c+1;
-                $product['ids'] = (array)$this->ids;
-                $product['surl'] = 'pay/product_' . $product['id'] . '.json';
-                $product = &$products[$c];
             }
+        }
+        if(!$product){
+            $product['id']  = $c+1;
+            $product['ids'] = (array)$this->ids;
+            $product['surl'] = 'pay/product_' . $product['id'] . '.json';
+            array_push($products,$product);
         }
         if (!isset($product)){
             return false;
         }
-        
         $product['file'] = "";
         foreach ($this->getAttributes() as $key => $value) {
             $type = gettype($product[$key]);
@@ -155,11 +155,13 @@ class Products extends Model
         try {
             // 拷贝商品ID文件到目录服
             $disk = Storage::disk('local');
-            $file = 'game/pay' . DIRECTORY_SEPARATOR . 'product_'.$this->id .'.json';
+            $file = 'game/pay' . DIRECTORY_SEPARATOR . 'product_'.$product['id'] .'.json';
             if ($disk->exists($file)) {
                 $disk->delete($file);
             }
-            $disk->copy('public/'.$this->file, $file);
+            if(isset($this->file)){
+                 $disk->copy('public/'.$this->file, $file);
+            }
         } catch (\Exception $e) {
             // return [
             //     'status'    => false,
@@ -168,7 +170,6 @@ class Products extends Model
         }
         
         unset($product['file']);
-
 
         Storage::disk('game')->put(self::$file, json_encode($products, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         return true;
