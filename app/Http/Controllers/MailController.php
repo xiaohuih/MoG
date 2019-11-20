@@ -76,7 +76,7 @@ class MailController extends Controller
         // 行操作
         $grid->actions(function ($actions) {
             $actions->disableView();
-            if (Admin::user()->can('mail.appovel') && ($actions->row['status'] != 1)){
+            if (Admin::user()->can('mail.approval') && ($actions->row['status'] != 1)){
                 $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'approval', 'fa-paper-plane'));
             }
             if ($actions->row['status'] == 1) {
