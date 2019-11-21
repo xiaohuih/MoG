@@ -143,8 +143,6 @@ class Audit extends Model
             settype($audit[$key], $type); 
         }
 
-        \Log::debug($audit);
-
         Storage::disk('game')->put(self::$file, json_encode($audits, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         // \Log::debug($audits);
         return true;
