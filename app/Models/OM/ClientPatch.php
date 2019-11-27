@@ -33,7 +33,11 @@ class ClientPatch extends Model
         try {
             // 拷贝补丁到SALT
             $disk = Storage::disk('local');
-            $file = 'game/assets/' . DIRECTORY_SEPARATOR . 'patch_'.$this->platform. "_" .$this->version.'.zip';
+            $dirctory = 'game/assets/' .$this->version;
+            if(! $disk->exists($dirctory)) {
+                $disk->makeDirectory($dirctory);
+            }
+            $file = $dirctory . DIRECTORY_SEPARATOR . 'patch_'.$this->platform. "_" .$this->version.'.zip';
             if ($disk->exists($file)) {
                 $disk->delete($file);
             }
