@@ -322,6 +322,17 @@ class AdminTablesSeeder extends Seeder
                     "permission" => "om.management",
                     "created_at" => "2019-11-05 20:56:01",
                     "updated_at" => "2019-11-07 17:55:07"
+                ],
+                [
+                    "id" => 44,
+                    "parent_id" => 33,
+                    "order" => 0,
+                    "title" => "客户端补丁",
+                    "icon" => "fa-bars",
+                    "uri" => "om/clientpatch",
+                    "permission" => "om.management",
+                    "created_at" => "2019-11-21 17:26:15",
+                    "updated_at" => "2019-11-21 17:26:15"
                 ]
             ]
         );
@@ -454,15 +465,6 @@ class AdminTablesSeeder extends Seeder
                     "http_path" => "/scheduling*",
                     "created_at" => "2019-05-26 00:03:43",
                     "updated_at" => "2019-05-26 00:03:43"
-                ],
-                [
-                    "id" => 16,
-                    "name" => "Mail Approval",
-                    "slug" => "mail.approval",
-                    "http_method" => "",
-                    "http_path" => NULL,
-                    "created_at" => "2019-11-15 14:28:35",
-                    "updated_at" => "2019-11-15 14:31:29"
                 ]
             ]
         );

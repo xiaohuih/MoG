@@ -45,4 +45,5 @@ Route::group([
     $router->get('om/server/list', 'OM\ServerController@list');
     $router->resource('om/audit', OM\AuditController::class);
     $router->resource('om/products', OM\ProductsController::class);
+    $router->resource('om/clientpatch', OM\ClientPatchController::class);
 });
