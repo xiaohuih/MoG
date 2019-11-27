@@ -38,7 +38,7 @@ class ClientPatchServerJob implements ShouldQueue
     public function handle()
     {
         Log::debug(sprintf("Clinet patch update {%s} version {%s} start", $this->platform, $this->version));
-        $script_file =  storage_path() . DIRECTORY_SEPARATOR .'app/game/assets/client-patch.sh';
+        $script_file =  storage_path() . DIRECTORY_SEPARATOR .'app/salt/states/game/files/scripts/client-patch.sh';
         $shell = sprintf("bash %s %s %s", $script_file, $this->version, $this->platform);
         exec($shell, $result, $status);
         if ($status != 0) {
