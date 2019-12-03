@@ -10,19 +10,10 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class Server extends Model
+class Audit extends Model
 {
-    public static $file = 'group/server_list.json';
-    /**
-     * 状态
-     */
-    public static $states = [
-        1 => ['name' => 'new', 'style' => 'green'],        // 新服
-        2 => ['name' => 'burst', 'style' => 'red'],      // 爆满
-        3 => ['name' => 'hot', 'style' => 'orange'],        // 火爆
-        4 => ['name' => 'maintain', 'style' => 'grey'],   // 维护
-        5 => ['name' => 'hide', 'style' => 'black'],       // 隐藏
-    ];
+    public static $file = 'package.json';
+
     /**
      * Paginate the given query.
      *
@@ -44,13 +35,12 @@ class Server extends Model
             'pagination' => ['total' => 0, 'perPage' => $perPage , 'currentPage' => $currentPage],
         ];
         try {
-            $contents = json_decode(Storage::disk('game')->get(self::$file), true);
-            $games = $contents['games'];
-            $data['list'] = array_slice($games, ($currentPage-1)*$perPage, $perPage);
-            $data['pagination']['total'] = count($games);
+            $contents = Storage::disk('game')->get(self::$file);
+            $data['list'] = json_decode($contents, true);
         } catch (\Exception $exception) {
             throw $exception;
         }
+        // \Log::debug($data);
 
         $items = static::hydrate($data['list']);
         $pagination = $data['pagination'];
@@ -71,21 +61,28 @@ class Server extends Model
      */
     public function findOrFail($id)
     {
-        $games = json_decode(Storage::disk('game')->get(self::$file), true)['games'];
+        $audits = json_decode(Storage::disk('game')->get(self::$file), true);
        
-        $game = null;
-        for ($i = 0, $c = count($games); $i < $c; ++$i) {
-            if ($games[$i]['id'] == (int)$id) {
-                $game = &$games[$i];
+        $audit = null;
+        for ($i = 0, $c = count($audits); $i < $c; ++$i) {
+            if ($audits[$i]['id'] == (int)$id) {
+                $audit = &$audits[$i];
                 break;
             }
         }
-        if (!isset($game)){
+        
+        if (!isset($audit)){
             return false;
         }
-        return static::newFromBuilder($game);
+        $audit['packages'] = implode(',', $audit['packages']);
+        return static::newFromBuilder($audit);
     }
 
+    protected function findToShow($id)
+    {
+        return $this->findOrFail($id);
+    }
+    
     /**
      * Add a basic where clause to the query.
      *
@@ -120,64 +117,58 @@ class Server extends Model
      */
     public function save(array $options = [])
     {
-        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
-        $games = &$contents['games'];
+        $audits = json_decode(Storage::disk('game')->get(self::$file), true);
+
        
-        $game = null;
-        for ($i = 0, $c = count($games); $i < $c; ++$i) {
-            if ($games[$i]['id'] == (int)$this->id) {
-                $game = &$games[$i];
+        $audit = null;
+        for ($i = 0, $c = count($audits); $i < $c; ++$i) {
+            if ($audits[$i]['id'] == (int)$this->id) {
+                $audit = &$audits[$i];
+                // \Log::debug($audit);
                 break;
             }
         }
-        if (!isset($game)){
+
+        if (!isset($audit)){
             return false;
         }
+        
         foreach ($this->getAttributes() as $key => $value) {
-            $type = gettype($game[$key]);
-            $game[$key] = $value;
-            settype($game[$key], $type);
+            $type = gettype($audit[$key]);
+            if ($type == 'array') {
+                $audit[$key] = explode(",", $value);
+            } else {
+                $audit[$key] = $value;
+            }
+            settype($audit[$key], $type); 
         }
 
-        Storage::disk('game')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        \Log::debug($audit);
+
+        Storage::disk('game')->put(self::$file, json_encode($audits, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        // \Log::debug($audits);
         return true;
     }
 
-    public static function modify($id, $name, $value)
+    public static function setProperty($type, $name, $value)
     {
-        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
-        $games = &$contents['games'];
-
-        $game = null;
-        for ($i = 0, $c = count($games); $i < $c; ++$i) {
-            if ($games[$i]['id'] == (int)$id) {
-                $game = &$games[$i];
+        $audits = json_decode(Storage::disk('game')->get(self::$file), true);
+       
+        $audit = null;
+        for ($i = 0, $c = count($audits); $i < $c; ++$i) {
+            if ($audits[$i]['id'] == (int)$type) {
+                $audit = &$audits[$i];
                 break;
             }
         }
-        if (!isset($game)){
+        if (!isset($audit)){
             return false;
         }
-        $type = gettype($game[$name]);
-        $game[$name] = $value;
-        settype($game[$name], $type);
+        $vartype = gettype($audit[$name]);
+        $audit[$name] = $value;
+        settype($audit[$name], $vartype);
 
-        Storage::disk('game')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
-        return 200;
-    }
-
-    public static function modifyMaxVersion($version)
-    {
-        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
-        $contents['version_max'] = $version;
-
-        Storage::disk('game')->put(self::$file, json_encode($contents, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
-        return 200;
-    }
-
-    public static function list()
-    {
-        $contents = json_decode(Storage::disk('game')->get(self::$file), true);
-        return $contents['games'];
+        Storage::disk('game')->put(self::$file, json_encode($audits, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        return true;
     }
 }

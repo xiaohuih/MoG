@@ -43,6 +43,8 @@ Route::group([
     $router->resource('om/patches', OM\PatchController::class);
     $router->resource('om/startserver', OM\ServerStartController::class);
     $router->get('om/server/list', 'OM\ServerController@list');
+    $router->resource('om/audit', OM\AuditController::class);
+    $router->resource('om/products', OM\ProductsController::class);
     // 运营
     $router->resource('op/retention', OP\RetentionController::class);
 });

@@ -29,68 +29,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 21,
+                    "order" => 23,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
                     "permission" => "auth.management",
                     "created_at" => NULL,
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2019-11-06 11:42:36"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 22,
+                    "order" => 24,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2019-11-06 11:42:36"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 23,
+                    "order" => 25,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2019-11-06 11:42:36"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 24,
+                    "order" => 26,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2019-11-06 11:42:36"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 25,
+                    "order" => 27,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2019-11-06 11:42:36"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 26,
+                    "order" => 28,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2019-11-06 11:42:36"
                 ],
                 [
                     "id" => 13,
@@ -300,6 +300,28 @@ class AdminTablesSeeder extends Seeder
                     "permission" => "om.management",
                     "created_at" => "2019-08-12 10:25:35",
                     "updated_at" => "2019-08-12 10:35:57"
+                ],
+                [
+                    "id" => 42,
+                    "parent_id" => 33,
+                    "order" => 21,
+                    "title" => "提审切换",
+                    "icon" => "fa-android",
+                    "uri" => "/om/audit",
+                    "permission" => "om.management",
+                    "created_at" => "2019-10-31 15:46:20",
+                    "updated_at" => "2019-11-07 17:54:13"
+                ],
+                [
+                    "id" => 43,
+                    "parent_id" => 33,
+                    "order" => 22,
+                    "title" => "商品配置",
+                    "icon" => "fa-shopping-cart",
+                    "uri" => "/om/products",
+                    "permission" => "om.management",
+                    "created_at" => "2019-11-05 20:56:01",
+                    "updated_at" => "2019-11-07 17:55:07"
                 ]
             ]
         );
@@ -596,6 +618,18 @@ class AdminTablesSeeder extends Seeder
                 [
                     "role_id" => 3,
                     "permission_id" => 12,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 13,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 14,
                     "created_at" => NULL,
                     "updated_at" => NULL
                 ]

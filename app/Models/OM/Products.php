@@ -10,24 +10,15 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class Notice extends Model
+class Products extends Model
 {
-    public static $file = 'group/notice.json';
+    public static $file = 'package_config.json';
     /**
      * The primary key for the model.
      *
      * @var string
      */
-    protected $primaryKey = 'type';
-    /**
-     * 类型
-     */
-    public static $types = [
-        1 => ['name' => 'maintain', 'switch' => true],      // 维护公告
-        2 => ['name' => 'update', 'switch' => false],       // 更新公告
-        3 => ['name' => 'operation', 'switch' => true],     // 运营公告
-        4 => ['name' => 'mandatory', 'switch' => false],    // 强更公告
-    ];
+    // protected $primaryKey = 'ids';
     /**
      * Paginate the given query.
      *
@@ -54,8 +45,13 @@ class Notice extends Model
         } catch (\Exception $exception) {
             throw $exception;
         }
+        // \Log::debug($data);
 
+        // for ($i = 0; $i < count($data['list']); ++$i) {
+        //     $data['list'][$i]['id'] = $i+1;
+        // }
         $items = static::hydrate($data['list']);
+        // \Log::debug($items);
         $pagination = $data['pagination'];
         return new LengthAwarePaginator($items, $pagination['total'], $pagination['perPage'], $pagination['currentPage'],[
             'path' => Paginator::resolveCurrentPath(),
@@ -74,19 +70,20 @@ class Notice extends Model
      */
     public function findOrFail($id)
     {
-        $notices = json_decode(Storage::disk('game')->get(self::$file), true);
-       
-        $notice = null;
-        for ($i = 0, $c = count($notices); $i < $c; ++$i) {
-            if ($notices[$i]['type'] == (int)$id) {
-                $notice = &$notices[$i];
+        $products = json_decode(Storage::disk('game')->get(self::$file), true);       
+        $product = null;
+        for ($i = 0, $c = count($products); $i < $c; ++$i) {
+            if ($products[$i]['id'] == (int)$id) {
+                $product = &$products[$i];
                 break;
             }
         }
-        if (!isset($notice)){
+
+        if (!isset($product)){
             return false;
         }
-        return static::newFromBuilder($notice);
+        $product['ids'] = implode(',', $product['ids']);
+        return static::newFromBuilder($product);
     }
 
     protected function findToShow($id)
@@ -128,47 +125,69 @@ class Notice extends Model
      */
     public function save(array $options = [])
     {
-        $notices = json_decode(Storage::disk('game')->get(self::$file), true);
-       
-        $notice = null;
-        for ($i = 0, $c = count($notices); $i < $c; ++$i) {
-            if ($notices[$i]['type'] == (int)$this->type) {
-                $notice = &$notices[$i];
+        $products = json_decode(Storage::disk('game')->get(self::$file), true);
+        $product = null;
+        for ($i = 0, $c = count($products); $i < $c; ++$i) {
+            if ($products[$i]['id'] == (int)$this->id) {
+                $product = &$products[$i];
                 break;
             }
         }
-        if (!isset($notice)){
+
+        if (!isset($product)){
             return false;
         }
+        $product['file'] = "";
         foreach ($this->getAttributes() as $key => $value) {
-            $type = gettype($notice[$key]);
-            $notice[$key] = $value;
-            settype($notice[$key], $type);
+            $type = gettype($product[$key]);
+            if ($type == "array") {
+                $product[$key] = explode(",", $value);
+            }else{
+                $product[$key] = $value;
+            }
+            settype($product[$key], $type); 
         }
+        try {
+            // 拷贝商品ID文件到目录服
+            $disk = Storage::disk('local');
+            $file = 'game/pay' . DIRECTORY_SEPARATOR . 'product_'.$this->id .'.json';
+            if ($disk->exists($file)) {
+                $disk->delete($file);
+            }
+            $disk->copy('public/'.$this->file, $file);
+        } catch (\Exception $e) {
+            // return [
+            //     'status'    => false,
+            //     'message'   => 'failed',
+            // ];
+        }
+        
+        unset($product['file']);
 
-        Storage::disk('game')->put(self::$file, json_encode($notices, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+
+        Storage::disk('game')->put(self::$file, json_encode($products, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         return true;
     }
 
     public static function setProperty($type, $name, $value)
     {
-        $notices = json_decode(Storage::disk('game')->get(self::$file), true);
+        $products = json_decode(Storage::disk('game')->get(self::$file), true);
        
-        $notice = null;
-        for ($i = 0, $c = count($notices); $i < $c; ++$i) {
-            if ($notices[$i]['type'] == (int)$type) {
-                $notice = &$notices[$i];
+        $product = null;
+        for ($i = 0, $c = count($products); $i < $c; ++$i) {
+            if ($products[$i]['id'] == (int)$id) {
+                $product = &$products[$i];
                 break;
             }
         }
-        if (!isset($notice)){
+        if (!isset($product)){
             return false;
         }
-        $vartype = gettype($notice[$name]);
-        $notice[$name] = $value;
-        settype($notice[$name], $vartype);
+        $vartype = gettype($product[$name]);
+        $product[$name] = $value;
+        settype($product[$name], $vartype);
 
-        Storage::disk('game')->put(self::$file, json_encode($notices, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
+        Storage::disk('game')->put(self::$file, json_encode($products, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
         return true;
     }
 }
