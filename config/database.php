@@ -135,4 +135,23 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | ElasticSearch
+    |--------------------------------------------------------------------------
+    |
+    | Elasticsearch provides real-time search and analytics for all types of data.
+    | See configuration options here:
+    |
+    | https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/configuration.html
+    |
+    */
+
+    'elasticsearch' => [
+        'hosts' => [
+            '192.168.52.220:9200'
+        ],
+        'retries' => 2
+    ],
+
 ];

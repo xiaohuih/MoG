@@ -15,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('elastic', function ($app) {
+            return \Elasticsearch\ClientBuilder::fromConfig(config('database.elasticsearch'), true);
+        });
     }
 
     /**
