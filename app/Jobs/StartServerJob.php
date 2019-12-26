@@ -7,12 +7,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class StartServerJob implements ShouldQueue
 {
-    public static $file = 'states/game/files/scripts/modify-pillar.sh';
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $zone;
@@ -35,10 +33,7 @@ class StartServerJob implements ShouldQueue
      */
     public function handle()
     {
-        $script = storage_path('app/salt') . DIRECTORY_SEPARATOR . self::$file;
         Log::debug(sprintf("Start server {%s} {%s}", $this->zone, $this->version));
-        $script_shell = sprintf("sudo bash %s", $script);
-        exec($script_shell, $result_shell, $shell_status);
         $shell = sprintf("sudo salt '*' state.apply game.start pillar='{\"zone\": \"%s\", \"version\": \"%s\"}'", $this->zone, $this->version);
         exec($shell, $result, $status);
         Log::debug($result);
