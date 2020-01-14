@@ -10,7 +10,9 @@ return [
     'rank'                  => '排行榜',
     'gcode'                 => '礼包码',
     'pet'                   => '精灵',
+    'pet_desc'              => '精灵  注意:DM暂时不可用',
     'item'                  => '道具',
+    'item_desc'             => '道具  注意:DM暂时不可用',
     'schedule'              => '计划',
     'startserver'           => '开服',
     'patch'                 => '补丁',
@@ -95,7 +97,8 @@ return [
         'file'          => '文件',
         'surl'          => '链接',
         'package'       => '包名',
-        'unapproved'    => '未审核'
+        'unapproved'    => '未审核',
+        'revoked'       => '已撤回',
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',

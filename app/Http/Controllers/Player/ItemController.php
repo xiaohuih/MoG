@@ -24,7 +24,7 @@ class ItemController extends Controller
     {
         return $content
             ->header(trans('game.player'))
-            ->description(trans('game.item'))
+            ->description(trans('game.item_desc'))
             ->body($this->grid());
     }
 

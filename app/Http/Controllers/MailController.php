@@ -76,7 +76,7 @@ class MailController extends Controller
         // 行操作
         $grid->actions(function ($actions) {
             $actions->disableView();
-            if (Admin::user()->can('mail.approval') && ($actions->row['status'] != 1)){
+            if (Admin::user()->can('mail.approval') && ($actions->row['status'] == 0)){
                 $actions->append(new ConfirmButton($actions->getResource(), $actions->getRouteKey(), 'approval', 'fa-paper-plane'));
             }
             if ($actions->row['status'] == 1) {
@@ -108,8 +108,11 @@ class MailController extends Controller
             if ($status == 1) {
                 $name = trans('game.info.sent');
                 return "<span class='label label-success'>$name</span>";
-            } else {
+            } else if ($status == 0) {
                 $name = trans('game.info.unapproved');
+                return "<span class='label label-default'>$name</span>";
+            } else if ($status == 2) {
+                $name = trans('game.info.revoked');
                 return "<span class='label label-default'>$name</span>";
             }
         });
@@ -158,7 +161,7 @@ class MailController extends Controller
             return Mail::find($id)->send();
         }
         else if (Input::get('revoke')) {
-            return Mail::revoke($id);
+            return Mail::find($id)->revoke();
         } else {
             return $this->form()->update($id);
         }

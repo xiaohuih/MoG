@@ -63,11 +63,13 @@ class Mail extends Model
      * 撤回邮件
      * @param int $id
      */
-    public static function revoke($id)
+    public function revoke()
     {
         $cmd = 'REVOKE_MAIL';
         $params = [
-            'id' => (int)$id,
+            'id' => (int)$this->id,
+            'receivers' => $this->receivers,
+            'zones' => $this->zones,
         ];
         $client = new Client();
         $res = $client->request('GET', config('game.url'), [
@@ -78,9 +80,9 @@ class Mail extends Model
             ]
         ]);
         $data = json_decode($res->getBody(), true);
-        // 更新状态
+        // 更新状态 为已撤回
         if (true == $data['status']) {
-            self::where('id', '=', $id)->update(['status' => 0]);
+            $this->update(['status' => 2]);
         }
 
         return $data;

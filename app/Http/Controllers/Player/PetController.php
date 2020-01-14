@@ -24,7 +24,7 @@ class PetController extends Controller
     {
         return $content
             ->header(trans('game.player'))
-            ->description(trans('game.pet'))
+            ->description(trans('game.pet_desc'))
             ->body($this->grid());
     }
 
