@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 
 class Mail extends Model
 {
-    protected static $cmd = 10002;
+    protected static $cmd = 10002; // 发送到gm服务器
     /**
      * @var array
      */

@@ -52,16 +52,19 @@ class ItemController extends Controller
             $filter->like('name', trans('game.info.name'));
         });
         // 行操作
-        $grid->actions(function ($actions) {
-            $actions->disableEdit();
-            $actions->disableView();
-            $actions->disableDelete();
-            $actions->append(new ConfirmButton($actions->getResource(), sprintf("%d_%d", $actions->row['player'], $actions->getRouteKey()), 'remove', 'fa-trash'));
-        });
+        $grid->disableActions();
+        // $grid->actions(function ($actions) {
+        //     $actions->disableEdit();
+        //     $actions->disableView();
+        //     $actions->disableDelete();
+        //     $actions->append(new ConfirmButton($actions->getResource(), sprintf("%d_%d_%d_%d", $actions->row['player'], $actions->row['id'], $actions->row['configid'], $actions->row['count']), 'remove', 'fa-trash'));
+        // });
         // 列
         $grid->id('ID');
         $grid->name(trans('game.info.name'));
+        $grid->configid(trans('game.info.configid'));
         $grid->count(trans('game.info.count'));
+        $grid->is_setup(trans('game.info.is_setup'));
 
         return $grid;
     }
@@ -69,17 +72,18 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param int $id
+     * @param $data 一行道具数据
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($data)
     {
-        if (Input::get('remove')) {
-            $params = explode("_", $id);
-            return Player\Item::remove($params[0], $params[1]);
-        } else {
-            return $this->form()->update($id);
-        }
+        return $this->form()->update($data);
+        // if (Input::get('remove')) {
+        //     $params = explode("_", $data);
+        //     return Player\Item::remove($params[0], $params[1], $params[2], $params[3]);
+        // } else {
+        //     return $this->form()->update($data);
+        // }
     }
 }

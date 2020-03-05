@@ -31,6 +31,7 @@ Route::group([
         $router->resource('player/ranks', Player\RankController::class);
         $router->resource('player/pets', Player\PetController::class);
         $router->resource('player/items', Player\ItemController::class);
+        $router->resource('player/remove_items', Player\RemoveItemController::class);
         // 公会
         $router->resource('guild/search', Guild\SearchController::class);
         $router->resource('guild/ranks', Guild\RankController::class);

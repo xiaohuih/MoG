@@ -77,12 +77,14 @@ class Item extends Model
      * @param int $id
      * @param int $item_id
      */
-    public static function remove($id, $item_id)
+    public static function remove($id, $item_id, $config_id, $count)
     {
         $cmd = 'REMOVE_PLAYER_ITEM';
         $params = [
             'id' => (int)$id,
-            'item_id' => (int)$item_id
+            'item_id' => (int)$item_id,
+            'config_id' => (int)$config_id,
+            'count' => (int)$count
         ];
         $client = new Client();
         $res = $client->request('GET', config('game.url'), [

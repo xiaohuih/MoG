@@ -20,6 +20,8 @@ return [
     'products'              => '商品',
     'yes'                   => '是',
     'no'                    => '否',
+    'update_time'           => '修改时间',
+    'remove_item'           => '删除玩家物品',
     'info'                  => [
         'zone'          => '区服',
         'version'       => '版本',
@@ -99,6 +101,9 @@ return [
         'package'       => '包名',
         'unapproved'    => '未审核',
         'revoked'       => '已撤回',
+        'itemid'        => '物品实例id',
+        'configid'      => '配置id',
+        'is_setup'      => '已装备',
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',
@@ -136,7 +141,10 @@ return [
         'gcode_group'   => '玩家同一礼包组只能领取一次，0：无限制',
         'sendtime'      => '不填则代表立即发送',
         'opentime'      => '不填则代表需要手动开启',
-        'nolimit'       => '不填则代表无限制'
+        'nolimit'       => '不填则代表无限制',
+        'remove_item'   => '涉及装备物品,当前只能一次删除一件物品',
+        'remove_item_config'   => '会根据配置id判断物品类型进行删除操作,所以一定不可以错,如果是装备物品,必须填写itemid,其他物品itemid可填0',
+        'remove_item_count'   => '如果是装备而不是普通物品,则一次只能根据物品实例id删除一个',
     ],
     'servers'               => [
         'client'        => '客户端',
