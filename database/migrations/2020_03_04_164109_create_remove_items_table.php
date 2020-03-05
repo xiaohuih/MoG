@@ -17,6 +17,7 @@ class CreateRemoveItemsTable extends Migration
             $table->bigIncrements('id');
             // 删除玩家物品操作记录
             $table->integer('player')->nullable();  // 玩家id
+            $table->integer('zone')->nullable();    // 玩家所在区服
             $table->integer('itemid')->nullable();  // 物品实例id
             $table->integer('configid')->nullable();// 物品配置id
             $table->integer('count')->nullable();   // 删除物品数量 

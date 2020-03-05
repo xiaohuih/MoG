@@ -21,6 +21,7 @@ Route::group([
     $router->resource('config/roles', Config\GameRoleController::class);
     $router->resource('mail', MailController::class);
     $router->resource('notice', NoticeController::class);
+    $router->resource('remove_items', RemoveItemController::class);
     $router->get('gcode/export/{id}', 'GCodeController@export');
     $router->resource('gcode', GCodeController::class);
     $router->resource('script', ScriptController::class);
@@ -31,7 +32,6 @@ Route::group([
         $router->resource('player/ranks', Player\RankController::class);
         $router->resource('player/pets', Player\PetController::class);
         $router->resource('player/items', Player\ItemController::class);
-        $router->resource('player/remove_items', Player\RemoveItemController::class);
         // 公会
         $router->resource('guild/search', Guild\SearchController::class);
         $router->resource('guild/ranks', Guild\RankController::class);

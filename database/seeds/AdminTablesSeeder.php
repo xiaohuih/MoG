@@ -29,68 +29,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 2,
                     "parent_id" => 0,
-                    "order" => 23,
+                    "order" => 25,
                     "title" => "管理员",
                     "icon" => "fa-tasks",
                     "uri" => NULL,
                     "permission" => "auth.management",
                     "created_at" => NULL,
-                    "updated_at" => "2019-11-06 11:42:36"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 3,
                     "parent_id" => 2,
-                    "order" => 24,
+                    "order" => 26,
                     "title" => "用户",
                     "icon" => "fa-users",
                     "uri" => "auth/users",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-11-06 11:42:36"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 4,
                     "parent_id" => 2,
-                    "order" => 25,
+                    "order" => 27,
                     "title" => "角色",
                     "icon" => "fa-user",
                     "uri" => "auth/roles",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-11-06 11:42:36"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 5,
                     "parent_id" => 2,
-                    "order" => 26,
+                    "order" => 28,
                     "title" => "权限",
                     "icon" => "fa-ban",
                     "uri" => "auth/permissions",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-11-06 11:42:36"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 6,
                     "parent_id" => 2,
-                    "order" => 27,
+                    "order" => 29,
                     "title" => "菜单",
                     "icon" => "fa-bars",
                     "uri" => "auth/menu",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-11-06 11:42:36"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 7,
                     "parent_id" => 2,
-                    "order" => 28,
+                    "order" => 30,
                     "title" => "操作日志",
                     "icon" => "fa-history",
                     "uri" => "auth/logs",
                     "permission" => NULL,
                     "created_at" => NULL,
-                    "updated_at" => "2019-11-06 11:42:36"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 13,
@@ -128,68 +128,68 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 16,
                     "parent_id" => 0,
-                    "order" => 7,
+                    "order" => 8,
                     "title" => "公会",
                     "icon" => "fa-bank",
                     "uri" => "admin/guild",
                     "permission" => "guild.management",
                     "created_at" => "2019-04-17 14:47:21",
-                    "updated_at" => "2019-05-16 17:18:33"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 17,
                     "parent_id" => 16,
-                    "order" => 9,
+                    "order" => 10,
                     "title" => "查询",
                     "icon" => "fa-search",
                     "uri" => "guild/search",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 14:48:13",
-                    "updated_at" => "2019-05-14 09:38:30"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 18,
                     "parent_id" => 16,
-                    "order" => 8,
+                    "order" => 9,
                     "title" => "排行榜",
                     "icon" => "fa-list-ol",
                     "uri" => "guild/ranks",
                     "permission" => NULL,
                     "created_at" => "2019-04-17 14:48:53",
-                    "updated_at" => "2019-05-14 09:38:30"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 19,
                     "parent_id" => 0,
-                    "order" => 11,
+                    "order" => 12,
                     "title" => "邮件",
                     "icon" => "fa-envelope",
                     "uri" => "mail",
                     "permission" => "mail.managerment",
                     "created_at" => "2019-04-17 14:52:41",
-                    "updated_at" => "2019-05-16 17:17:55"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 20,
                     "parent_id" => 0,
-                    "order" => 12,
+                    "order" => 13,
                     "title" => "公告",
                     "icon" => "fa-bullhorn",
                     "uri" => "notice",
                     "permission" => "notice.management",
                     "created_at" => "2019-04-17 14:54:36",
-                    "updated_at" => "2019-05-16 17:18:09"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 21,
                     "parent_id" => 0,
-                    "order" => 13,
+                    "order" => 14,
                     "title" => "礼包",
                     "icon" => "fa-briefcase",
                     "uri" => "gcode",
                     "permission" => "gcode.management",
                     "created_at" => "2019-04-17 14:58:37",
-                    "updated_at" => "2019-05-16 17:18:19"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 28,
@@ -216,123 +216,134 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 30,
                     "parent_id" => 16,
-                    "order" => 10,
+                    "order" => 11,
                     "title" => "成员",
                     "icon" => "fa-users",
                     "uri" => "guild/members",
                     "permission" => NULL,
                     "created_at" => "2019-05-05 11:23:32",
-                    "updated_at" => "2019-05-05 11:33:30"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 32,
                     "parent_id" => 0,
-                    "order" => 14,
+                    "order" => 15,
                     "title" => "脚本",
                     "icon" => "fa-scribd",
                     "uri" => "script",
                     "permission" => "script.management",
                     "created_at" => "2019-05-13 11:40:38",
-                    "updated_at" => "2019-05-16 17:17:31"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 33,
                     "parent_id" => 0,
-                    "order" => 15,
+                    "order" => 16,
                     "title" => "运维",
                     "icon" => "fa-opera",
                     "uri" => NULL,
                     "permission" => "om.management",
                     "created_at" => "2019-05-25 23:57:21",
-                    "updated_at" => "2019-05-26 00:01:47"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 34,
                     "parent_id" => 33,
-                    "order" => 16,
+                    "order" => 17,
                     "title" => "计划",
                     "icon" => "fa-calendar",
                     "uri" => "om/schedules",
                     "permission" => "om.management",
                     "created_at" => "2019-05-25 23:58:18",
-                    "updated_at" => "2019-06-13 23:15:37"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 36,
                     "parent_id" => 33,
-                    "order" => 20,
+                    "order" => 21,
                     "title" => "区服列表",
                     "icon" => "fa-navicon",
                     "uri" => "om/servers",
                     "permission" => "om.management",
                     "created_at" => "2019-05-26 00:02:55",
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 38,
                     "parent_id" => 33,
-                    "order" => 19,
+                    "order" => 20,
                     "title" => "公告",
                     "icon" => "fa-bullhorn",
                     "uri" => "om/notices",
                     "permission" => NULL,
                     "created_at" => "2019-05-26 01:37:14",
-                    "updated_at" => "2019-08-12 10:25:47"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 39,
                     "parent_id" => 33,
-                    "order" => 17,
+                    "order" => 18,
                     "title" => "开服",
                     "icon" => "fa-plane",
                     "uri" => "om/startserver",
                     "permission" => "om.management",
                     "created_at" => "2019-06-12 18:04:25",
-                    "updated_at" => "2019-06-13 23:15:37"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 40,
                     "parent_id" => 33,
-                    "order" => 18,
+                    "order" => 19,
                     "title" => "补丁",
                     "icon" => "fa-plus",
                     "uri" => "/om/patches",
                     "permission" => "om.management",
                     "created_at" => "2019-08-12 10:25:35",
-                    "updated_at" => "2019-08-12 10:35:57"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 42,
                     "parent_id" => 33,
-                    "order" => 21,
+                    "order" => 22,
                     "title" => "提审切换",
                     "icon" => "fa-android",
                     "uri" => "/om/audit",
                     "permission" => "om.management",
                     "created_at" => "2019-10-31 15:46:20",
-                    "updated_at" => "2019-11-07 17:54:13"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 43,
                     "parent_id" => 33,
-                    "order" => 22,
+                    "order" => 23,
                     "title" => "商品配置",
                     "icon" => "fa-shopping-cart",
                     "uri" => "/om/products",
                     "permission" => "om.management",
                     "created_at" => "2019-11-05 20:56:01",
-                    "updated_at" => "2019-11-07 17:55:07"
+                    "updated_at" => "2020-03-05 17:26:22"
                 ],
                 [
                     "id" => 44,
                     "parent_id" => 33,
-                    "order" => 0,
+                    "order" => 24,
                     "title" => "客户端补丁",
                     "icon" => "fa-bars",
                     "uri" => "om/clientpatch",
                     "permission" => "om.management",
                     "created_at" => "2019-11-21 17:26:15",
-                    "updated_at" => "2019-11-21 17:26:15"
+                    "updated_at" => "2020-03-05 17:26:22"
+                ],
+                [
+                    "id" => 45,
+                    "parent_id" => 0,
+                    "order" => 7,
+                    "title" => "删除玩家道具",
+                    "icon" => "fa-cut",
+                    "uri" => "remove_items",
+                    "permission" => NULL,
+                    "created_at" => "2020-03-05 17:26:06",
+                    "updated_at" => "2020-03-05 17:38:30"
                 ]
             ]
         );
@@ -465,6 +476,15 @@ class AdminTablesSeeder extends Seeder
                     "http_path" => "/scheduling*",
                     "created_at" => "2019-05-26 00:03:43",
                     "updated_at" => "2019-05-26 00:03:43"
+                ],
+                [
+                    "id" => 16,
+                    "name" => "RemoveItem manage",
+                    "slug" => "remove_item.management",
+                    "http_method" => "",
+                    "http_path" => "/removeitem*",
+                    "created_at" => "2020-03-05 17:36:16",
+                    "updated_at" => "2020-03-05 17:36:16"
                 ]
             ]
         );
@@ -503,6 +523,24 @@ class AdminTablesSeeder extends Seeder
                 [
                     "role_id" => 3,
                     "menu_id" => 38,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 1,
+                    "menu_id" => 45,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "menu_id" => 45,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "menu_id" => 45,
                     "created_at" => NULL,
                     "updated_at" => NULL
                 ]
@@ -641,6 +679,18 @@ class AdminTablesSeeder extends Seeder
                 [
                     "role_id" => 3,
                     "permission_id" => 14,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 2,
+                    "permission_id" => 16,
+                    "created_at" => NULL,
+                    "updated_at" => NULL
+                ],
+                [
+                    "role_id" => 3,
+                    "permission_id" => 16,
                     "created_at" => NULL,
                     "updated_at" => NULL
                 ]

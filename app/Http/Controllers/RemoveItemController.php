@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Player;
+namespace App\Http\Controllers;
 
-use App\Models\Player\RemoveItem;
+use App\Models\RemoveItem;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -104,6 +104,7 @@ class RemoveItemController extends Controller
         // 列
         $grid->id('Id');
         $grid->player(trans('game.player'));
+        $grid->zone(trans('game.zone'));
         $grid->itemid(trans('game.info.itemid'));
         $grid->configid(trans('game.info.configid'));
         $grid->count(trans('game.info.count'));
@@ -136,6 +137,7 @@ class RemoveItemController extends Controller
             $tools->disableView();
         });
         $form->text('player', trans('game.player'))->rules(['required', 'regex:/^(\*|\d{1,})(;\d{1,}){0,}$/']);
+        $form->text('zone', trans('game.zone'))->rules(['required', 'regex:/^(\*|\d{1,})(;\d{1,}){0,}$/']);
         $form->text('itemid', trans('game.info.itemid'))->help(trans('game.helps.remove_item'))->rules(['required', 'regex:/^(\*|\d{1,})(;\d{1,}){0,}$/']);
         $form->text('configid', trans('game.info.configid'))->rules(['required', 'regex:/^(\*|\d{1,})(;\d{1,}){0,}$/'])->help(trans('game.helps.remove_item_config'));
         $form->text('count', trans('game.info.count'))->rules(['required', 'regex:/^(\*|\d{1,})(;\d{1,}){0,}$/'])->help(trans('game.helps.remove_item_count'));

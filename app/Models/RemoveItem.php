@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Player;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
@@ -33,7 +33,7 @@ class RemoveItem extends Model
             'timeout' => 10,
             'query' => [
                 'CmdId' => static::$server_cmd,
-                'ZoneId' => Game::getZone(),
+                'ZoneId' => (int)$this->zone,
                 'params' => json_encode([$cmd, $params])
             ]
         ]);
