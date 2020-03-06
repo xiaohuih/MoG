@@ -81,7 +81,7 @@ class ItemController extends Controller
     public function update($data)
     {
         if (Input::get('remove')) {
-            admin_info(trans('game.info.added'), trans('game.hint.go_check'));
+            admin_info(trans('game.info.added'), trans('game.helps.go_check'));
 
             $params = explode("_", $data);
             return RemoveItem::addRequest($params[0], Game::getZone(), $params[1], $params[2], $params[3]);

@@ -46,7 +46,7 @@ class PlayerController extends Controller
         $show->vip(trans('game.info.vip'));
         $show->paper_level(trans('game.info.paperlevel'));
         $show->diamond(trans('game.info.diamond'));
-        $show->hint(trans('game.hint.remove_value_hint'));
+        $show->hint(trans('game.helps.remove_value_hint'));
         $show->gold(trans('game.info.gold'));
         $show->diamond(trans('game.info.diamond'));
         $show->exp(trans('game.info.exp'));

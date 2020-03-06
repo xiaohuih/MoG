@@ -144,8 +144,11 @@ return [
         'opentime'      => '不填则代表需要手动开启',
         'nolimit'       => '不填则代表无限制',
         'remove_item'   => '涉及装备物品,当前只能一次删除一件物品',
-        'remove_item_config'   => '会根据配置id判断物品类型进行删除操作,所以一定不可以错,如果是装备物品,必须填写itemid,其他物品itemid可填0',
+        'remove_item_config'  => '会根据配置id判断物品类型进行删除操作,所以一定不可以错,如果是装备物品,必须填写itemid,其他物品itemid可填0',
         'remove_item_count'   => '如果是装备而不是普通物品,则一次只能根据物品实例id删除一个',
+        'go_check'      => '请去审核',
+        'remove_item_hint'    => '玩家离线时进行的删除,会在玩家再次上线时才生效. 添加请求时不支持去重,请注意尽量不要重复删除;删除资源时需填写对应的物品id',
+        'remove_value_hint'   => '如要删除玩家资源,请在删除玩家道具界面操作',
     ],
     'servers'               => [
         'client'        => '客户端',
@@ -166,9 +169,4 @@ return [
         'mandatory'     => '强更',
     ],
     'select_zone'       => '请选择区服',
-    'hint'               => [
-        'go_check' => '请去审核',
-        'remove_item_hint'         => '玩家离线时进行的删除,会在玩家再次上线时才生效. 添加请求时不支持去重,请注意尽量不要重复删除',
-        'remove_value_hint'        => '如要删除玩家资源,请在删除道具界面操作',
-    ],
 ];
