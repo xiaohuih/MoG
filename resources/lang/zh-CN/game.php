@@ -104,6 +104,7 @@ return [
         'itemid'        => '物品实例id',
         'configid'      => '配置id',
         'is_setup'      => '已装备',
+        'added'         => '已添加',
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',
@@ -165,4 +166,9 @@ return [
         'mandatory'     => '强更',
     ],
     'select_zone'       => '请选择区服',
+    'hint'               => [
+        'go_check' => '请去审核',
+        'remove_item_hint'         => '玩家离线时进行的删除,会在玩家再次上线时才生效. 添加请求时不支持去重,请注意尽量不要重复删除',
+        'remove_value_hint'        => '如要删除玩家资源,请在删除道具界面操作',
+    ],
 ];

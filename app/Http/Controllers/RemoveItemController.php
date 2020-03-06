@@ -28,7 +28,7 @@ class RemoveItemController extends Controller
     {
         return $content
             ->header(trans('game.remove_item'))
-            ->description(trans('admin.list'))
+            ->description(trans('game.hint.remove_item_hint'))
             ->body($this->grid());
     }
 

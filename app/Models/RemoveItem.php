@@ -45,4 +45,20 @@ class RemoveItem extends Model
 
         return $data;
     }
+
+    /**
+     * 外部增加删除请求
+     */
+    public static function addRequest($player, $zone, $itemid, $configid, $count)
+    {
+        $remove_item = new RemoveItem;
+
+        $remove_item->player = $player;
+        $remove_item->zone = $zone;
+        $remove_item->itemid = $itemid;
+        $remove_item->configid = $configid;
+        $remove_item->count = $count;
+
+        $remove_item->save();
+    }
 }

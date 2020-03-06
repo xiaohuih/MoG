@@ -9,6 +9,8 @@ use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\Input;
+use App\Facades\Game;
+use App\Models\RemoveItem;
 
 class ItemController extends Controller
 {
@@ -52,15 +54,15 @@ class ItemController extends Controller
             $filter->like('name', trans('game.info.name'));
         });
         // 行操作
-        $grid->disableActions();
-        // $grid->actions(function ($actions) {
-        //     $actions->disableEdit();
-        //     $actions->disableView();
-        //     $actions->disableDelete();
-        //     $actions->append(new ConfirmButton($actions->getResource(), sprintf("%d_%d_%d_%d", $actions->row['player'], $actions->row['id'], $actions->row['configid'], $actions->row['count']), 'remove', 'fa-trash'));
-        // });
+        //$grid->disableActions();
+        $grid->actions(function ($actions) {
+            $actions->disableEdit();
+            $actions->disableView();
+            $actions->disableDelete();
+            $actions->append(new ConfirmButton($actions->getResource(), sprintf("%d_%d_%d_%d", $actions->row['player'], $actions->row['itemid'], $actions->row['configid'], $actions->row['count']), 'remove', 'fa-trash'));
+        });
         // 列
-        $grid->id('ID');
+        $grid->itemid(trans('game.info.itemid'));
         $grid->name(trans('game.info.name'));
         $grid->configid(trans('game.info.configid'));
         $grid->count(trans('game.info.count'));
@@ -78,12 +80,13 @@ class ItemController extends Controller
      */
     public function update($data)
     {
-        return $this->form()->update($data);
-        // if (Input::get('remove')) {
-        //     $params = explode("_", $data);
-        //     return Player\Item::remove($params[0], $params[1], $params[2], $params[3]);
-        // } else {
-        //     return $this->form()->update($data);
-        // }
+        if (Input::get('remove')) {
+            admin_info(trans('game.info.added'), trans('game.hint.go_check'));
+
+            $params = explode("_", $data);
+            return RemoveItem::addRequest($params[0], Game::getZone(), $params[1], $params[2], $params[3]);
+        } else {
+            return $this->form()->update($data);
+        }
     }
 }
