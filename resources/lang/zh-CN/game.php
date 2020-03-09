@@ -22,6 +22,7 @@ return [
     'no'                    => '否',
     'update_time'           => '修改时间',
     'remove_item'           => '删除玩家物品',
+    'feedback'              => '玩家反馈',
     'info'                  => [
         'zone'          => '区服',
         'version'       => '版本',
@@ -105,6 +106,9 @@ return [
         'configid'      => '配置id',
         'is_setup'      => '已装备',
         'added'         => '已添加',
+        'bug'           => 'BUG',
+        'advice'        => '优化建议',
+        'phone'         => '手机',
     ],
     'actions'               => [
         'title_confirm' => '确认:action?',
@@ -149,6 +153,7 @@ return [
         'go_check'      => '请去审核',
         'remove_item_hint'    => '玩家离线时进行的删除,会在玩家再次上线时才生效. 添加请求时不支持去重,请注意尽量不要重复删除;删除资源时需填写对应的物品id',
         'remove_value_hint'   => '如要删除玩家资源,请在删除玩家道具界面操作',
+        'feedback_desc' => '反馈从新到旧显示 id为服务器上总数的第几条',
     ],
     'servers'               => [
         'client'        => '客户端',

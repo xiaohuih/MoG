@@ -344,6 +344,17 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL,
                     "created_at" => "2020-03-05 17:26:06",
                     "updated_at" => "2020-03-05 17:38:30"
+                ],
+                [
+                    "id" => 46,
+                    "parent_id" => 13,
+                    "order" => 0,
+                    "title" => "反馈",
+                    "icon" => "fa-amazon",
+                    "uri" => "/player/feedbacks",
+                    "permission" => NULL,
+                    "created_at" => "2020-03-09 15:34:25",
+                    "updated_at" => "2020-03-09 15:34:25"
                 ]
             ]
         );
