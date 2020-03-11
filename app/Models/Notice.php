@@ -53,13 +53,13 @@ class Notice extends Model
     
     /**
      * 撤回公告
-     * @param int $id
      */
-    public static function revoke($id)
+    public function revoke()
     {
         $cmd = 'REVOKE_NOTICE';
         $params = [
-            'id' => (int)$id,
+            'id' => (int)$this->id,
+            'zones' => $this->zones,
         ];
         $client = new Client();
         $res = $client->request('GET', config('game.url'), [
@@ -72,7 +72,7 @@ class Notice extends Model
         $data = json_decode($res->getBody(), true);
         // 更新状态
         if (true == $data['status']) {
-            self::where('id', '=', $id)->update(['status' => 0]);
+            $this->update(['status' => 0]);
         }
 
         return $data;

@@ -145,7 +145,7 @@ class NoticeController extends Controller
             return Notice::find($id)->send();
         }
         else if (Input::get('revoke')) {
-            return Notice::revoke($id);
+            return Notice::find($id)->revoke();
         } else {
             return $this->form()->update($id);
         }
